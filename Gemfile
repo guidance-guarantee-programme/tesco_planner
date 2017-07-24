@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 ruby IO.read('.ruby-version').chomp
 
+gem 'gds-sso'
 gem 'govuk_admin_template'
 gem 'pg', '~> 0.18'
 gem 'plek'
@@ -12,6 +13,9 @@ gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
   gem 'byebug'
+  gem 'capybara'
+  gem 'factory_girl_rails'
+  gem 'rspec-rails'
 end
 
 group :development do

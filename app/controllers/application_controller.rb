@@ -1,8 +1,7 @@
 class ApplicationController < ActionController::Base
+  include GDS::SSO::ControllerMethods
+
   protect_from_forgery with: :exception
 
-  def current_user
-    User.new
-  end
-  helper_method :current_user
+  before_action :require_signin_permission!
 end

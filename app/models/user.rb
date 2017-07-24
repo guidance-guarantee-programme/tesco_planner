@@ -1,9 +1,5 @@
-class User
-  def name
-    'Ben Lovell'
-  end
+class User < ApplicationRecord
+  include GDS::SSO::User
 
-  def id
-    1
-  end
+  serialize :permissions, Array
 end
