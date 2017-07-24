@@ -2,10 +2,12 @@ source 'https://rubygems.org'
 
 ruby IO.read('.ruby-version').chomp
 
+gem 'govuk_admin_template'
 gem 'pg', '~> 0.18'
+gem 'plek'
 gem 'puma', '~> 3.7'
 gem 'rails', '~> 5.1.2'
-gem 'sass-rails', '~> 5.0'
+gem 'sassc-rails'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
