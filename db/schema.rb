@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170724135454) do
+ActiveRecord::Schema.define(version: 20170801130213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assignments", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "location_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_assignments_on_location_id"
+    t.index ["user_id", "location_id"], name: "index_assignments_on_user_id_and_location_id", unique: true
+    t.index ["user_id"], name: "index_assignments_on_user_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "address_line_one", default: "", null: false
+    t.string "address_line_two", default: "", null: false
+    t.string "address_line_three", default: "", null: false
+    t.string "town", default: "", null: false
+    t.string "county", default: "", null: false
+    t.string "postcode", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -28,4 +50,6 @@ ActiveRecord::Schema.define(version: 20170724135454) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "assignments", "locations"
+  add_foreign_key "assignments", "users"
 end

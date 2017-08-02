@@ -1,0 +1,54 @@
+<% content_for(:page_title, 'Locations') %>
+<div class="page-header">
+  <ol class="breadcrumb">
+    <li><a href="<%= root_path %>">Tesco appointment planner</a></li>
+    <li class="active">Locations</li>
+  </ol>
+
+  <h1>Locations</h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <% if @locations.empty? %>
+      <p class="no-content t-notice">No Locations.</p>
+    <% else %>
+      <table class="locations table table-bordered table-striped">
+        <caption><span class="sr-only">Locations</span></caption>
+        <colgroup>
+          <col width="40%" />
+          <col width="20%" />
+          <col width="25%" />
+          <col width="15%" />
+        </colgroup>
+      <thead>
+        <thead>
+          <tr class="table-header">
+            <th>Name</th>
+            <th>Town</th>
+            <th>County</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @locations.each do |location| %>
+            <tr class="t-location">
+              <td class="t-name">
+                <%= location.name  %>
+              </td>
+              <td class="t-town">
+                <%= location.town %>
+              </td>
+              <td class="t-county">
+                <%= location.county %>
+              </td>
+              <td>
+                <%= link_to('Availability', '/', class: 'btn btn-info t-availability') %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

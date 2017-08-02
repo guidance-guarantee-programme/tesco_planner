@@ -27,3 +27,7 @@ Style/EmptyMethod:
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
+
+Metrics/AbcSize:
+  Exclude:
+    - 'spec/**/*'
