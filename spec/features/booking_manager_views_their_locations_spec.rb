@@ -40,6 +40,8 @@ RSpec.feature 'Booking manager views their locations' do
     @page.locations.first.tap do |location|
       expect(location.name.text).to eq(@location.name)
       expect(location.town.text).to eq(@location.town)
+
+      expect(location).to have_rooms(count: 1)
     end
   end
 end

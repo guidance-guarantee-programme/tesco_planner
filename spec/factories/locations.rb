@@ -8,5 +8,7 @@ FactoryGirl.define do
     town 'Some Town'
     county 'Some County'
     postcode 'RG2 9FL'
+
+    after(:build) { |location| location.rooms << build(:room) }
   end
 end

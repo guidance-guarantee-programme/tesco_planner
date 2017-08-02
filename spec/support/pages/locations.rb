@@ -7,6 +7,10 @@ module Pages
       element :town, '.t-town'
       element :county, '.t-county'
       element :availability, '.t-availability'
+
+      sections :rooms, '.t-rooms' do
+        element :room, '.t-room'
+      end
     end
   end
 end
