@@ -16,9 +16,10 @@
       <table class="locations table table-bordered table-striped">
         <caption><span class="sr-only">Locations</span></caption>
         <colgroup>
-          <col width="40%" />
+          <col width="30%" />
           <col width="20%" />
-          <col width="25%" />
+          <col width="20%" />
+          <col width="15%" />
           <col width="15%" />
         </colgroup>
       <thead>
@@ -27,6 +28,7 @@
             <th>Name</th>
             <th>Town</th>
             <th>County</th>
+            <th>Rooms</th>
             <th></th>
           </tr>
         </thead>
@@ -41,6 +43,13 @@
               </td>
               <td class="t-county">
                 <%= location.county %>
+              </td>
+              <td>
+                <ul class="list-unstyled t-rooms">
+                <% location.rooms.each do |room| %>
+                  <li class="t-room"><%= room.name %></li>
+                <% end %>
+                </ul>
               </td>
               <td>
                 <%= link_to('Availability', '/', class: 'btn btn-info t-availability') %>
