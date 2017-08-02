@@ -7,6 +7,12 @@
   Tesco Appointment Planner
 <% end %>
 
+<%= content_for :navbar_items do %>
+  <% if current_user.booking_manager? %>
+    <li><%= link_to 'Locations', locations_path %></li>
+  <% end %>
+<% end %>
+
 <% content_for :body_end do %>
   <%= javascript_include_tag 'application' %>
 <% end %>

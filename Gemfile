@@ -16,6 +16,7 @@ group :development, :test do
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'rspec-rails'
+  gem 'site_prism'
 end
 
 group :development do
