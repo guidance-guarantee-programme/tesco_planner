@@ -10,15 +10,6 @@ RSpec.feature 'Booking manager views their locations' do
     end
   end
 
-  def given_the_user_is_identified_as_a_booking_manager
-    @user = create(:booking_manager)
-    GDS::SSO.test_user = @user
-
-    yield
-  ensure
-    GDS::SSO.test_user = nil
-  end
-
   def and_they_have_assigned_locations
     @location = create(:location)
 

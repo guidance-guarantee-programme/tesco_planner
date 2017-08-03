@@ -14,15 +14,6 @@ RSpec.feature 'Guider views bookings' do
     end
   end
 
-  def given_the_user_is_identified_as_a_guider
-    @user = create(:guider)
-    GDS::SSO.test_user = @user
-
-    yield
-  ensure
-    GDS::SSO.test_user = nil
-  end
-
   def when_they_visit_the_root
     visit root_path
   end
