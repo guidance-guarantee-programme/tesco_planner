@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 ruby IO.read('.ruby-version').chomp
 
+gem 'active_model_serializers'
 gem 'gds-sso'
 gem 'govuk_admin_template'
 gem 'pg', '~> 0.18'
