@@ -29,7 +29,18 @@
         showNonCurrentDates: false,
         defaultDate: moment(el.data('default-date')),
         firstDay: 1,
-        resources: this.$el.data('rooms-uri'),
+        resources: el.data('rooms-uri'),
+        eventSources: [
+          {
+            url: el.data('slots-uri'),
+            cache: true,
+            rendering: 'background',
+            eventType: 'slot'
+          }
+        ],
+        eventRender: (event, element) => {
+          $(element).attr('id', event.id).addClass('t-slot')
+        },
         resourceRender: (resource, labelTds) => {
           labelTds.addClass('t-room')
         },

@@ -3,5 +3,6 @@ module Pages
     set_url '/locations/{location_id}/slots'
 
     elements :rooms, '.t-room'
+    elements :slots, '.t-slot'
   end
 end
