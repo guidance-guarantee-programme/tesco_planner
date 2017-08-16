@@ -38,8 +38,33 @@
             eventType: 'slot'
           }
         ],
+        dayClick: (date, jsEvent) => {
+          jsEvent.preventDefault()
+
+          if (jsEvent.target.classList.contains('js-slot')) {
+            if (confirm('Are you sure you want to delete this slot?')) {
+              const id = jsEvent.target.id
+
+              $.ajax({
+                type: 'DELETE',
+                url: `${this.$el.data('slots-uri')}/${id}`,
+                headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
+                success: () => {
+                  $(this.$el).fullCalendar('refetchEvents')
+
+                  $('.alert')
+                    .hide()
+                    .filter('.alert-success')
+                    .show()
+                    .delay(3000)
+                    .fadeOut('slow');
+                }
+              })
+            }
+          }
+        },
         eventRender: (event, element) => {
-          $(element).attr('id', event.id).addClass('t-slot')
+          $(element).attr('id', event.id).addClass('t-slot js-slot')
         },
         resourceRender: (resource, labelTds) => {
           labelTds.addClass('t-room')

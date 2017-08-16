@@ -10,6 +10,12 @@ class SlotsController < ApplicationController
     end
   end
 
+  def destroy
+    location.slots.find(params[:id]).destroy
+
+    head :no_content
+  end
+
   private
 
   def location
@@ -17,7 +23,7 @@ class SlotsController < ApplicationController
   end
 
   def slots
-    @location.slots.where(
+    location.slots.where(
       start_at: params[:start].to_date.beginning_of_day..params[:end].to_date.end_of_day
     )
   end

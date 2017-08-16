@@ -3,6 +3,6 @@ Rails.application.routes.draw do
 
   resources :locations, only: :index do
     resources :rooms, only: :index
-    resources :slots, only: :index
+    resources :slots, only: %i(index destroy)
   end
 end

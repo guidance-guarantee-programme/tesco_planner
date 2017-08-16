@@ -4,5 +4,7 @@ module Pages
 
     elements :rooms, '.t-room'
     elements :slots, '.t-slot'
+
+    element :success, '.t-success'
   end
 end
