@@ -1,0 +1,23 @@
+<% content_for(:page_title, "Edit slots for #{@location.name}") %>
+<div class="page-header">
+  <ol class="breadcrumb">
+    <li><a href="<%= root_path %>">Tesco appointment planner</a></li>
+    <li><a href="<%= locations_path %>">Locations</a></li>
+    <li class="active">Edit slots for <%= @location.name %></li>
+  </ol>
+
+  <h1>Edit slots for <%= @location.name %></h1>
+</div>
+
+<div class="alert alert-success js-success t-success" role="alert" style="display:none;">
+  <span class="glyphicon glyphicon-ok"></span> Slot deleted.
+</div>
+
+<div
+  id="AvailabilityCalendar"
+  class="js-calendar availability-calendar t-calendar"
+  data-module="availability-calendar"
+  data-default-date="<%= Time.zone.now.iso8601 %>"
+  data-slots-uri="<%= location_slots_path(@location) %>"
+  data-rooms-uri="<%= location_rooms_path(@location) %>">
+</div>

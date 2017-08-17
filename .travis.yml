@@ -2,11 +2,14 @@ sudo: false
 language: ruby
 cache:
   bundler: true
+  yarn: true
   directories:
+  - $HOME/.phantomjs
   - tmp/cache/assets/test
 before_install:
 - gem update --system
 before_script:
+- yarn install
 - bundle exec rake db:create db:migrate RAILS_ENV=test
 branches:
   except:

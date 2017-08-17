@@ -1,0 +1,16 @@
+{
+  "parser": "babel-eslint",
+  "extends": "eslint:recommended",
+  "env": {
+    "browser": true,
+    "jquery": true
+  },
+  "rules": {
+    "strict": [2, "global"],
+    "no-var": 2,
+    "one-var": [2, "always"],
+    "prefer-template": 2,
+    "no-param-reassign": 2
+  }
+}
+
