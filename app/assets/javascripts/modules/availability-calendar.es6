@@ -56,12 +56,28 @@
         resourceRender: (resource, labelTds) => {
           labelTds.addClass('t-room')
         },
+        loading: (isLoading) => {
+          this.insertLoadingView();
+
+          if (!isLoading && this.$loadingSpinner) {
+            clearTimeout(this.loadingTimeout);
+            return this.$loadingSpinner.addClass('hide');
+          }
+
+          this.loadingTimeout = setTimeout(() => {
+            if (isLoading && this.$loadingSpinner) {
+              this.$loadingSpinner.removeClass('hide');
+            }
+          }, 200);
+        },
         schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source'
       });
     }
 
     deleteSlot(jsEvent) {
       if (confirm('Are you sure you want to delete this slot?')) {
+        this.showSpinner()
+
         const id = jsEvent.target.id
 
         $.ajax({
@@ -72,9 +88,37 @@
             $(this.$el).fullCalendar('refetchEvents')
 
             this.showSuccess()
+          },
+          complete: () => {
+            this.hideSpinner()
           }
         })
       }
+    }
+
+    showSpinner() {
+      this.$loadingSpinner.removeClass('hide');
+    }
+
+    hideSpinner() {
+      this.$loadingSpinner.addClass('hide');
+    }
+
+    insertLoadingView() {
+      if (this.$loadingSpinner) {
+        return;
+      }
+
+      this.$loadingSpinner = $(`
+        <div class="calendar-loading hide">
+          <div class="loading-spinner loading-spinner--large">
+            <div class="loading-spinner__bounce loading-spinner__bounce--1"></div>
+            <div class="loading-spinner__bounce loading-spinner__bounce--2"></div>
+            <div class="loading-spinner__bounce"></div>
+          </div>
+        </div>`);
+
+      this.$loadingSpinner.appendTo($('.fc-view-container'));
     }
 
     showSuccess() {
@@ -87,14 +131,19 @@
     }
 
     createSlot(date, resourceObject) {
-        $.post({
-          url: this.$slotsUri,
-          data: { start_at: date.utc().format(), room_id: resourceObject.id },
-          headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
-          success: () => {
-            $(this.$el).fullCalendar('refetchEvents')
-          }
-        })
+      this.showSpinner()
+
+      $.post({
+        url: this.$slotsUri,
+        data: { start_at: date.utc().format(), room_id: resourceObject.id },
+        headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
+        success: () => {
+          $(this.$el).fullCalendar('refetchEvents')
+        },
+        complete: () => {
+          this.hideSpinner()
+        }
+      })
     }
   }
 
