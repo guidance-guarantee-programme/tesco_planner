@@ -1,13 +1,21 @@
 class SlotsController < ApplicationController
   before_action :authorise_booking_manager!
+  before_action :location
 
   def index
-    @location = location
-
     respond_to do |format|
       format.html
       format.json { render json: slots }
     end
+  end
+
+  def create
+    Slot.create!(
+      room: location.rooms.find(params[:room_id]),
+      start_at: params[:start_at]
+    )
+
+    head :created
   end
 
   def destroy
@@ -19,7 +27,7 @@ class SlotsController < ApplicationController
   private
 
   def location
-    current_user.locations.find(params[:location_id])
+    @location ||= current_user.locations.find(params[:location_id])
   end
 
   def slots

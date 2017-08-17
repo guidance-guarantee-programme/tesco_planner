@@ -5,6 +5,8 @@
   class AvailabilityCalendar {
     start(el) {
       this.$el = el;
+      this.$slotsUri = this.$el.data('slots-uri')
+      this.$modal = this.$el.find('.js-availability-modal')
 
       $(this.$el).fullCalendar({
         header: {
@@ -30,37 +32,22 @@
         defaultDate: moment(el.data('default-date')),
         firstDay: 1,
         resources: el.data('rooms-uri'),
+        timezone: 'local',
         eventSources: [
           {
-            url: el.data('slots-uri'),
+            url: this.$slotsUri,
             cache: true,
             rendering: 'background',
             eventType: 'slot'
           }
         ],
-        dayClick: (date, jsEvent) => {
+        dayClick: (date, jsEvent, _, resourceObject) => {
           jsEvent.preventDefault()
 
           if (jsEvent.target.classList.contains('js-slot')) {
-            if (confirm('Are you sure you want to delete this slot?')) {
-              const id = jsEvent.target.id
-
-              $.ajax({
-                type: 'DELETE',
-                url: `${this.$el.data('slots-uri')}/${id}`,
-                headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
-                success: () => {
-                  $(this.$el).fullCalendar('refetchEvents')
-
-                  $('.alert')
-                    .hide()
-                    .filter('.alert-success')
-                    .show()
-                    .delay(3000)
-                    .fadeOut('slow');
-                }
-              })
-            }
+            this.deleteSlot(jsEvent)
+          } else {
+            this.createSlot(date, resourceObject)
           }
         },
         eventRender: (event, element) => {
@@ -71,6 +58,43 @@
         },
         schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source'
       });
+    }
+
+    deleteSlot(jsEvent) {
+      if (confirm('Are you sure you want to delete this slot?')) {
+        const id = jsEvent.target.id
+
+        $.ajax({
+          type: 'DELETE',
+          url: `${this.$slotsUri}/${id}`,
+          headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
+          success: () => {
+            $(this.$el).fullCalendar('refetchEvents')
+
+            this.showSuccess()
+          }
+        })
+      }
+    }
+
+    showSuccess() {
+      $('.alert')
+        .hide()
+        .filter('.alert-success')
+        .show()
+        .delay(3000)
+        .fadeOut('slow');
+    }
+
+    createSlot(date, resourceObject) {
+        $.post({
+          url: this.$slotsUri,
+          data: { start_at: date.utc().format(), room_id: resourceObject.id },
+          headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
+          success: () => {
+            $(this.$el).fullCalendar('refetchEvents')
+          }
+        })
     }
   }
 
