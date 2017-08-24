@@ -76,8 +76,6 @@
 
     deleteSlot(jsEvent) {
       if (confirm('Are you sure you want to delete this slot?')) {
-        this.showSpinner()
-
         const id = jsEvent.target.id
 
         $.ajax({
@@ -88,9 +86,6 @@
             $(this.$el).fullCalendar('refetchEvents')
 
             this.showSuccess()
-          },
-          complete: () => {
-            this.hideSpinner()
           }
         })
       }
@@ -131,17 +126,12 @@
     }
 
     createSlot(date, resourceObject) {
-      this.showSpinner()
-
       $.post({
         url: this.$slotsUri,
         data: { start_at: date.utc().format(), room_id: resourceObject.id },
         headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
         success: () => {
           $(this.$el).fullCalendar('refetchEvents')
-        },
-        complete: () => {
-          this.hideSpinner()
         }
       })
     }
