@@ -10,9 +10,8 @@ class SlotsController < ApplicationController
   end
 
   def create
-    Slot.create!(
-      room: location.rooms.find(params[:room_id]),
-      delivery_centre: current_user.delivery_centre,
+    current_user.slots.create!(
+      room: room,
       start_at: params[:start_at]
     )
 
@@ -26,6 +25,10 @@ class SlotsController < ApplicationController
   end
 
   private
+
+  def room
+    location.rooms.find(params[:room_id])
+  end
 
   def location
     @location ||= current_user.location
