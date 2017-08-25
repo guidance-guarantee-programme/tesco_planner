@@ -17,7 +17,6 @@ RSpec.feature 'Booking manager manages availability' do
   scenario 'Creating a slot for a given location', js: true do
     travel_to '2017-08-11 13:00' do
       given_the_user_is_identified_as_a_booking_manager do
-        and_they_have_an_assigned_location
         when_they_view_availability_for_their_location
         and_they_add_a_slot_on_a_given_day
         then_the_slot_is_created
@@ -26,25 +25,20 @@ RSpec.feature 'Booking manager manages availability' do
   end
 
   def and_they_have_an_assigned_location_with_availability
-    @location = create(:location) do |location|
-      @user.locations << location
-
-      # this will be visible
-      location.rooms.first.slots << build(:slot)
-      # this will be hidden
-      location.rooms.first.slots << build(:slot, start_at: 1.month.from_now)
-    end
-  end
-
-  def and_they_have_an_assigned_location
-    @location = create(:location) do |location|
-      @user.locations << location
-    end
+    @location = @user.location
+    # this will be visible
+    @location.rooms.first.slots << build(:slot, delivery_centre: @user.delivery_centre)
+    # this will be hidden
+    @location.rooms.first.slots << build(
+      :slot,
+      start_at: 1.month.from_now,
+      delivery_centre: @user.delivery_centre
+    )
   end
 
   def when_they_view_availability_for_their_location
     @page = Pages::Availability.new
-    @page.load(location_id: @location.id)
+    @page.load
   end
 
   def then_they_see_the_associated_rooms

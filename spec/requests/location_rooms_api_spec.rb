@@ -1,23 +1,16 @@
 require 'rails_helper'
 
-RSpec.describe 'GET /locations/:location_id/rooms.json' do
+RSpec.describe 'GET /rooms.json' do
   scenario 'Retrieving rooms as JSON' do
     given_the_user_is_identified_as_a_booking_manager do
-      and_they_have_an_assigned_location
-      when_they_request_the_rooms_for_their_location
+      when_they_request_the_rooms
       then_the_service_responds_ok
       and_the_rooms_are_serialized_as_json
     end
   end
 
-  def and_they_have_an_assigned_location
-    @location = create(:location)
-
-    @user.locations << @location
-  end
-
-  def when_they_request_the_rooms_for_their_location
-    get location_rooms_path(@location), as: :json
+  def when_they_request_the_rooms
+    get rooms_path, as: :json
   end
 
   def then_the_service_responds_ok

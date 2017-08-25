@@ -12,6 +12,7 @@ class SlotsController < ApplicationController
   def create
     Slot.create!(
       room: location.rooms.find(params[:room_id]),
+      delivery_centre: current_user.delivery_centre,
       start_at: params[:start_at]
     )
 
@@ -27,12 +28,13 @@ class SlotsController < ApplicationController
   private
 
   def location
-    @location ||= current_user.locations.find(params[:location_id])
+    @location ||= current_user.location
   end
 
   def slots
-    location.slots.where(
-      start_at: params[:start].to_date.beginning_of_day..params[:end].to_date.end_of_day
-    )
+    starts = params[:start].to_date.beginning_of_day
+    ends   = params[:end].to_date.end_of_day
+
+    location.slots.where(start_at: starts..ends)
   end
 end

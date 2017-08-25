@@ -1,6 +1,6 @@
 module Pages
   class Availability < SitePrism::Page
-    set_url '/locations/{location_id}/slots'
+    set_url '/slots'
 
     elements :rooms, '.t-room'
     elements :slots, '.t-slot'

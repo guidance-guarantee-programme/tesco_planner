@@ -31,7 +31,7 @@
         showNonCurrentDates: false,
         defaultDate: moment(el.data('default-date')),
         firstDay: 1,
-        resources: el.data('rooms-uri'),
+        resources: '/rooms.json',
         timezone: 'local',
         eventSources: [
           {

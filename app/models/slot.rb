@@ -2,6 +2,7 @@ class Slot < ApplicationRecord
   after_initialize :infer_end_at!
 
   belongs_to :room
+  belongs_to :delivery_centre
 
   private
 
