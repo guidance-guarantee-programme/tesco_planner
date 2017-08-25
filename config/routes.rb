@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
-  root 'bookings#index'
+  root 'slots#index'
 
-  resources :locations, only: :index do
-    resources :rooms, only: :index
-    resources :slots, only: %i(index create destroy)
-  end
+  resources :rooms, only: :index
+  resources :slots, only: %i(index create destroy)
 end

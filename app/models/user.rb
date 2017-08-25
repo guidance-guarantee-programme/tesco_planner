@@ -5,8 +5,9 @@ class User < ApplicationRecord
 
   serialize :permissions, Array
 
-  has_many :assignments
-  has_many :locations, through: :assignments
+  belongs_to :delivery_centre, optional: true
+
+  delegate :location, to: :delivery_centre
 
   def booking_manager?
     has_permission?(BOOKING_MANAGER)

@@ -2,7 +2,6 @@
 <div class="page-header">
   <ol class="breadcrumb">
     <li><a href="<%= root_path %>">Tesco appointment planner</a></li>
-    <li><a href="<%= locations_path %>">Locations</a></li>
     <li class="active">Edit slots for <%= @location.name %></li>
   </ol>
 
@@ -18,6 +17,5 @@
   class="js-calendar availability-calendar t-calendar"
   data-module="availability-calendar"
   data-default-date="<%= Time.zone.now.iso8601 %>"
-  data-slots-uri="<%= location_slots_path(@location) %>"
-  data-rooms-uri="<%= location_rooms_path(@location) %>">
+  data-slots-uri="<%= slots_path %>">
 </div>

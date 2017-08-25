@@ -9,7 +9,7 @@
 
 <%= content_for :navbar_items do %>
   <% if current_user.booking_manager? %>
-    <li><%= link_to 'Locations', locations_path %></li>
+    <li><%= link_to 'Availability', slots_path %></li>
   <% end %>
 <% end %>
 

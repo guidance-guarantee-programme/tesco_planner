@@ -1,11 +1,10 @@
 # rubocop:disable Metrics/MethodLength
 require 'rails_helper'
 
-RSpec.describe 'GET /locations/:location_id/slots?start=date&end=date' do
+RSpec.describe 'GET /slots?start=date&end=date' do
   scenario 'Requesting the slots' do
     travel_to '2017-08-11 13:00' do
       given_the_user_is_identified_as_a_booking_manager do
-        and_they_have_an_assigned_location
         and_the_location_has_slots
         when_they_request_the_slots_for_their_location
         then_the_service_responds_ok
@@ -14,13 +13,9 @@ RSpec.describe 'GET /locations/:location_id/slots?start=date&end=date' do
     end
   end
 
-  def and_they_have_an_assigned_location
-    @location = create(:location)
-
-    @user.locations << @location
-  end
-
   def and_the_location_has_slots
+    @room = @user.location.rooms.first
+
     @dates = [
       '2017-08-14 13:00',
       '2017-08-14 15:30',
@@ -28,16 +23,16 @@ RSpec.describe 'GET /locations/:location_id/slots?start=date&end=date' do
       '2017-08-18 09:00',
       '2017-10-01 10:00'
     ].each do |date|
-      @location.rooms.first.slots << build(
+      @room.slots << build(
         :slot,
-        start_at: Time.zone.parse(date)
+        start_at: Time.zone.parse(date),
+        delivery_centre: @user.delivery_centre
       )
     end
   end
 
   def when_they_request_the_slots_for_their_location
-    get location_slots_path(
-      @location,
+    get slots_path(
       start: Date.current.beginning_of_month,
       end: Date.current.end_of_month
     ), as: :json

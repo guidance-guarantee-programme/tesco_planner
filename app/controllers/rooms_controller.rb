@@ -10,6 +10,6 @@ class RoomsController < ApplicationController
   private
 
   def location
-    current_user.locations.find(params[:location_id])
+    current_user.delivery_centre.location
   end
 end
