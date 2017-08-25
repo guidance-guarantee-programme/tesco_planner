@@ -19,7 +19,7 @@ class SlotsController < ApplicationController
   end
 
   def destroy
-    location.slots.find(params[:id]).destroy
+    current_user.slots.destroy(params[:id])
 
     head :no_content
   end

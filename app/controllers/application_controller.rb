@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
 
   before_action :require_signin_permission!
 
+  rescue_from ActiveRecord::RecordNotFound do
+    respond_to do |format|
+      format.json { head :not_found }
+    end
+  end
+
   protected
 
   def authorise_booking_manager!

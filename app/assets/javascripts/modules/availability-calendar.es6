@@ -86,6 +86,9 @@
             $(this.$el).fullCalendar('refetchEvents')
 
             this.showSuccess()
+          },
+          error: () => {
+            alert('You cannot delete slots belonging to other delivery centres')
           }
         })
       }
