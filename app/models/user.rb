@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   belongs_to :delivery_centre, optional: true
 
-  delegate :location, to: :delivery_centre
+  delegate :location, :slots, to: :delivery_centre
 
   def booking_manager?
     has_permission?(BOOKING_MANAGER)
