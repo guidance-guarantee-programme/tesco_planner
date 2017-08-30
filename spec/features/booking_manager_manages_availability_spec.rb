@@ -60,7 +60,7 @@ RSpec.feature 'Booking manager manages availability' do
   end
 
   def and_they_see_the_slots_for_their_location
-    @page.wait_until_slots_visible
+    @page.wait_for_calendar_events
 
     expect(@page).to have_slots(count: 2)
   end
@@ -72,6 +72,8 @@ RSpec.feature 'Booking manager manages availability' do
   end
 
   def then_the_slot_is_removed
+    @page.wait_until_success_visible
+
     expect(@page).to have_success
   end
 
@@ -83,14 +85,14 @@ RSpec.feature 'Booking manager manages availability' do
   end
 
   def then_the_slot_is_created
-    @page.wait_until_slots_visible
+    @page.wait_for_calendar_events
     expect(@page).to have_slots(count: 1)
   end
 
   def when_they_click_a_slot_from_another_delivery_centre
     @page.dismiss_confirmations
 
-    @page.wait_until_slots_visible
+    @page.wait_for_calendar_events
     @page.slots.first.click
   end
 

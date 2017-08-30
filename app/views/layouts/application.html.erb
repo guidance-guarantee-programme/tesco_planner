@@ -15,6 +15,12 @@
 
 <% content_for :body_end do %>
   <%= javascript_include_tag 'application' %>
+
+  <% if Rails.env.test? %>
+    <script>
+      $.fx.off = true;
+    </script>
+  <% end %>
 <% end %>
 
 <%= render template: 'layouts/govuk_admin_template' %>
