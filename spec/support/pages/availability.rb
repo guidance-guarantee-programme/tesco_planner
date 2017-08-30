@@ -8,6 +8,10 @@ module Pages
     element :success, '.t-success'
     element :day, '.fc-agendaDay-button'
 
+    def wait_for_calendar_events
+      find('.t-calendar-rendered', visible: false)
+    end
+
     def dismiss_confirmations
       page.evaluate_script <<-JS
         window.confirm = function() {

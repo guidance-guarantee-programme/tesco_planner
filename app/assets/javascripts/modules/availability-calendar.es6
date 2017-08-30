@@ -53,10 +53,20 @@
         eventRender: (event, element) => {
           $(element).attr('id', event.id).addClass('t-slot js-slot')
         },
+        eventAfterAllRender: () => {
+          // mark the calendar as reloaded
+          let $rendered = $("<div class='t-calendar-rendered' style='display:hidden;'></div>")
+          $('body').append($rendered);
+        },
         resourceRender: (resource, labelTds) => {
           labelTds.addClass('t-room')
         },
         loading: (isLoading) => {
+          if (isLoading) {
+            // mark the calendar as reloading
+            $('.t-calendar-rendered').remove()
+          }
+
           this.insertLoadingView();
 
           if (!isLoading && this.$loadingSpinner) {
