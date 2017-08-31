@@ -5,7 +5,7 @@ FactoryGirl.define do
     uid { SecureRandom.uuid }
     name 'Rick Sanchez'
     email 'rick@example.com'
-    permissions %w(signin booking_manager)
+    permissions %w[signin booking_manager]
     delivery_centre
   end
 end

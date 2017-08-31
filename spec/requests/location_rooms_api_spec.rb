@@ -19,7 +19,7 @@ RSpec.describe 'GET /rooms.json' do
 
   def and_the_rooms_are_serialized_as_json
     JSON.parse(response.body).tap do |json|
-      expect(json.first.keys).to match_array(%w(id title))
+      expect(json.first.keys).to match_array(%w[id title])
     end
   end
 end

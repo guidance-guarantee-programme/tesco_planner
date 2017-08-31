@@ -46,7 +46,7 @@ RSpec.describe 'GET /slots?start=date&end=date' do
     JSON.parse(response.body).tap do |json|
       expect(json.count).to eq(4)
 
-      expect(json.first.keys).to match_array(%w(id start end resourceId))
+      expect(json.first.keys).to match_array(%w[id start end resourceId])
     end
   end
 end

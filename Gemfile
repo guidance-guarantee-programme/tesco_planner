@@ -3,7 +3,7 @@ ruby IO.read('.ruby-version').chomp
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-daterangepicker'
-  gem 'rails-assets-fullcalendar'
+  gem 'rails-assets-fullcalendar', '3.4.0'
   gem 'rails-assets-fullcalendar-scheduler'
 end
 
@@ -14,7 +14,7 @@ source 'https://rubygems.org' do
   gem 'momentjs-rails'
   gem 'pg', '~> 0.18'
   gem 'plek'
-  gem 'puma', '~> 3.7'
+  gem 'puma'
   gem 'rails', '~> 5.1.2'
   gem 'sassc-rails'
   gem 'sprockets-es6'
@@ -37,7 +37,7 @@ source 'https://rubygems.org' do
 
   group :development do
     gem 'listen', '>= 3.0.5', '< 3.2'
-    gem 'rubocop', '~> 0.47.1', require: false
+    gem 'rubocop', require: false
   end
 
   group :staging, :production do

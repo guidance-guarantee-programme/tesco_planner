@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   end
 
   resources :rooms, only: :index
-  resources :slots, only: %i(index create destroy)
+  resources :slots, only: %i[index create destroy]
 end
