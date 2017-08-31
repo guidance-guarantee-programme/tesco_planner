@@ -1,5 +1,5 @@
 class LocationSerializer < ActiveModel::Serializer
-  attributes %i(
+  attributes %i[
     id
     name
     address_line_one
@@ -8,5 +8,5 @@ class LocationSerializer < ActiveModel::Serializer
     town
     county
     postcode
-  )
+  ]
 end

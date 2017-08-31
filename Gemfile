@@ -37,7 +37,7 @@ source 'https://rubygems.org' do
 
   group :development do
     gem 'listen', '>= 3.0.5', '< 3.2'
-    gem 'rubocop', '~> 0.47.1', require: false
+    gem 'rubocop', require: false
   end
 
   group :staging, :production do
