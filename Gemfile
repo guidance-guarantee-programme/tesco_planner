@@ -21,10 +21,10 @@ source 'https://rubygems.org' do
   gem 'uglifier', '>= 1.3.0'
 
   group :development, :test do
-    gem 'byebug'
     gem 'capybara'
     gem 'factory_girl_rails'
     gem 'phantomjs'
+    gem 'pry-byebug'
     gem 'rspec-rails'
     gem 'site_prism'
   end

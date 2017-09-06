@@ -1,8 +1,12 @@
 class Slot < ApplicationRecord
-  after_initialize :infer_end_at!
+  before_validation :infer_end_at!
 
   belongs_to :room
   belongs_to :delivery_centre
+
+  scope :from_tomorrow, lambda {
+    where(arel_table[:start_at].gteq(Date.tomorrow.beginning_of_day))
+  }
 
   private
 
