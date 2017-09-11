@@ -3,9 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :locations, only: :index do
-        resources :slots, only: :index
-      end
+      resources :locations, only: %i[index show]
     end
   end
 
