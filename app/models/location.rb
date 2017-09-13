@@ -8,6 +8,7 @@ class Location < ApplicationRecord
   def windowed_slots
     slots
       .from_tomorrow
+      .available
       .select('start_at::date as start_date, start_at')
       .order('start_date asc, start_at asc')
       .group_by(&:start_date)

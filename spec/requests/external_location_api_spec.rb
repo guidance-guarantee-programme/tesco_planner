@@ -36,8 +36,10 @@ RSpec.describe 'GET /api/v1/locations/:location_id' do
     @combined = build_slot(@room_one, @now.advance(weeks: 1), @delivery_centre_one)
     # will be combined with the slot above
     @other_combined = build_slot(@room_two, @now.advance(weeks: 1), @delivery_centre_two)
-    # this will appear in the same day but different time
+
+    # this won't appear as it has an associated appointment
     @other_slot = build_slot(@room_one, @now.advance(weeks: 1, hours: 1), @delivery_centre_one)
+    create(:appointment, slot: @other_slot)
   end
 
   def when_the_location_is_requested
@@ -53,20 +55,14 @@ RSpec.describe 'GET /api/v1/locations/:location_id' do
       slots = json['windowed_slots']
       expect(slots.keys).to match_array(%w[2017-09-07 2017-09-13])
 
-      expect(slots['2017-09-07']).to match_array(
-        %w[2017-09-07T13:00:00.000Z]
-      )
-      expect(slots['2017-09-13']).to match_array(
-        %w[2017-09-13T13:00:00.000Z 2017-09-13T14:00:00.000Z]
-      )
+      expect(slots['2017-09-07']).to match_array(%w[2017-09-07T13:00:00.000Z])
+      expect(slots['2017-09-13']).to match_array(%w[2017-09-13T13:00:00.000Z])
     end
   end
 
   def build_slot(room, start_at, delivery_centre)
-    room.slots << build(
-      :slot,
-      start_at: start_at,
-      delivery_centre: delivery_centre
-    )
+    build(:slot, start_at: start_at, delivery_centre: delivery_centre) do |slot|
+      room.slots << slot
+    end
   end
 end

@@ -3,9 +3,14 @@ class Slot < ApplicationRecord
 
   belongs_to :room
   belongs_to :delivery_centre
+  has_one :appointment
 
   scope :from_tomorrow, lambda {
     where(arel_table[:start_at].gteq(Date.tomorrow.beginning_of_day))
+  }
+
+  scope :available, lambda {
+    left_outer_joins(:appointment).where(appointments: { id: nil })
   }
 
   private

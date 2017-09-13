@@ -3,10 +3,13 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :locations, only: %i[index show]
+      resources :locations, only: %i[index show] do
+        resources :appointments, only: :create
+      end
     end
   end
 
+  resources :appointments, only: :show
   resources :rooms, only: :index
   resources :slots, only: %i[index create destroy]
 end
