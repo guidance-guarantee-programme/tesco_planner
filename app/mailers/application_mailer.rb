@@ -1,4 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  default from: 'Tesco Pension Wise Appointments <appointments@pensionwise.gov.uk>'
+
   layout 'mailer'
 end

@@ -27,5 +27,7 @@ module TescoPlanner
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.action_mailer.preview_path = Rails.root.join('spec', 'mailers', 'previews')
   end
 end

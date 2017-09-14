@@ -5,6 +5,7 @@ module Api
         @appointment = Appointment.new(appointment_params.merge(slot: slot))
 
         if @appointment.save
+          deliver_notifications(@appointment)
           head :created, location: @appointment
         else
           render json: @appointment.errors, status: :unprocessable_entity
@@ -32,6 +33,12 @@ module Api
 
       def location
         @location ||= Location.find(params[:location_id])
+      end
+
+      def deliver_notifications(appointment)
+        appointment.booking_managers.each do |booking_manager|
+          BookingManagerNotificationJob.perform_later(booking_manager)
+        end
       end
     end
   end
