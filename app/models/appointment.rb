@@ -1,5 +1,6 @@
 class Appointment < ApplicationRecord
   belongs_to :slot
+  has_one :delivery_centre, through: :slot
 
   before_validation :calculate_type_of_appointment
 
@@ -16,6 +17,10 @@ class Appointment < ApplicationRecord
 
   validates :slot, presence: true, uniqueness: true
   validates :type_of_appointment, presence: true
+
+  def booking_managers
+    delivery_centre.users.active
+  end
 
   private
 

@@ -9,6 +9,8 @@ class User < ApplicationRecord
 
   delegate :location, :slots, to: :delivery_centre
 
+  scope :active, -> { where(disabled: false) }
+
   def booking_manager?
     has_permission?(BOOKING_MANAGER)
   end
