@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   root 'slots#index'
 
@@ -12,4 +14,6 @@ Rails.application.routes.draw do
   resources :appointments, only: :show
   resources :rooms, only: :index
   resources :slots, only: %i[index create destroy]
+
+  mount Sidekiq::Web, at: '/sidekiq', constraints: AuthenticatedUser.new
 end

@@ -17,6 +17,8 @@ source 'https://rubygems.org' do
   gem 'puma'
   gem 'rails', '~> 5.1.2'
   gem 'sassc-rails'
+  gem 'sidekiq'
+  gem 'sinatra', require: false
   gem 'sprockets-es6'
   gem 'uglifier', '>= 1.3.0'
 
