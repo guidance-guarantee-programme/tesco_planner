@@ -18,6 +18,7 @@ RSpec.describe 'POST /api/v1/locations/:location_id/appointments' do
       and_the_appointment_is_identified_by_the_location_header
       and_the_appointment_is_created
       and_the_booking_managers_are_notified
+      and_the_customer_is_notified
     end
   end
 
@@ -76,6 +77,10 @@ RSpec.describe 'POST /api/v1/locations/:location_id/appointments' do
 
   def and_the_booking_managers_are_notified
     assert_enqueued_jobs(1, only: BookingManagerNotificationJob)
+  end
+
+  def and_the_customer_is_notified
+    assert_enqueued_jobs(1, only: CustomerNotificationJob)
   end
 
   def when_an_invalid_appointment_request_is_made

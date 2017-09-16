@@ -9,5 +9,9 @@ FactoryGirl.define do
     memorable_word 'snootbooper'
     date_of_birth '1945-01-01'
     type_of_appointment '50-54'
+
+    trait :with_slot do
+      slot { build(:slot, :with_room) }
+    end
   end
 end
