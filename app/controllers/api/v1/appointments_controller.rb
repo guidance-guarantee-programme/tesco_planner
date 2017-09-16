@@ -36,6 +36,8 @@ module Api
       end
 
       def deliver_notifications(appointment)
+        CustomerNotificationJob.perform_later(appointment)
+
         appointment.booking_managers.each do |booking_manager|
           BookingManagerNotificationJob.perform_later(booking_manager)
         end
