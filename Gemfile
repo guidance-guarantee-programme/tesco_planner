@@ -9,6 +9,7 @@ end
 
 source 'https://rubygems.org' do
   gem 'active_model_serializers'
+  gem 'bootsnap', require: false
   gem 'gds-sso'
   gem 'govuk_admin_template'
   gem 'momentjs-rails'
