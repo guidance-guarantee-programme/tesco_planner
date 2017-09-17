@@ -10,7 +10,5 @@ class LocationSerializer < ActiveModel::Serializer
     postcode
   ]
 
-  attribute :windowed_slots, if: -> { instance_options[:include_slots] } do
-    object.windowed_slots
-  end
+  attribute :windowed_slots, if: -> { instance_options[:include_slots] }
 end
