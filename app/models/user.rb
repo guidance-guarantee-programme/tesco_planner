@@ -11,6 +11,13 @@ class User < ApplicationRecord
 
   scope :active, -> { where(disabled: false) }
 
+  def appointments
+    delivery_centre
+      .appointments
+      .includes(slot: :room)
+      .order(:created_at)
+  end
+
   def booking_manager?
     has_permission?(BOOKING_MANAGER)
   end

@@ -25,4 +25,16 @@ module UserHelpers
   ensure
     GDS::SSO.test_user = nil
   end
+
+  def appointment_for_user(user)
+    build(:appointment) do |a|
+      a.slot = build(
+        :slot,
+        delivery_centre: user.delivery_centre,
+        room: user.location.rooms.first
+      )
+
+      a.save!
+    end
+  end
 end

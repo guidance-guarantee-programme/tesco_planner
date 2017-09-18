@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :appointments, only: :show
+  resources :appointments, only: %i[index show edit]
   resources :rooms, only: :index
   resources :slots, only: %i[index create destroy]
 
