@@ -4,7 +4,7 @@ ruby IO.read('.ruby-version').chomp
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-daterangepicker'
   gem 'rails-assets-fullcalendar', '3.4.0'
-  gem 'rails-assets-fullcalendar-scheduler'
+  gem 'rails-assets-fullcalendar-scheduler', '1.6.2'
 end
 
 source 'https://rubygems.org' do
@@ -40,7 +40,7 @@ source 'https://rubygems.org' do
 
   group :development do
     gem 'listen', '>= 3.0.5', '< 3.2'
-    gem 'rubocop', require: false
+    gem 'rubocop', '0.49.1', require: false
   end
 
   group :staging, :production do
