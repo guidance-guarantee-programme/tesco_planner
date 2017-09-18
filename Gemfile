@@ -10,8 +10,10 @@ end
 source 'https://rubygems.org' do
   gem 'active_model_serializers'
   gem 'bootsnap', require: false
+  gem 'bootstrap-kaminari-views'
   gem 'gds-sso'
   gem 'govuk_admin_template'
+  gem 'kaminari'
   gem 'momentjs-rails'
   gem 'pg', '~> 0.18'
   gem 'plek'
