@@ -40,7 +40,7 @@ source 'https://rubygems.org' do
 
   group :development do
     gem 'listen', '>= 3.0.5', '< 3.2'
-    gem 'rubocop', require: false
+    gem 'rubocop', '0.49.1', require: false
   end
 
   group :staging, :production do
