@@ -8,4 +8,10 @@ class AppointmentMailerPreview < ActionMailer::Preview
 
     AppointmentMailer.customer(@appointment)
   end
+
+  def cancellation
+    @appointment = Appointment.first
+
+    AppointmentMailer.cancellation(@appointment)
+  end
 end

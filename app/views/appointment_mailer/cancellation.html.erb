@@ -1,0 +1,20 @@
+<h1 style="color: #0B0C0C !important;font-family: Helvetica, Arial, sans-serif;margin: 15px 0;font-weight: 700;font-size: 20px;line-height: 1.111111111;padding: 15px 0;">
+  We’ve cancelled your appointment
+</h1>
+
+<p>Dear <%= @appointment.first_name %>,</p>
+
+<p>We have cancelled the following appointment as requested:</p>
+
+<p>
+  Reference number:
+  <br>
+  <strong class="emphasize">
+    <%= @appointment.id %>
+  </strong>
+</p>
+
+<p>
+  If you didn’t ask us to cancel your appointment or to book a new one, call
+  0800 138 3944.
+</p>
