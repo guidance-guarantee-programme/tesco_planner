@@ -16,5 +16,7 @@ module Pages
     element :opt_out_of_market_research, '.t-opt-out-of-market-research'
 
     element :submit, '.t-submit'
+
+    element :errors, '.t-errors'
   end
 end

@@ -10,6 +10,14 @@ RSpec.feature 'Booking manager manages an appointment' do
     end
   end
 
+  scenario 'Incorrectly modifying an appointment' do
+    given_the_user_is_identified_as_a_booking_manager do
+      and_they_have_an_associated_appointment
+      when_they_provide_invalid_details
+      then_errors_are_displayed
+    end
+  end
+
   def and_they_have_an_associated_appointment
     @appointment = appointment_for_user(@user)
   end
@@ -45,5 +53,19 @@ RSpec.feature 'Booking manager manages an appointment' do
       opt_out_of_market_research: false,
       dc_pot_confirmed: false
     )
+  end
+
+  def when_they_provide_invalid_details
+    @page = Pages::Appointment.new
+    @page.load(id: @appointment.id)
+
+    @page.first_name.set ''
+    @page.last_name.set ''
+
+    @page.submit.click
+  end
+
+  def then_errors_are_displayed
+    expect(@page).to have_errors
   end
 end

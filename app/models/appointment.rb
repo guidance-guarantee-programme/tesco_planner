@@ -15,6 +15,12 @@ class Appointment < ApplicationRecord
     cancelled_by_pension_wise
   ]
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :email, presence: true, email: true
+  validates :phone, presence: true
+  validates :memorable_word, presence: true
+  validates :date_of_birth, presence: true
   validates :slot, presence: true, uniqueness: true
   validates :type_of_appointment, presence: true
 
