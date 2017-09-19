@@ -28,6 +28,14 @@ class Appointment < ApplicationRecord
     delivery_centre.users.active
   end
 
+  def cancelled?
+    status_previously_changed? && status.start_with?('cancelled')
+  end
+
+  def future?
+    slot.start_at.future?
+  end
+
   private
 
   def calculate_type_of_appointment

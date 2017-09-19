@@ -21,4 +21,17 @@ RSpec.describe AppointmentMailer do
       end
     end
   end
+
+  describe '#cancellation' do
+    subject { described_class.cancellation(build(:appointment)) }
+
+    it 'contains the necessary detail' do
+      expect(subject.to).to match_array('rick@example.com')
+
+      subject.body.encoded.tap do |body|
+        expect(body).to include('Dear Rick')
+        expect(body).to include('Reference number')
+      end
+    end
+  end
 end

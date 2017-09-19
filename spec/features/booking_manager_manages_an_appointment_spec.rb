@@ -18,6 +18,14 @@ RSpec.feature 'Booking manager manages an appointment' do
     end
   end
 
+  scenario 'Cancelling an appointment' do
+    given_the_user_is_identified_as_a_booking_manager do
+      and_they_have_an_associated_appointment
+      when_the_appointment_is_cancelled
+      then_the_customer_is_notified
+    end
+  end
+
   def and_they_have_an_associated_appointment
     @appointment = appointment_for_user(@user)
   end
@@ -67,5 +75,17 @@ RSpec.feature 'Booking manager manages an appointment' do
 
   def then_errors_are_displayed
     expect(@page).to have_errors
+  end
+
+  def when_the_appointment_is_cancelled
+    @page = Pages::Appointment.new
+    @page.load(id: @appointment.id)
+
+    @page.status.select 'Cancelled By Customer'
+    @page.submit.click
+  end
+
+  def then_the_customer_is_notified
+    assert_enqueued_jobs(1, only: CancellationNotificationJob)
   end
 end
