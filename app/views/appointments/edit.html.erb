@@ -1,0 +1,86 @@
+<% content_for(:page_title, t('service.title', page_title: "Manage appointment for #{@appointment.full_name}")) %>
+<div class="page-header">
+  <ol class="breadcrumb">
+    <li><a href="<%= root_path %>">Tesco appointment planner</a></li>
+    <li><a href="<%= appointments_path %>">Appointments</a></li>
+    <li class="active"><%= @appointment.full_name %></li>
+  </ol>
+
+  <h1>
+    Manage appointment for <%= @appointment.full_name %><br>
+    <small><%= @appointment.slot %></small>
+  </h1>
+</div>
+
+<%= form_for @appointment.object do |f| %>
+  <div class="row">
+    <div class="col-md-12 l-appointment-details">
+      <% if @appointment.object.errors.any? %>
+        <div class="alert alert-danger t-errors" role="alert">
+          <h3 class="alert__heading h4">There's a problem</h3>
+          <ul>
+            <% @appointment.object.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="row">
+        <div class="col-md-6">
+          <h2 class="h3">Customer details</h2>
+          <div class="form-group">
+            <%= f.label :first_name %>
+            <%= f.text_field :first_name, class: 'form-control t-first-name' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :last_name %>
+            <%= f.text_field :last_name, class: 'form-control t-last-name' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :email %>
+            <%= f.text_field :email, class: 'form-control t-email' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :phone %>
+            <%= f.text_field :phone, class: 'form-control t-phone' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :memorable_word %>
+            <%= f.text_field :memorable_word, class: 'form-control t-memorable-word' %>
+          </div>
+          <%= render partial: 'shared/date_of_birth_form_field', locals: { form: f } %>
+        </div>
+        <div class="col-md-6">
+          <h2 class="h3">Appointment details</h2>
+          <div class="form-group">
+            <%= f.label :status, 'Appointment status' %>
+            <%= f.select :status, friendly_options(Appointment.statuses), options = {}, { class: 'form-control t-status' } %>
+          </div>
+          <div class="form-group">
+            <p class="bold">Defined contribution pot confirmed?</p>
+            <%= f.label :dc_pot_confirmed, value: true, class: 'radio-inline' do %>
+              <%= f.radio_button :dc_pot_confirmed, true, class: 't-dc-pot-confirmed-yes' %>
+              Yes
+            <% end %>
+
+            <%= f.label :dc_pot_confirmed, value: false, class: 'radio-inline' do %>
+              <%= f.radio_button :dc_pot_confirmed, false, class: 't-dc-pot-confirmed-dont-know' %>
+              Don’t know
+            <% end %>
+          </div>
+          <div class="form-group">
+            <%= f.label :opt_out_of_market_research %>
+            <%= f.check_box :opt_out_of_market_research, class: 't-opt-out-of-market-research' %>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <%= f.button class: 'btn btn-primary t-submit' do %>
+            Update appointment details for <%= @appointment.full_name %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

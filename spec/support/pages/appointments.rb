@@ -3,5 +3,7 @@ module Pages
     set_url '/appointments'
 
     elements :appointments, '.t-appointment'
+
+    element :success, '.alert-success'
   end
 end
