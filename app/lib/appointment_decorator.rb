@@ -15,8 +15,6 @@ class AppointmentDecorator < SimpleDelegator
     object.slot.room.name
   end
 
-  private
-
   def object
     __getobj__
   end

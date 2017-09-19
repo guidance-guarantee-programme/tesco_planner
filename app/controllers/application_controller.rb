@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
+  add_flash_types :success
+
   before_action :require_signin_permission!
 
   rescue_from ActiveRecord::RecordNotFound do
