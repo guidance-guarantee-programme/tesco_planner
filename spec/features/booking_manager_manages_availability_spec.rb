@@ -5,10 +5,12 @@ RSpec.feature 'Booking manager manages availability' do
     travel_to '2017-08-11 13:00' do
       given_the_user_is_identified_as_a_booking_manager do
         and_they_have_an_assigned_location_with_availability
+        and_they_have_appointments
         and_slots_from_another_delivery_centre
         when_they_view_availability_for_their_location
         then_they_see_the_associated_rooms
         and_they_see_the_slots_for_their_location
+        and_they_see_the_appointments_for_their_location
         when_they_click_an_existing_slot
         then_the_slot_is_removed
         when_they_click_a_slot_from_another_delivery_centre
@@ -37,6 +39,14 @@ RSpec.feature 'Booking manager manages availability' do
       start_at: 1.month.from_now,
       delivery_centre: @user.delivery_centre
     )
+  end
+
+  def and_they_have_appointments
+    appointment_for_user(@user, start_at: 1.hour.from_now)
+  end
+
+  def and_they_see_the_appointments_for_their_location
+    expect(@page).to have_appointments(count: 1)
   end
 
   def and_slots_from_another_delivery_centre

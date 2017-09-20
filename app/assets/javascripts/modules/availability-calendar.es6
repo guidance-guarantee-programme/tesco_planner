@@ -39,6 +39,10 @@
             cache: true,
             rendering: 'background',
             eventType: 'slot'
+          },
+          {
+            url: '/appointments.json',
+            eventType: 'appointment'
           }
         ],
         dayClick: (date, jsEvent, _, resourceObject) => {
@@ -51,7 +55,13 @@
           }
         },
         eventRender: (event, element) => {
-          $(element).attr('id', event.id).addClass('t-slot js-slot')
+          if (event.source.eventType === 'slot') {
+            $(element).addClass('t-slot js-slot')
+          } else {
+            $(element).addClass('t-appointment js-appointment')
+          }
+
+          $(element).attr('id', event.id)
         },
         eventAfterAllRender: () => {
           // mark the calendar as reloaded

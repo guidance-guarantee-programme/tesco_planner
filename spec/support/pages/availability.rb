@@ -4,6 +4,7 @@ module Pages
 
     elements :rooms, '.t-room'
     elements :slots, '.t-slot'
+    elements :appointments, '.t-appointment'
 
     element :success, '.t-success'
     element :day, '.fc-agendaDay-button'
