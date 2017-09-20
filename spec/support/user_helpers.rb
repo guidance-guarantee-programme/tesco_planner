@@ -26,10 +26,11 @@ module UserHelpers
     GDS::SSO.test_user = nil
   end
 
-  def appointment_for_user(user)
+  def appointment_for_user(user, start_at: Time.current)
     build(:appointment) do |a|
       a.slot = build(
         :slot,
+        start_at: start_at,
         delivery_centre: user.delivery_centre,
         room: user.location.rooms.first
       )

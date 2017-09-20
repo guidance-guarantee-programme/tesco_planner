@@ -29,7 +29,7 @@ class Appointment < ApplicationRecord
   end
 
   def cancelled?
-    status_previously_changed? && status.start_with?('cancelled')
+    status.start_with?('cancelled')
   end
 
   def future?

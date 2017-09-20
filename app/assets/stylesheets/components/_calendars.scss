@@ -1,7 +1,18 @@
 $color-white: #fff;
 $color-black: #000;
+$color-boston-blue: #3a87ad;
 
 $calendar-loading-view-background: transparentize($color-white, .2);
+
+.fc {
+  a:visited {
+    color: $color-black;
+  }
+}
+
+.fc-event {
+  @include striped($color-boston-blue);
+}
 
 .calendar-loading {
   align-items: center;
