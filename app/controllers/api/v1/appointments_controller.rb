@@ -28,7 +28,7 @@ module Api
       end
 
       def slot
-        @slot ||= location.slots.find_by(start_at: params[:start_at])
+        @slot ||= location.available_slot(params[:start_at])
       end
 
       def location

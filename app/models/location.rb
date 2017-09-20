@@ -5,6 +5,10 @@ class Location < ApplicationRecord
   has_many :delivery_centres
   has_many :users, through: :delivery_centres
 
+  def available_slot(start_at)
+    slots.available.find_by(start_at: start_at)
+  end
+
   def windowed_slots
     slots
       .from_tomorrow
