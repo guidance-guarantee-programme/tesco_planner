@@ -52,6 +52,7 @@
               </td>
               <td>
                 <%= link_to('Manage', edit_appointment_path(appointment), class: 'btn btn-info t-manage') %>
+                <%= link_to('Reschedule', edit_appointment_reschedule_path(appointment), class: 'btn btn-info t-reschedule') %>
               </td>
             </tr>
           <% end %>

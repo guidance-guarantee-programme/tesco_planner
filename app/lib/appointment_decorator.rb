@@ -8,6 +8,8 @@ class AppointmentDecorator < SimpleDelegator
   end
 
   def slot
+    return '' unless object.slot
+
     object.slot.start_at.in_time_zone('London').to_s(:govuk_date)
   end
 

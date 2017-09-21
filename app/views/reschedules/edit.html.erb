@@ -1,0 +1,39 @@
+<% content_for(:page_title, t('service.title', page_title: "Reschedule appointment for #{@appointment.full_name}")) %>
+<div class="page-header">
+  <ol class="breadcrumb">
+    <li><a href="<%= root_path %>">Tesco appointment planner</a></li>
+    <li><a href="<%= appointments_path %>">Appointments</a></li>
+    <li class="active"><%= @appointment.full_name %></li>
+  </ol>
+
+  <h1>
+    Reschedule appointment for <%= @appointment.full_name %><br>
+    <small><%= @appointment.slot %></small>
+  </h1>
+</div>
+
+<%= form_for @appointment.object, url: appointment_reschedule_path(@appointment.object), as: :appointment do |f| %>
+  <div class="row">
+    <div class="col-md-3">
+      <% if @appointment.object.errors.any? %>
+        <div class="alert alert-danger t-errors" role="alert">
+          <h3 class="alert__heading h4">There's a problem</h3>
+          <ul>
+            <% @appointment.object.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label :slot_id, 'Available slots' %>
+        <%= f.select :slot_id, grouped_options_for_select(grouped_slots(@slots)), { include_blank: true }, { class: 'form-control t-slots' } %>
+      </div>
+
+      <%= f.button class: 'btn btn-primary t-submit' do %>
+        Reschedule and notify <%= @appointment.full_name %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

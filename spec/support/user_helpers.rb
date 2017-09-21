@@ -38,4 +38,13 @@ module UserHelpers
       a.save!
     end
   end
+
+  def slot_for_user(user, start_at: Time.current.advance(days: 1))
+    create(
+      :slot,
+      start_at: start_at,
+      delivery_centre: user.delivery_centre,
+      room: user.location.rooms.first
+    )
+  end
 end
