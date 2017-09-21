@@ -8,7 +8,7 @@
 
   <h1>
     Manage appointment for <%= @appointment.full_name %><br>
-    <small><%= @appointment.slot %></small>
+    <small><%= link_to @appointment.slot, edit_appointment_reschedule_path(@appointment) %></small>
   </h1>
 </div>
 

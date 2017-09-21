@@ -11,7 +11,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :appointments, only: %i[index show edit update]
+  resources :appointments, only: %i[index show edit update] do
+    resource :reschedule, only: %i[edit update]
+  end
   resources :rooms, only: :index
   resources :slots, only: %i[index create destroy]
 
