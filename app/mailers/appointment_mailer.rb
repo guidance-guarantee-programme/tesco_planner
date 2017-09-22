@@ -4,13 +4,13 @@ class AppointmentMailer < ApplicationMailer
   def cancellation(appointment)
     @appointment = appointment
 
-    mail to: appointment.email
+    mail to: appointment.email, reply_to: appointment.delivery_centre.reply_to
   end
 
   def customer(appointment)
     @appointment = appointment
 
-    mail to: appointment.email
+    mail to: appointment.email, reply_to: appointment.delivery_centre.reply_to
   end
 
   def booking_manager(booking_manager)
