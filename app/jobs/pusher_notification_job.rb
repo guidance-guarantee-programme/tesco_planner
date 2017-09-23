@@ -3,7 +3,7 @@ class PusherNotificationJob < ApplicationJob
 
   def perform(activity)
     Pusher.trigger(
-      Pusher.app_id,
+      'pension_wise_tesco',
       "appointment_activity_#{activity.appointment_id}",
       body: render_activity(activity)
     )
