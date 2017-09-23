@@ -1,6 +1,7 @@
 class Appointment < ApplicationRecord
   belongs_to :slot
   has_one :delivery_centre, through: :slot
+  has_many :activities
 
   before_validation :calculate_type_of_appointment
 

@@ -5,6 +5,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-daterangepicker'
   gem 'rails-assets-fullcalendar', '3.4.0'
   gem 'rails-assets-fullcalendar-scheduler', '1.6.2'
+  gem 'rails-assets-pusher'
 end
 
 source 'https://rubygems.org' do
@@ -19,6 +20,7 @@ source 'https://rubygems.org' do
   gem 'pg', '~> 0.18'
   gem 'plek'
   gem 'puma'
+  gem 'pusher'
   gem 'rails', '~> 5.1.2'
   gem 'sassc-rails'
   gem 'sidekiq'
@@ -31,6 +33,7 @@ source 'https://rubygems.org' do
     gem 'factory_girl_rails'
     gem 'phantomjs'
     gem 'pry-byebug'
+    gem 'pusher-fake'
     gem 'rspec-rails'
     gem 'site_prism'
   end

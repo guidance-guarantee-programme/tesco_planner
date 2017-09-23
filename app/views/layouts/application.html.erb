@@ -17,6 +17,17 @@
 <% content_for :body_end do %>
   <%= javascript_include_tag 'application' %>
 
+  <script>
+  <% if defined?(PusherFake) %>
+      Pusher.instance = <%= raw PusherFake.javascript %>;
+  <% else %>
+      Pusher.instance = new Pusher('<%= ENV['PUSHER_KEY'] %>', {
+        cluster: 'eu',
+        encrypted: true
+      });
+  <% end %>
+  </script>
+
   <% if Rails.env.test? %>
     <script>
       $.fx.off = true;

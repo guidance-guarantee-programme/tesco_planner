@@ -56,7 +56,10 @@ class AppointmentsController < ApplicationController
 
   def load_appointment
     @appointment = AppointmentDecorator.new(
-      current_user.appointments.find(params[:id])
+      current_user
+        .appointments
+        .includes(activities: :user)
+        .find(params[:id])
     )
   end
 end

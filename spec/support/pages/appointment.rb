@@ -2,6 +2,10 @@ module Pages
   class Appointment < SitePrism::Page
     set_url '/appointments/{id}/edit'
 
+    element :message, '.t-message'
+    element :submit_message, '.t-submit-message'
+    elements :activities, '.t-activity'
+
     element :first_name, '.t-first-name'
     element :last_name, '.t-last-name'
     element :email, '.t-email'
