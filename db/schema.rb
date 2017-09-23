@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170922085419) do
+ActiveRecord::Schema.define(version: 20170922112631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "appointment_id"
+    t.string "message", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["appointment_id"], name: "index_activities_on_appointment_id"
+    t.index ["user_id"], name: "index_activities_on_user_id"
+  end
 
   create_table "appointments", force: :cascade do |t|
     t.bigint "slot_id", null: false
@@ -87,6 +97,8 @@ ActiveRecord::Schema.define(version: 20170922085419) do
     t.index ["delivery_centre_id"], name: "index_users_on_delivery_centre_id"
   end
 
+  add_foreign_key "activities", "appointments"
+  add_foreign_key "activities", "users"
   add_foreign_key "appointments", "slots"
   add_foreign_key "delivery_centres", "locations"
   add_foreign_key "slots", "delivery_centres"

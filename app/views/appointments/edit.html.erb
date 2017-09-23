@@ -12,6 +12,9 @@
   </h1>
 </div>
 
+<%= render partial: 'activities', locals: { appointment: @appointment } %>
+<hr>
+
 <%= form_for @appointment.object do |f| %>
   <div class="row">
     <div class="col-md-12 l-appointment-details">
