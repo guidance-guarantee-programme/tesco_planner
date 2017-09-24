@@ -29,6 +29,6 @@ class ReschedulesController < ApplicationController
   end
 
   def notify_customer(appointment)
-    CustomerNotificationJob.perform_later(appointment.object)
+    AppointmentMailer.customer(appointment.object).deliver_later
   end
 end

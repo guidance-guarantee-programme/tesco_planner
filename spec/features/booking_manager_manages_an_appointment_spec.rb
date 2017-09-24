@@ -86,6 +86,6 @@ RSpec.feature 'Booking manager manages an appointment' do
   end
 
   def then_the_customer_is_notified
-    assert_enqueued_jobs(1, only: CancellationNotificationJob)
+    expect(ActionMailer::Base.deliveries.first.to).to match_array(@appointment.email)
   end
 end

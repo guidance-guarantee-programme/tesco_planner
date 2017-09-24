@@ -76,11 +76,13 @@ RSpec.describe 'POST /api/v1/locations/:location_id/appointments' do
   end
 
   def and_the_booking_managers_are_notified
-    assert_enqueued_jobs(1, only: BookingManagerNotificationJob)
+    expect(
+      ActionMailer::Base.deliveries.map(&:subject).flatten
+    ).to include('Tesco Pension Wise Appointment')
   end
 
   def and_the_customer_is_notified
-    assert_enqueued_jobs(1, only: CustomerNotificationJob)
+    expect(ActionMailer::Base.deliveries.map(&:to).flatten).to include(@appointment.email)
   end
 
   def when_an_invalid_appointment_request_is_made
