@@ -35,7 +35,7 @@ class AppointmentsController < ApplicationController
   def send_notifications(appointment)
     return unless appointment.status_previously_changed? && appointment.cancelled?
 
-    CancellationNotificationJob.perform_later(appointment.object)
+    AppointmentMailer.cancellation(appointment.object).deliver_later
   end
 
   def appointment_params # rubocop:disable Metrics/MethodLength

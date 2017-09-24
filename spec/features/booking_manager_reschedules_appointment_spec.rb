@@ -38,6 +38,6 @@ RSpec.feature 'Booking manager reschedules appointment' do
   end
 
   def and_the_customer_is_notified
-    assert_enqueued_jobs 1, only: CustomerNotificationJob
+    expect(ActionMailer::Base.deliveries.first.to).to match_array(@appointment.email)
   end
 end
