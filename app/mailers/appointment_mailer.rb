@@ -1,6 +1,12 @@
 class AppointmentMailer < ApplicationMailer
   default subject: 'Your Tesco Pension Wise Appointment'
 
+  def reminder(appointment)
+    @appointment = appointment
+
+    mail to: appointment.email, reply_to: appointment.delivery_centre.reply_to
+  end
+
   def cancellation(appointment)
     @appointment = appointment
 

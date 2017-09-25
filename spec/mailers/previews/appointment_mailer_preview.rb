@@ -1,4 +1,10 @@
 class AppointmentMailerPreview < ActionMailer::Preview
+  def reminder
+    @appointment = Appointment.first
+
+    AppointmentMailer.reminder(@appointment)
+  end
+
   def booking_manager
     AppointmentMailer.booking_manager(User.first)
   end

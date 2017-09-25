@@ -37,6 +37,13 @@ class Appointment < ApplicationRecord
     slot.start_at.future?
   end
 
+  def self.needing_reminder
+    pending
+      .joins(:slot)
+      .where(reminder_sent_at: nil)
+      .where(slots: { start_at: Time.current..48.hours.from_now })
+  end
+
   private
 
   def calculate_type_of_appointment
