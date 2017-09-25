@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170922112631) do
+ActiveRecord::Schema.define(version: 20170925134441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20170922112631) do
     t.boolean "dc_pot_confirmed", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "reminder_sent_at"
     t.index ["slot_id"], name: "index_appointments_on_slot_id", unique: true
   end
 
