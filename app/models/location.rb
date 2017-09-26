@@ -5,6 +5,12 @@ class Location < ApplicationRecord
   has_many :delivery_centres
   has_many :users, through: :delivery_centres
 
+  validates :name, presence: true
+  validates :address_line_one, presence: true
+  validates :town, presence: true
+  validates :county, presence: true
+  validates :postcode, presence: true
+
   def available_slot(start_at)
     slots.available.find_by(start_at: start_at)
   end
