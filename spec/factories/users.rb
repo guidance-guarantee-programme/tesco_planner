@@ -7,5 +7,9 @@ FactoryGirl.define do
     email 'rick@example.com'
     permissions %w[signin booking_manager]
     delivery_centre
+
+    factory :administrator do
+      permissions %w[signin booking_manager administrator]
+    end
   end
 end

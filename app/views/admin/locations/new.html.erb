@@ -1,0 +1,37 @@
+<% content_for(:page_title, t('service.title', page_title: 'New location')) %>
+<div class="page-header">
+  <ol class="breadcrumb">
+    <li><a href="<%= root_path %>">Tesco appointment planner</a></li>
+    <li><a href="<%= admin_locations_path %>">Manage locations</a></li>
+    <li class="active">New location</li>
+  </ol>
+
+  <h1>New location</h1>
+</div>
+
+<%= form_for @location, url: admin_locations_path do |f| %>
+  <div class="row">
+    <div class="col-md-6">
+      <% if @location.errors.any? %>
+        <div class="alert alert-danger t-errors" role="alert">
+          <h3 class="alert__heading h4">There's a problem</h3>
+          <ul>
+            <% @location.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <%= render partial: 'form', locals: { f: f } %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.button class: 'btn btn-primary t-submit' do %>
+        Create location
+      <% end %>
+    </div>
+  </div>
+<% end %>

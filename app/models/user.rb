@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  ADMINISTRATOR   = 'administrator'.freeze
   BOOKING_MANAGER = 'booking_manager'.freeze
 
   include GDS::SSO::User
@@ -20,5 +21,9 @@ class User < ApplicationRecord
 
   def booking_manager?
     has_permission?(BOOKING_MANAGER)
+  end
+
+  def administrator?
+    has_permission?(ADMINISTRATOR)
   end
 end
