@@ -11,6 +11,8 @@ class Location < ApplicationRecord
   validates :county, presence: true
   validates :postcode, presence: true
 
+  scope :active, -> { where(active: true) }
+
   def available_slot(start_at)
     slots.available.find_by(start_at: start_at)
   end
