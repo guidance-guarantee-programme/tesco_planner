@@ -20,6 +20,20 @@ module Admin
       end
     end
 
+    def new
+      @location = Location.new
+    end
+
+    def create
+      @location = Location.new(location_params)
+
+      if @location.save
+        redirect_to admin_locations_path, success: 'Location created.'
+      else
+        render :new
+      end
+    end
+
     private
 
     def location_params # rubocop:disable Metrics/MethodLength
