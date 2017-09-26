@@ -44,6 +44,7 @@
               </td>
               <td>
                 <%= link_to('Manage', edit_admin_location_path(location), class: 'btn btn-info t-manage') %>
+                <%= link_to('Rooms', admin_location_rooms_path(location), class: 'btn btn-info t-rooms') %>
               </td>
             </tr>
           <% end %>
