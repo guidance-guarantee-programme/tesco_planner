@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def authorise_administrator!
+    authorise_user!(User::ADMINISTRATOR)
+  end
+
   def authorise_booking_manager!
     authorise_user!(User::BOOKING_MANAGER)
   end
