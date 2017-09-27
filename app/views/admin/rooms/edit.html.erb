@@ -1,0 +1,44 @@
+<% content_for(:page_title, "Edit #{@room.name}") %>
+<div class="page-header">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Tesco appointment planner', root_path %></li>
+    <li><%= link_to @location.name, edit_admin_location_path(@location) %></li>
+    <li class="active">Edit <%= @room.name %></li>
+  </ol>
+
+  <h1>Edit <%= @location.name %></h1>
+</div>
+
+<%= form_for @room, url: admin_location_room_path(@location) do |f| %>
+  <div class="row">
+    <div class="col-md-6">
+      <% if @room.errors.any? %>
+        <div class="alert alert-danger t-errors" role="alert">
+          <h3 class="alert__heading h4">There's a problem</h3>
+          <ul>
+            <% @room.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control t-name' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.button class: 'btn btn-primary t-submit' do %>
+        Update <%= @room.name %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

@@ -20,7 +20,9 @@ Rails.application.routes.draw do
   resources :slots, only: %i[index create destroy]
 
   namespace :admin do
-    resources :locations
+    resources :locations do
+      resources :rooms
+    end
   end
 
   mount Sidekiq::Web, at: '/sidekiq', constraints: AuthenticatedUser.new
