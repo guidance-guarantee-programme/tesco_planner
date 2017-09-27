@@ -21,6 +21,20 @@ module Admin
       end
     end
 
+    def edit
+      @room = @location.rooms.find(params[:id])
+    end
+
+    def update
+      @room = @location.rooms.find(params[:id])
+
+      if @room.update(room_params)
+        redirect_to admin_location_rooms_path(@location), success: 'Room updated.'
+      else
+        render :edit
+      end
+    end
+
     private
 
     def room_params
