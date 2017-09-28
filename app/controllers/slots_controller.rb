@@ -38,6 +38,6 @@ class SlotsController < ApplicationController
     starts = params[:start].to_date.beginning_of_day
     ends   = params[:end].to_date.end_of_day
 
-    location.slots.available.where(start_at: starts..ends)
+    location.slots.where(start_at: starts..ends)
   end
 end

@@ -26,6 +26,10 @@ class User < ApplicationRecord
       .order(:created_at)
   end
 
+  def mine?(slot)
+    slot.delivery_centre_id == delivery_centre_id
+  end
+
   def booking_manager?
     has_permission?(BOOKING_MANAGER)
   end
