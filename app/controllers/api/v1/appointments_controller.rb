@@ -6,7 +6,7 @@ module Api
 
         if @appointment.save
           deliver_notifications(@appointment)
-          head :created, location: @appointment
+          render json: AppointmentDecorator.new(@appointment).to_h, status: :created
         else
           render json: @appointment.errors, status: :unprocessable_entity
         end
