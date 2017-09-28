@@ -1,0 +1,48 @@
+<% content_for(:page_title, 'Manage Delivery Centres') %>
+<div class="page-header">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Tesco appointment planner', root_path %></li>
+    <li><%= link_to @location.name, edit_admin_location_path(@location) %></li>
+    <li class="active">Manage delivery centres for <%= @location.name %></li>
+  </ol>
+
+  <h1>Manage delivery centres for <%= @location.name %></h1>
+  <%= link_to 'New delivery centre', new_admin_location_delivery_centre_path(@location), class: 'btn btn-default' %>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <% if @delivery_centres.empty? %>
+      <p class="no-content t-notice">No delivery centres.</p>
+    <% else %>
+      <table class="table table-bordered centred-table">
+        <caption><span class="sr-only">Delivery Centres</span></caption>
+        <thead>
+          <tr class="table-header">
+            <th>Name</th>
+            <th>Booking managers</th>
+            <th>Modified</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @delivery_centres.each do |delivery_centre| %>
+            <tr class="t-delivery-centre">
+              <td>
+                <%= delivery_centre.name %>
+              </td>
+              <td>
+                <%= delivery_centre.users.pluck(:name).to_sentence %>
+              <td>
+                <%= time_ago_in_words(delivery_centre.updated_at) %> ago
+              </td>
+              <td>
+                <%= link_to('Booking Managers', edit_admin_location_delivery_centre_path(@location, delivery_centre), class: 'btn btn-info t-manage') %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

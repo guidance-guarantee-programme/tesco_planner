@@ -5,5 +5,6 @@ class DeliveryCentre < ApplicationRecord
 
   belongs_to :location
 
+  validates :name, presence: true, uniqueness: true
   validates :reply_to, presence: true, email: true
 end
