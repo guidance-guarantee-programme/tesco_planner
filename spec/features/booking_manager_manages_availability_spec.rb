@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Booking manager manages availability' do
   scenario 'Managing existing slots for a given location', js: true do
-    travel_to '2017-08-11 13:00' do
+    travel_to '2017-08-11 10:00' do
       given_the_user_is_identified_as_a_booking_manager do
         and_they_have_an_assigned_location_with_availability
         and_they_have_appointments
@@ -72,7 +72,7 @@ RSpec.feature 'Booking manager manages availability' do
   def and_they_see_the_slots_for_their_location
     @page.wait_for_calendar_events
 
-    expect(@page).to have_slots(count: 2)
+    expect(@page).to have_slots(count: 3)
   end
 
   def when_they_click_an_existing_slot
@@ -82,8 +82,6 @@ RSpec.feature 'Booking manager manages availability' do
   end
 
   def then_the_slot_is_removed
-    @page.wait_until_success_visible
-
     expect(@page).to have_success
   end
 
@@ -103,10 +101,10 @@ RSpec.feature 'Booking manager manages availability' do
     @page.dismiss_confirmations
 
     @page.wait_for_calendar_events
-    @page.slots.first.click
+    @page.slots.last.click
   end
 
   def then_the_slot_is_not_removed
-    expect(@page).to have_slots(count: 1)
+    expect(@page).to have_slots(count: 2)
   end
 end

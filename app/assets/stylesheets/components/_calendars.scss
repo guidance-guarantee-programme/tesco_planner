@@ -11,6 +11,10 @@ $calendar-loading-view-background: transparentize($color-white, .2);
   @include striped($color-boston-blue);
 }
 
+.fc-event--theirs {
+  @include striped($color-dove-gray);
+}
+
 .calendar-loading {
   align-items: center;
   background: $calendar-loading-view-background;
