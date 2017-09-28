@@ -20,4 +20,11 @@ class AppointmentDecorator < SimpleDelegator
   def object
     __getobj__
   end
+
+  def to_h
+    {
+      id: id,
+      room: room
+    }
+  end
 end

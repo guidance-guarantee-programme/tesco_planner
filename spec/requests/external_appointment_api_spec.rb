@@ -15,7 +15,7 @@ RSpec.describe 'POST /api/v1/locations/:location_id/appointments' do
       given_a_location_with_availability
       when_an_appointment_request_is_made
       then_the_service_responds_created
-      and_the_appointment_is_identified_by_the_location_header
+      and_the_appointment_is_identified_in_the_response
       and_the_appointment_is_created
       and_the_booking_managers_are_notified
       and_the_customer_is_notified
@@ -54,10 +54,13 @@ RSpec.describe 'POST /api/v1/locations/:location_id/appointments' do
     expect(response).to be_created
   end
 
-  def and_the_appointment_is_identified_by_the_location_header
+  def and_the_appointment_is_identified_in_the_response
     @appointment = Appointment.last
 
-    expect(response.headers['Location']).to end_with(appointment_path(@appointment))
+    expect(JSON.parse(response.body)).to include(
+      'id'   => @appointment.id,
+      'room' => @appointment.slot.room.name
+    )
   end
 
   def and_the_appointment_is_created
