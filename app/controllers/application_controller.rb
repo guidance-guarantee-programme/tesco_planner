@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
-  add_flash_types :success
+  add_flash_types :success, :notice, :warning
 
   before_action :require_signin_permission!
 
