@@ -19,15 +19,15 @@
         buttonText: {
           today: 'Jump to today'
         },
-        slotLabelInterval: { 'minutes': 60 },
+        slotLabelInterval: { 'minutes': 15 },
         displayEventTime: false,
         columnFormat: 'ddd D/M',
-        height: 'auto',
+        height: 'parent',
         maxTime: '18:00:00',
         minTime: '09:00:00',
         weekends: false,
         defaultView: 'agendaWeek',
-        slotDuration: '00:10:00',
+        slotDuration: '00:05:00',
         showNonCurrentDates: false,
         defaultDate: moment(el.data('default-date')),
         firstDay: 1,

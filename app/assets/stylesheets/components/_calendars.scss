@@ -5,6 +5,12 @@ $calendar-loading-view-background: transparentize($color-white, .2);
   a:visited {
     color: $color-white;
   }
+
+  min-height: 400px;
+}
+
+.fc-slats table {
+  font-size: 12px;
 }
 
 .fc-event {
