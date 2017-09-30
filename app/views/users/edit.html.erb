@@ -1,0 +1,37 @@
+<% content_for(:page_title, "Assign #{current_user.name}") %>
+<div class="page-header">
+  <ol class="breadcrumb">
+    <li><a href="<%= root_path %>">Tesco appointment planner</a></li>
+    <li class="active">Choose your delivery centre</li>
+  </ol>
+
+  <h1>Choose your delivery centre</h1>
+</div>
+
+<%= form_for current_user do |f| %>
+  <div class="row">
+    <div class="col-md-5">
+      <% if current_user.errors.any? %>
+        <div class="alert alert-danger t-errors" role="alert">
+          <h3 class="alert__heading h4">There's a problem</h3>
+          <ul>
+            <% current_user.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label :delivery_centre_id, 'Delivery centre' %>
+        <%= f.select :delivery_centre_id,
+              grouped_options_for_select(grouped_delivery_centres(@locations)),
+              {},
+              { class: 'form-control t-delivery-centres' }
+        %>
+      </div>
+
+      <%= f.button 'Choose your delivery centre', class: 'btn btn-primary t-submit' %>
+    </div>
+  </div>
+<% end %>
