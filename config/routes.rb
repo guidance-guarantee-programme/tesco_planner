@@ -1,7 +1,9 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  root 'slots#index'
+  root 'home#index'
+
+  resource :user, only: %i[edit update]
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do

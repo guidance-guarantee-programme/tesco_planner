@@ -26,6 +26,10 @@ class User < ApplicationRecord
       .order(:created_at)
   end
 
+  def assigned?
+    delivery_centre_id?
+  end
+
   def mine?(slot)
     slot.delivery_centre_id == delivery_centre_id
   end
