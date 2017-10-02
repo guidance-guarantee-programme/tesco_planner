@@ -97,6 +97,9 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  # use lograge and log in single-line heroku router style
+  config.lograge.enabled = true
+
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
