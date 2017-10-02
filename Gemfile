@@ -12,6 +12,7 @@ source 'https://rubygems.org' do
   gem 'active_model_serializers'
   gem 'bootsnap', require: false
   gem 'bootstrap-kaminari-views'
+  gem 'bugsnag'
   gem 'email_validator'
   gem 'gds-sso'
   gem 'govuk_admin_template'
