@@ -1,3 +1,5 @@
+LOGRAGE_EXCEPTIONS = %w[controller action format id].freeze
+
 Rails.application.configure do # rubocop:disable Metrics/BlockLength
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -103,6 +105,11 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
 
   # use lograge and log in single-line heroku router style
   config.lograge.enabled = true
+  config.lograge.custom_options = lambda do |event|
+    {
+      params: event.payload[:params].except(*LOGRAGE_EXCEPTIONS)
+    }
+  end
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false

@@ -1,6 +1,8 @@
 module Api
   module V1
     class AppointmentsController < ActionController::Base
+      include LogrageFilterer
+
       def create
         @appointment = Appointment.new(appointment_params.merge(slot: slot))
 

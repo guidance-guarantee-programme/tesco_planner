@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include GDS::SSO::ControllerMethods
+  include LogrageFilterer
 
   protect_from_forgery with: :exception
 
