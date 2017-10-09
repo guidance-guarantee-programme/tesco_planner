@@ -12,13 +12,6 @@ class User < ApplicationRecord
 
   scope :active, -> { where(disabled: false) }
 
-  def self.unassigned_booking_managers
-    active
-      .where(delivery_centre_id: nil)
-      .order(:name)
-      .select(&:booking_manager?)
-  end
-
   def appointments
     delivery_centre
       .appointments
