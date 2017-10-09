@@ -1,6 +1,6 @@
 module AppointmentHelper
   def grouped_delivery_centres(locations)
-    locations.map do |location|
+    locations.uniq(&:name).map do |location|
       [
         location.name,
         location.delivery_centres.pluck(:name, :id)
