@@ -25,18 +25,7 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :name %>
-        <%= f.text_field :name, class: 'form-control t-name' %>
-      </div>
-      <div class="form-group">
-        <%= f.label :reply_to %>
-        <%= f.email_field :reply_to, class: 'form-control t-reply-to' %>
-      </div>
-    </div>
-  </div>
+  <%= render partial: 'form', locals: { f: f } %>
 
   <div class="row">
     <div class="col-md-6">

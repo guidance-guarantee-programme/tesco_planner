@@ -26,19 +26,17 @@ module Admin
     end
 
     def edit
-      @booking_managers = User.unassigned_booking_managers.pluck(:name, :id)
-      @assigned_users   = @delivery_centre.users.order(:name)
+      @delivery_centre = DeliveryCentre.find(params[:id])
     end
 
     def update
-      if params[:user_id].present?
-        User.update(params[:user_id], delivery_centre: @delivery_centre)
-        options = { success: 'Booking manager assigned.' }
-      else
-        options = { warning: 'Choose a booking manager to assign.' }
-      end
+      @delivery_centre = DeliveryCentre.find(params[:id])
 
-      redirect_back options.merge(fallback_location: root_path)
+      if @delivery_centre.update(delivery_centre_params)
+        redirect_to admin_location_delivery_centres_path(@location), success: 'Delivery centre updated.'
+      else
+        render :edit
+      end
     end
 
     private

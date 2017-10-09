@@ -37,7 +37,7 @@
                 <%= time_ago_in_words(delivery_centre.updated_at) %> ago
               </td>
               <td>
-                <%= link_to('Booking Managers', edit_admin_location_delivery_centre_path(@location, delivery_centre), class: 'btn btn-info t-manage') %>
+                <%= link_to('Manage', edit_admin_location_delivery_centre_path(@location, delivery_centre), class: 'btn btn-info t-manage') %>
               </td>
             </tr>
           <% end %>

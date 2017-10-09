@@ -1,38 +1,37 @@
-<% content_for(:page_title, "Booking managers for #{@delivery_centre.name}") %>
+<% content_for(:page_title, "Edit #{@delivery_centre.name}") %>
 <div class="page-header">
   <ol class="breadcrumb">
     <li><%= link_to 'Tesco appointment planner', root_path %></li>
     <li><%= link_to @location.name, edit_admin_location_path(@location) %></li>
-    <li class="active">Booking managers for <%= @delivery_centre.name %></li>
+    <li class="active">Edit <%= @delivery_centre.name %></li>
   </ol>
 
-  <h1>Booking managers for <%= @delivery_centre.name %></h1>
+  <h1>Edit <%= @delivery_centre.name %></h1>
 </div>
 
-<div class="row">
-  <div class="col-md-3">
-    <div class="well">
-      <%= form_with method: :patch, local: true, url: admin_location_delivery_centre_path(@location, @delivery_centre) do |f| %>
-        <div class="form-group">
-          <%= f.label :user_id, 'Booking manager' %>
-          <%= f.select :user_id, @booking_managers, { include_blank: true }, class: 'form-control t-booking-managers' %>
-        </div>
-        <div class="form-group">
-          <%= f.button 'Assign', class: 'btn btn-default t-submit' %>
+<%= form_for @delivery_centre, url: admin_location_delivery_centre_path(@location, @delivery_centre) do |f| %>
+  <div class="row">
+    <div class="col-md-6">
+      <% if @delivery_centre.errors.any? %>
+        <div class="alert alert-danger t-errors" role="alert">
+          <h3 class="alert__heading h4">There's a problem</h3>
+          <ul>
+            <% @delivery_centre.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
         </div>
       <% end %>
     </div>
   </div>
 
-  <div class="col-md-9">
-    <% if @assigned_users.empty? %>
-      <p class="no-content t-notice">No booking managers.</p>
-    <% else %>
-      <ul class="list-unstyled">
-        <% @assigned_users.each do |user| %>
-          <li class="t-assigned-booking-manager"><%= user.name %></li>
-        <% end %>
-      </ul>
-    <% end %>
+  <%= render partial: 'form', locals: { f: f } %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.button class: 'btn btn-primary t-submit' do %>
+        Update <%= @delivery_centre.name %>
+      <% end %>
+    </div>
   </div>
-</div>
+<% end %>
