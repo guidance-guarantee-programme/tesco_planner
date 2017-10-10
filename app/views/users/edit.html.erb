@@ -25,7 +25,7 @@
       <div class="form-group">
         <%= f.label :delivery_centre_id, 'Delivery centre' %>
         <%= f.select :delivery_centre_id,
-              grouped_options_for_select(grouped_delivery_centres(@locations)),
+              grouped_options_for_select(grouped_delivery_centres(@locations), current_user.delivery_centre_id),
               {},
               { class: 'form-control t-delivery-centres' }
         %>
