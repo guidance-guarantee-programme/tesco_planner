@@ -25,6 +25,13 @@ class Appointment < ApplicationRecord
   validates :slot, presence: true, uniqueness: true
   validates :type_of_appointment, presence: true
 
+  def handle_cancellation!
+    return unless status_previously_changed? && cancelled?
+
+    slot.free!
+    yield self
+  end
+
   def booking_managers
     delivery_centre.users.active
   end

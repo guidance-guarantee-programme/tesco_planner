@@ -23,6 +23,7 @@ RSpec.feature 'Booking manager manages an appointment' do
       and_they_have_an_associated_appointment
       when_the_appointment_is_cancelled
       then_the_customer_is_notified
+      and_the_original_slot_is_still_available
     end
   end
 
@@ -87,5 +88,11 @@ RSpec.feature 'Booking manager manages an appointment' do
 
   def then_the_customer_is_notified
     expect(ActionMailer::Base.deliveries.first.to).to match_array(@appointment.email)
+  end
+
+  def and_the_original_slot_is_still_available
+    expect(
+      Slot.available.find_by(start_at: @appointment.slot.start_at)
+    ).to be
   end
 end

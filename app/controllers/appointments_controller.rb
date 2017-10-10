@@ -16,7 +16,7 @@ class AppointmentsController < ApplicationController
 
   def update
     if @appointment.update(appointment_params)
-      send_notifications(@appointment)
+      handle_cancellation(@appointment)
       redirect_to appointments_path, success: 'The appointment was updated.'
     else
       render :edit
@@ -32,10 +32,10 @@ class AppointmentsController < ApplicationController
     appointments.includes(:slot).where(slots: { start_at: starts..ends })
   end
 
-  def send_notifications(appointment)
-    return unless appointment.status_previously_changed? && appointment.cancelled?
-
-    AppointmentMailer.cancellation(appointment.object).deliver_later
+  def handle_cancellation(appointment)
+    appointment.handle_cancellation! do
+      AppointmentMailer.cancellation(appointment.object).deliver_later
+    end
   end
 
   def appointment_params # rubocop:disable Metrics/MethodLength
