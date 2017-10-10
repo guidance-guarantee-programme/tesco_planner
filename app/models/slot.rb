@@ -13,6 +13,15 @@ class Slot < ApplicationRecord
     left_outer_joins(:appointment).where(appointments: { id: nil })
   }
 
+  def free!
+    Slot.create!(
+      start_at: start_at,
+      end_at: end_at,
+      room: room,
+      delivery_centre: delivery_centre
+    )
+  end
+
   private
 
   def infer_end_at!
