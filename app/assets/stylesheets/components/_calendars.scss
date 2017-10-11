@@ -17,6 +17,10 @@ $calendar-loading-view-background: transparentize($color-white, .2);
   @include striped($color-boston-blue);
 }
 
+.fc-bgevent {
+  border: 2px solid $color-white;
+}
+
 .fc-event--theirs {
   @include striped($color-dove-gray);
 }
