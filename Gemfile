@@ -14,6 +14,9 @@ source 'https://rubygems.org' do
   gem 'bootstrap-kaminari-views'
   gem 'bugsnag'
   gem 'email_validator'
+  gem 'faraday'
+  gem 'faraday-conductivity'
+  gem 'faraday_middleware'
   gem 'gds-sso'
   gem 'govuk_admin_template'
   gem 'kaminari'
@@ -43,6 +46,7 @@ source 'https://rubygems.org' do
     gem 'database_rewinder'
     gem 'launchy'
     gem 'poltergeist'
+    gem 'webmock'
   end
 
   group :development do
