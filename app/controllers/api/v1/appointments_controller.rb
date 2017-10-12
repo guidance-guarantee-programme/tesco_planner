@@ -39,6 +39,7 @@ module Api
 
       def deliver_notifications(appointment)
         AppointmentMailer.customer(appointment).deliver_later
+        SlackPingerJob.perform_later(appointment)
 
         appointment.booking_managers.each do |booking_manager|
           AppointmentMailer.booking_manager(booking_manager).deliver_later
