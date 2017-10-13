@@ -1,5 +1,5 @@
 class Activity < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :appointment
 
   default_scope { order(created_at: :desc) }
