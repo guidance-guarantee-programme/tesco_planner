@@ -2,12 +2,17 @@ require 'rails_helper'
 
 RSpec.describe AppointmentMailer do
   let(:appointment) { create(:appointment, :with_slot) }
+  let(:mailgun_headers) { JSON.parse(subject['X-Mailgun-Variables'].value) }
 
   describe '#reminder' do
     subject do
       travel_to '2017-09-16 13:00 UTC' do
         described_class.reminder(appointment)
       end
+    end
+
+    it 'is identified for mailgun' do
+      expect(mailgun_headers).to include('message_type' => 'reminder')
     end
 
     it 'contains the necessary detail' do
@@ -33,6 +38,10 @@ RSpec.describe AppointmentMailer do
       end
     end
 
+    it 'is identified for mailgun' do
+      expect(mailgun_headers).to include('message_type' => 'confirmation')
+    end
+
     it 'contains the necessary detail' do
       expect(subject.to).to match_array('rick@example.com')
 
@@ -51,6 +60,10 @@ RSpec.describe AppointmentMailer do
 
   describe '#cancellation' do
     subject { described_class.cancellation(appointment) }
+
+    it 'is identified for mailgun' do
+      expect(mailgun_headers).to include('message_type' => 'cancellation')
+    end
 
     it 'contains the necessary detail' do
       expect(subject.to).to match_array('rick@example.com')
