@@ -3,6 +3,10 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   root 'home#index'
 
+  namespace :mailgun do
+    resources :drops, only: :create
+  end
+
   resource :user, only: %i[edit update]
 
   namespace :api, defaults: { format: :json } do
