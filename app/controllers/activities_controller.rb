@@ -24,6 +24,9 @@ class ActivitiesController < ApplicationController
     params
       .require(:activity)
       .permit(:message)
-      .merge(user: current_user)
+      .merge(
+        user: current_user,
+        type: MessageActivity.name
+      )
   end
 end
