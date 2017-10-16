@@ -23,7 +23,7 @@
         displayEventTime: false,
         columnFormat: 'ddd D/M',
         height: 'parent',
-        maxTime: '18:00:00',
+        maxTime: '20:00:00',
         minTime: '09:00:00',
         weekends: false,
         defaultView: 'agendaWeek',
