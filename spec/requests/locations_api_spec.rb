@@ -28,7 +28,7 @@ RSpec.describe 'GET /api/v1/locations.json' do
       expect(json.first['name']).to eq(@hq.name)
 
       expect(json.first.keys).to match_array(
-        %w[id name address_line_one address_line_two address_line_three town county postcode]
+        %w[id name address_line_one address_line_two address_line_three town county postcode available]
       )
     end
   end

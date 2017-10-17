@@ -10,5 +10,9 @@ class LocationSerializer < ActiveModel::Serializer
     postcode
   ]
 
+  attribute :available do
+    object.slots.available.from_tomorrow.count.positive?
+  end
+
   attribute :windowed_slots, if: -> { instance_options[:include_slots] }
 end
