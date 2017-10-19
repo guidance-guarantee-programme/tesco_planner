@@ -1,6 +1,7 @@
 class Location < ApplicationRecord
   has_many :rooms
   has_many :slots, through: :rooms
+  has_many :appointments, through: :slots
 
   has_many :delivery_centres
   has_many :users, through: :delivery_centres

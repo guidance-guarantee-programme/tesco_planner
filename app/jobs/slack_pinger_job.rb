@@ -15,10 +15,13 @@ class SlackPingerJob < ApplicationJob
   end
 
   def payload(location)
+    appointments = location.appointments.size
+    slots = location.slots.size
+
     {
       username: 'tesco',
       channel: '#online-bookings',
-      text: ":rotating_light: #{location.name} :rotating_light:",
+      text: ":rotating_light: #{location.name} #{appointments}/#{slots} :rotating_light:",
       icon_emoji: ':tesco:'
     }
   end
