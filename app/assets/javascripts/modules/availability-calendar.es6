@@ -65,6 +65,10 @@
             }
           } else {
             $(element).addClass('t-appointment js-appointment')
+
+            if(event.cancelled) {
+              $(element).addClass('fc-event--cancelled')
+            }
           }
 
           $(element).attr('id', event.id)
