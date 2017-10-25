@@ -1,6 +1,6 @@
 'use strict';
 
-/* global moment */
+/* global moment, alertify */
 {
   class AvailabilityCalendar {
     start(el) {
@@ -105,23 +105,28 @@
     }
 
     deleteSlot(jsEvent) {
-      if (confirm('Are you sure you want to delete this slot?')) {
-        const id = jsEvent.target.id
+      alertify
+        .theme('bootstrap')
+        .okBtn('OK')
+        .confirm('Are you sure you want to delete this slot?', (e) => {
+          e.preventDefault()
 
-        $.ajax({
-          type: 'DELETE',
-          url: `${this.$slotsUri}/${id}`,
-          headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
-          success: () => {
-            $(this.$el).fullCalendar('refetchEvents')
+          const id = jsEvent.target.id
 
-            this.showSuccess()
-          },
-          error: () => {
-            alert('You cannot delete this slot.')
-          }
+          $.ajax({
+            type: 'DELETE',
+            url: `${this.$slotsUri}/${id}`,
+            headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
+            success: () => {
+              $(this.$el).fullCalendar('refetchEvents')
+
+              this.showSuccess()
+            },
+            error: () => {
+              alertify.theme('bootstrap').alert('You cannot delete this slot.')
+            }
+          })
         })
-      }
     }
 
     showSpinner() {

@@ -76,12 +76,12 @@ RSpec.feature 'Booking manager manages availability' do
   end
 
   def when_they_click_an_existing_slot
-    @page.dismiss_confirmations
-
     @page.slots.first.click
+    @page.accept_confirmation
   end
 
   def then_the_slot_is_removed
+    @page.wait_until_success_visible
     expect(@page).to have_success
   end
 
@@ -98,8 +98,6 @@ RSpec.feature 'Booking manager manages availability' do
   end
 
   def when_they_click_a_slot_from_another_delivery_centre
-    @page.dismiss_confirmations
-
     @page.wait_for_calendar_events
     @page.slots.last.click
   end

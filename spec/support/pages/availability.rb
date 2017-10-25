@@ -9,16 +9,15 @@ module Pages
     element :success, '.t-success'
     element :day, '.fc-agendaDay-button'
 
+    element :ok, '.ok'
+
     def wait_for_calendar_events
       find('.t-calendar-rendered', visible: false)
     end
 
-    def dismiss_confirmations
-      page.evaluate_script <<-JS
-        window.confirm = function() {
-          return true;
-        };
-      JS
+    def accept_confirmation
+      wait_until_ok_visible
+      ok.click
     end
 
     def click_slot(time, resource_name = 'Room no.') # rubocop:disable Metrics/MethodLength
