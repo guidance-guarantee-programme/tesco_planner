@@ -4,5 +4,6 @@
 //= require fullcalendar-scheduler
 //= require bootstrap-daterangepicker
 //= require pusher
+//= require alertifyjs
 
 //= require_tree .

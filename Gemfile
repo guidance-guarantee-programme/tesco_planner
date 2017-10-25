@@ -2,6 +2,7 @@
 ruby IO.read('.ruby-version').chomp
 
 source 'https://rails-assets.org' do
+  gem 'rails-assets-alertifyjs'
   gem 'rails-assets-bootstrap-daterangepicker'
   gem 'rails-assets-fullcalendar', '3.4.0'
   gem 'rails-assets-fullcalendar-scheduler', '1.6.2'
