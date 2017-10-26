@@ -1,4 +1,6 @@
 class Slot < ApplicationRecord
+  audited
+
   before_validation :infer_end_at!
 
   belongs_to :room
