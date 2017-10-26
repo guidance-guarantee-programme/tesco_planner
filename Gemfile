@@ -11,6 +11,7 @@ end
 
 source 'https://rubygems.org' do
   gem 'active_model_serializers'
+  gem 'audited'
   gem 'bootsnap', require: false
   gem 'bootstrap-kaminari-views'
   gem 'bugsnag'
