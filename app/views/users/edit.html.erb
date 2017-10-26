@@ -8,7 +8,7 @@
   <h1>Choose your delivery centre</h1>
 </div>
 
-<%= form_for current_user do |f| %>
+<%= form_for current_user, url: user_path do |f| %>
   <div class="row">
     <div class="col-md-5">
       <% if current_user.errors.any? %>
