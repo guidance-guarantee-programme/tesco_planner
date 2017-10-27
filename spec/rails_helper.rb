@@ -18,7 +18,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
 
   config.include ActiveSupport::Testing::TimeHelpers
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
   config.include UserHelpers
 
   config.after(:each) { ActionMailer::Base.deliveries.clear }

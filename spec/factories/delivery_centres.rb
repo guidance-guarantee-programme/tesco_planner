@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :delivery_centre do
     reply_to 'dc@example.com'
     location

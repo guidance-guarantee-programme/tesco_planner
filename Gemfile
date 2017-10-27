@@ -36,7 +36,7 @@ source 'https://rubygems.org' do
 
   group :development, :test do
     gem 'capybara'
-    gem 'factory_girl_rails'
+    gem 'factory_bot_rails'
     gem 'phantomjs'
     gem 'pry-byebug'
     gem 'pusher-fake'
