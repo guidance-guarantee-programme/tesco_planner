@@ -1,6 +1,6 @@
 require 'securerandom'
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :user, aliases: [:booking_manager] do
     uid { SecureRandom.uuid }
     name 'Rick Sanchez'
