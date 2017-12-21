@@ -6,8 +6,6 @@ class ApplicationController < ActionController::Base
 
   add_flash_types :success, :notice, :warning
 
-  before_action :require_signin_permission!
-
   rescue_from ActiveRecord::RecordNotFound do
     respond_to do |format|
       format.json { head :not_found }
