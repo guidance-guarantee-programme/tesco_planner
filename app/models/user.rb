@@ -6,11 +6,16 @@ class User < ApplicationRecord
 
   serialize :permissions, Array
 
-  belongs_to :delivery_centre, optional: true
+  has_many :assignments
+  has_many :delivery_centres, through: :assignments
 
   delegate :location, :slots, to: :delivery_centre
 
   scope :active, -> { where(disabled: false) }
+
+  def delivery_centre
+    delivery_centres.first
+  end
 
   def appointments
     delivery_centre
@@ -20,11 +25,11 @@ class User < ApplicationRecord
   end
 
   def assigned?
-    delivery_centre_id?
+    assignment_ids.present?
   end
 
   def mine?(slot)
-    slot.delivery_centre_id == delivery_centre_id
+    delivery_centre_ids.include?(slot.delivery_centre_id)
   end
 
   def booking_manager?

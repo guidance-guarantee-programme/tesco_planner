@@ -17,8 +17,17 @@ module UserHelpers
     GDS::SSO.test_user = nil
   end
 
-  def given_the_user_is_identified_as_a_booking_manager(opts = {})
-    @user = create(:booking_manager, opts)
+  def given_the_user_is_identified_as_a_booking_manager(type: :booking_manager)
+    @user = create(type)
+    GDS::SSO.test_user = @user
+
+    yield
+  ensure
+    GDS::SSO.test_user = nil
+  end
+
+  def given_the_user_is_identified_as_an_unassigned_booking_manager
+    @user = create(:unassigned_booking_manager)
     GDS::SSO.test_user = @user
 
     yield

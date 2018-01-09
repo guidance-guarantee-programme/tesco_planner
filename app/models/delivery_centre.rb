@@ -1,5 +1,7 @@
 class DeliveryCentre < ApplicationRecord
-  has_many :users
+  has_many :assignments
+  has_many :users, through: :assignments
+
   has_many :slots
   has_many :appointments, through: :slots
 

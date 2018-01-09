@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def update
     if current_user.update(user_params)
-      redirect_to appointments_path, success: 'Your delivery centre has been assigned.'
+      redirect_to appointments_path, success: 'Your delivery centres have been assigned.'
     else
       render :edit
     end
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:delivery_centre_id)
+    params.require(:user).permit(delivery_centre_ids: [])
   end
 
   def load_locations

@@ -9,7 +9,7 @@ RSpec.feature 'Booking manager assigns their delivery centre' do
   end
 
   scenario 'They are not yet assigned' do
-    given_the_user_is_identified_as_a_booking_manager(delivery_centre: nil) do
+    given_the_user_is_identified_as_an_unassigned_booking_manager do
       and_a_delivery_centre_exists
       when_they_visit_the_application
       and_they_choose_a_delivery_centre

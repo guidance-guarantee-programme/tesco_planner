@@ -2,10 +2,10 @@
 <div class="page-header">
   <ol class="breadcrumb">
     <li><a href="<%= root_path %>">Tesco appointment planner</a></li>
-    <li class="active">Choose your delivery centre</li>
+    <li class="active">Choose your delivery centres</li>
   </ol>
 
-  <h1>Choose your delivery centre</h1>
+  <h1>Choose your delivery centres</h1>
 </div>
 
 <%= form_for current_user, url: user_path do |f| %>
@@ -23,15 +23,15 @@
       <% end %>
 
       <div class="form-group">
-        <%= f.label :delivery_centre_id, 'Delivery centre' %>
-        <%= f.select :delivery_centre_id,
-              grouped_options_for_select(grouped_delivery_centres(@locations), current_user.delivery_centre_id),
+        <%= f.label :delivery_centre_ids, 'Delivery centre' %>
+        <%= f.select :delivery_centre_ids,
+              grouped_options_for_select(grouped_delivery_centres(@locations), current_user.delivery_centre_ids),
               {},
-              { class: 'form-control t-delivery-centres' }
+              { class: 'form-control t-delivery-centres', multiple: true, size: 10 }
         %>
       </div>
 
-      <%= f.button 'Choose your delivery centre', class: 'btn btn-primary t-submit' %>
+      <%= f.button 'Choose your delivery centres', class: 'btn btn-primary t-submit' %>
     </div>
   </div>
 <% end %>
