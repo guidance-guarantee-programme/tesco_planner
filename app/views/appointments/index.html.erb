@@ -25,6 +25,7 @@
             <th>Room</th>
             <th>Reference</th>
             <th>Status</th>
+            <th>Processed</th>
             <th></th>
           </tr>
         </thead>
@@ -49,6 +50,9 @@
               </td>
               <td>
                 <%= appointment.status %>
+              </td>
+              <td>
+                <%= appointment.processed_at? ? 'Yes' : 'No' %>
               </td>
               <td>
                 <%= link_to('Manage', edit_appointment_path(appointment), class: 'btn btn-info t-manage') %>
