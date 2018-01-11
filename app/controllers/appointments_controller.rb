@@ -3,11 +3,12 @@ class AppointmentsController < ApplicationController
   before_action :load_appointment, only: %i[edit update]
 
   def index
-    @appointments = current_user.appointments
-
     respond_to do |format|
-      format.html { @appointments = @appointments.page(params[:page]) }
-      format.json { render json: windowed(@appointments) }
+      format.html do
+        @search = AppointmentSearch.new(search_params)
+        @appointments = @search.results
+      end
+      format.json { render json: windowed(current_user.appointments) }
     end
   end
 
@@ -24,6 +25,20 @@ class AppointmentsController < ApplicationController
   end
 
   private
+
+  def search_params # rubocop:disable MethodLength
+    params
+      .fetch(:search, {})
+      .permit(
+        :reference,
+        :name,
+        :status,
+        :date
+      ).merge(
+        page: params[:page],
+        user: current_user
+      )
+  end
 
   def windowed(appointments)
     starts = params[:start].to_date.beginning_of_day
