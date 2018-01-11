@@ -1,0 +1,2 @@
+class ProcessedActivity < Activity
+end

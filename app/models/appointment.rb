@@ -25,6 +25,16 @@ class Appointment < ApplicationRecord
   validates :slot, presence: true, uniqueness: true
   validates :type_of_appointment, presence: true
 
+  def process!(by)
+    return if processed_at?
+
+    transaction do
+      touch(:processed_at) # rubocop:disable SkipsModelValidations
+
+      ProcessedActivity.create!(user: by, appointment: self)
+    end
+  end
+
   def handle_cancellation!
     return unless status_previously_changed? && cancelled?
 

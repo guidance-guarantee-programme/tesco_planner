@@ -1,6 +1,6 @@
 require 'sidekiq/web'
 
-Rails.application.routes.draw do
+Rails.application.routes.draw do # rubocop:disable BlockLength
   root 'home#index'
 
   namespace :mailgun do
@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   resources :appointments, only: %i[index show edit update] do
     resource :reschedule, only: %i[edit update]
+    resource :process, only: :create
+
     resources :activities, only: :create
   end
 

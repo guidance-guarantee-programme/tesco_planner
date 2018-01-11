@@ -1,4 +1,8 @@
 class AppointmentDecorator < SimpleDelegator
+  def processed
+    object.processed_at? ? 'Yes' : 'No'
+  end
+
   def full_name
     "#{object.first_name} #{object.last_name}"
   end
