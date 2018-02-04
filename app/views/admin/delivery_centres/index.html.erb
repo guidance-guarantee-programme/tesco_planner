@@ -2,12 +2,11 @@
 <div class="page-header">
   <ol class="breadcrumb">
     <li><%= link_to 'Tesco appointment planner', root_path %></li>
-    <li><%= link_to @location.name, edit_admin_location_path(@location) %></li>
-    <li class="active">Manage delivery centres for <%= @location.name %></li>
+    <li class="active">Manage delivery centres</li>
   </ol>
 
-  <h1>Manage delivery centres for <%= @location.name %></h1>
-  <%= link_to 'New delivery centre', new_admin_location_delivery_centre_path(@location), class: 'btn btn-default' %>
+  <h1>Manage delivery centres</h1>
+  <%= link_to 'New delivery centre', new_admin_delivery_centre_path, class: 'btn btn-default' %>
 </div>
 
 <div class="row">
@@ -37,7 +36,7 @@
                 <%= time_ago_in_words(delivery_centre.updated_at) %> ago
               </td>
               <td>
-                <%= link_to('Manage', edit_admin_location_delivery_centre_path(@location, delivery_centre), class: 'btn btn-info t-manage') %>
+                <%= link_to('Manage', edit_admin_delivery_centre_path(delivery_centre), class: 'btn btn-info t-manage') %>
               </td>
             </tr>
           <% end %>

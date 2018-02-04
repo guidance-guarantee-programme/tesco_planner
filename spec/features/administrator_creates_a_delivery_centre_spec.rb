@@ -3,30 +3,24 @@ require 'rails_helper'
 RSpec.feature 'Administrator creates a delivery centre' do
   scenario 'Creating a delivery centre' do
     given_the_user_is_identified_as_an_administrator do
-      and_a_location_exists
-      when_they_add_a_delivery_centre_to_the_location
-      then_the_delivery_centre_is_added
+      when_they_create_a_delivery_centre
+      then_the_delivery_centre_is_created
     end
   end
 
-  def and_a_location_exists
-    @location = create(:location)
-  end
-
-  def when_they_add_a_delivery_centre_to_the_location
+  def when_they_create_a_delivery_centre
     @page = Pages::Admin::DeliveryCentre.new
-    @page.load(location_id: @location.id)
+    @page.load
 
     @page.name.set('Stevenage')
     @page.reply_to.set('stevenage@example.com')
     @page.submit.click
   end
 
-  def then_the_delivery_centre_is_added
+  def then_the_delivery_centre_is_created
     expect(DeliveryCentre.last).to have_attributes(
       name: 'Stevenage',
-      reply_to: 'stevenage@example.com',
-      location_id: @location.id
+      reply_to: 'stevenage@example.com'
     )
   end
 end

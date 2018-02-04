@@ -35,7 +35,7 @@
   <br>
   <strong class="emphasize">
     <%= @appointment.slot.room.name %><br>
-    <%= simple_format(@appointment.delivery_centre.location.address) %>
+    <%= simple_format(@appointment.slot.room.location.address) %>
   </strong>
 </p>
 

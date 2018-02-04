@@ -5,7 +5,6 @@ RSpec.describe 'GET /api/v1/locations/:location_id' do
     travel_to @now = Time.zone.parse('2017-09-06 13:00') do
       given_the_location_exists
       and_it_has_multiple_rooms
-      and_it_has_multiple_delivery_centres
       and_it_has_associated_slots
       when_the_location_is_requested
       then_the_service_responds_ok
@@ -22,20 +21,16 @@ RSpec.describe 'GET /api/v1/locations/:location_id' do
     @room_two = create(:room, location: @location)
   end
 
-  def and_it_has_multiple_delivery_centres
-    @delivery_centre_one = @location.delivery_centres.first
-    @delivery_centre_two = create(:delivery_centre, location: @location)
-  end
-
   def and_it_has_associated_slots
+    @delivery_centre_one = @location.delivery_centre
     # won't appear as it occurs today
     @today = build_slot(@room_one, @now, @delivery_centre_one)
     # appears singularly
-    @tomorrow = build_slot(@room_one, @now.advance(days: 1), @delivery_centre_two)
+    @tomorrow = build_slot(@room_one, @now.advance(days: 1), @delivery_centre_one)
     # will be combined into a single slot
     @combined = build_slot(@room_one, @now.advance(weeks: 1), @delivery_centre_one)
     # will be combined with the slot above
-    @other_combined = build_slot(@room_two, @now.advance(weeks: 1), @delivery_centre_two)
+    @other_combined = build_slot(@room_two, @now.advance(weeks: 1), @delivery_centre_one)
 
     # this won't appear as it has an associated appointment
     @other_slot = build_slot(@room_one, @now.advance(weeks: 1, hours: 1), @delivery_centre_one)

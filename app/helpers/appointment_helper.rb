@@ -1,13 +1,4 @@
 module AppointmentHelper
-  def grouped_delivery_centres(locations)
-    locations.includes(:delivery_centres).uniq(&:name).map do |location|
-      [
-        location.name,
-        location.delivery_centres.pluck(:name, :id)
-      ]
-    end
-  end
-
   def grouped_slots(slots)
     [].tap do |result|
       grouped = slots.group_by { |slot| slot.start_at.to_date.to_s(:govuk_date) }
