@@ -3,7 +3,7 @@ class Location < ApplicationRecord
   has_many :slots, through: :rooms
   has_many :appointments, through: :slots
 
-  belongs_to :delivery_centre, optional: true
+  belongs_to :delivery_centre
   has_many :users, through: :delivery_centre
 
   validates :name, presence: true

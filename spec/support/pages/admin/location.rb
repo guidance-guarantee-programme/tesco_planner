@@ -3,6 +3,7 @@ module Pages
     class Location < SitePrism::Page
       set_url '/admin/locations/new'
 
+      element :delivery_centre, '.t-delivery-centre'
       element :name, '.t-name'
       element :address_line_one, '.t-address-line-one'
       element :address_line_two, '.t-address-line-two'

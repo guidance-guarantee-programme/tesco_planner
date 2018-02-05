@@ -3,6 +3,8 @@ FactoryBot.define do
     sequence(:name) { |n| "Delivery Centre #{n}" }
     reply_to 'dc@example.com'
 
-    after(:build) { |dc| dc.locations << build(:location) }
+    trait :with_locations do
+      after(:build) { |dc| dc.locations << build(:location) }
+    end
   end
 end
