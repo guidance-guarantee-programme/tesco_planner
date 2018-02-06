@@ -49,9 +49,7 @@
           jsEvent.preventDefault()
 
           if (jsEvent.target.classList.contains('js-slot')) {
-            if (!jsEvent.target.classList.contains('fc-event--theirs')) {
-              this.deleteSlot(jsEvent)
-            }
+            this.deleteSlot(jsEvent)
           } else {
             this.createSlot(date, resourceObject)
           }
@@ -59,10 +57,6 @@
         eventRender: (event, element) => {
           if (event.source.eventType === 'slot') {
             $(element).addClass('t-slot js-slot')
-
-            if (!event.mine) {
-              $(element).addClass('fc-event--theirs')
-            }
           } else {
             $(element).addClass('t-appointment js-appointment')
 

@@ -4,8 +4,11 @@ class Slot < ApplicationRecord
   before_validation :infer_end_at!
 
   belongs_to :room
-  belongs_to :delivery_centre
   has_one :appointment
+
+  scope :for_location, lambda { |location|
+    includes(room: :location).where(locations: { id: location.id })
+  }
 
   scope :from_tomorrow, lambda {
     where(arel_table[:start_at].gteq(Date.tomorrow.beginning_of_day))
@@ -19,8 +22,7 @@ class Slot < ApplicationRecord
     Slot.create!(
       start_at: start_at,
       end_at: end_at,
-      room: room,
-      delivery_centre: delivery_centre
+      room: room
     )
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180203151839) do
+ActiveRecord::Schema.define(version: 20180205162025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,8 +103,6 @@ ActiveRecord::Schema.define(version: 20180203151839) do
     t.bigint "room_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "delivery_centre_id"
-    t.index ["delivery_centre_id"], name: "index_slots_on_delivery_centre_id"
     t.index ["room_id"], name: "index_slots_on_room_id"
   end
 
@@ -126,7 +124,6 @@ ActiveRecord::Schema.define(version: 20180203151839) do
   add_foreign_key "activities", "appointments"
   add_foreign_key "activities", "users"
   add_foreign_key "appointments", "slots"
-  add_foreign_key "slots", "delivery_centres"
   add_foreign_key "slots", "rooms"
   add_foreign_key "users", "delivery_centres"
 end

@@ -40,7 +40,6 @@ module UserHelpers
       a.slot = build(
         :slot,
         start_at: start_at,
-        delivery_centre: user.delivery_centre,
         room: user.location.rooms.first
       )
 
@@ -52,7 +51,6 @@ module UserHelpers
     create(
       :slot,
       start_at: start_at,
-      delivery_centre: user.delivery_centre,
       room: user.location.rooms.first
     )
   end

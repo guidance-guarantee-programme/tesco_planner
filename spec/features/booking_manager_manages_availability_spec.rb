@@ -29,13 +29,9 @@ RSpec.feature 'Booking manager manages availability' do
   def and_they_have_an_assigned_location_with_availability
     @location = @user.location
     # this will be visible
-    @location.rooms.first.slots << build(:slot, delivery_centre: @user.delivery_centre)
+    @location.rooms.first.slots << build(:slot)
     # this will be hidden
-    @location.rooms.first.slots << build(
-      :slot,
-      start_at: 1.month.from_now,
-      delivery_centre: @user.delivery_centre
-    )
+    @location.rooms.first.slots << build(:slot, start_at: 1.month.from_now)
   end
 
   def and_they_have_appointments

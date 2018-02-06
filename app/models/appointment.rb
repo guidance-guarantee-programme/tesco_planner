@@ -1,6 +1,6 @@
 class Appointment < ApplicationRecord
   belongs_to :slot
-  has_one :delivery_centre, through: :slot
+  has_one :room, through: :slot
   has_many :activities
 
   before_validation :calculate_type_of_appointment
@@ -24,6 +24,14 @@ class Appointment < ApplicationRecord
   validates :date_of_birth, presence: true
   validates :slot, presence: true, uniqueness: true
   validates :type_of_appointment, presence: true
+
+  scope :by_delivery_centre, lambda { |delivery_centre|
+    includes(slot: { room: :location })
+      .where(locations: { delivery_centre_id: delivery_centre.id })
+  }
+
+  delegate :location, to: :room
+  delegate :delivery_centre, to: :location
 
   def process!(by)
     return if processed_at?

@@ -10,7 +10,7 @@ class SlotsController < ApplicationController
   end
 
   def create
-    current_user.slots.create!(
+    Slot.create!(
       room: room,
       start_at: params[:start_at]
     )
@@ -19,7 +19,7 @@ class SlotsController < ApplicationController
   end
 
   def destroy
-    current_user.slots.destroy(params[:id])
+    Slot.destroy(params[:id])
 
     head :no_content
   end

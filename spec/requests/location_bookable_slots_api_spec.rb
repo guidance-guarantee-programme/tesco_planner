@@ -25,8 +25,7 @@ RSpec.describe 'GET /slots?start=date&end=date' do
     ].each do |date|
       @room.slots << build(
         :slot,
-        start_at: Time.zone.parse(date),
-        delivery_centre: @user.delivery_centre
+        start_at: Time.zone.parse(date)
       )
     end
   end
@@ -46,7 +45,7 @@ RSpec.describe 'GET /slots?start=date&end=date' do
     JSON.parse(response.body).tap do |json|
       expect(json.count).to eq(4)
 
-      expect(json.first.keys).to match_array(%w[id start end resourceId mine])
+      expect(json.first.keys).to match_array(%w[id start end resourceId])
     end
   end
 end
