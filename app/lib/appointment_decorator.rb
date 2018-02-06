@@ -21,6 +21,10 @@ class AppointmentDecorator < SimpleDelegator
     object.slot.room.name
   end
 
+  def location_name
+    object.slot.room.location.name
+  end
+
   def object
     __getobj__
   end

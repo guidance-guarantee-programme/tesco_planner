@@ -8,12 +8,14 @@ class User < ApplicationRecord
 
   belongs_to :delivery_centre, optional: true
 
+  delegate :locations, to: :delivery_centre
+
   scope :active, -> { where(disabled: false) }
 
   def location
     return unless delivery_centre_id?
 
-    delivery_centre.locations.first
+    locations.first
   end
 
   def appointments
