@@ -44,7 +44,7 @@ RSpec.feature 'Booking manager manages availability' do
 
   def when_they_view_availability_for_their_location
     @page = Pages::Availability.new
-    @page.load
+    @page.load(location_id: @user.location.id)
   end
 
   def then_they_see_the_associated_rooms

@@ -7,7 +7,11 @@ class RoomsController < ApplicationController
 
   private
 
+  def location
+    current_user.locations.find(params[:location_id])
+  end
+
   def rooms
-    current_user.location.rooms.order(:name)
+    location.rooms.order(:name)
   end
 end

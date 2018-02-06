@@ -6,6 +6,7 @@
     start(el) {
       this.$el = el;
       this.$slotsUri = this.$el.data('slots-uri')
+      this.$roomsUri = this.$el.data('rooms-uri')
       this.$modal = this.$el.find('.js-availability-modal')
 
       $(this.$el).fullCalendar({
@@ -31,7 +32,7 @@
         showNonCurrentDates: false,
         defaultDate: moment(el.data('default-date')),
         firstDay: 1,
-        resources: '/rooms.json',
+        resources: this.$roomsUri,
         timezone: 'local',
         eventSources: [
           {

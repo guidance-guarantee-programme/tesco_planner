@@ -31,7 +31,7 @@ class SlotsController < ApplicationController
   end
 
   def location
-    @location ||= current_user.location
+    @location ||= current_user.locations.find(params[:location_id])
   end
 
   def slots
