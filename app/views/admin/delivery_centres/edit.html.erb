@@ -2,14 +2,13 @@
 <div class="page-header">
   <ol class="breadcrumb">
     <li><%= link_to 'Tesco appointment planner', root_path %></li>
-    <li><%= link_to @location.name, edit_admin_location_path(@location) %></li>
     <li class="active">Edit <%= @delivery_centre.name %></li>
   </ol>
 
   <h1>Edit <%= @delivery_centre.name %></h1>
 </div>
 
-<%= form_for @delivery_centre, url: admin_location_delivery_centre_path(@location, @delivery_centre) do |f| %>
+<%= form_for @delivery_centre, url: admin_delivery_centre_path(@delivery_centre) do |f| %>
   <div class="row">
     <div class="col-md-6">
       <% if @delivery_centre.errors.any? %>
