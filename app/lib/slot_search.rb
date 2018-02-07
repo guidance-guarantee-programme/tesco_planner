@@ -11,7 +11,7 @@ class SlotSearch
     scope = Slot.includes(room: :location).where(locations: { id: location.id })
     scope = scope.where(start_at: date_range)
     scope = availability(scope)
-    scope.order(:start_at)
+    scope = scope.order(:start_at)
     scope.page(page)
   end
 
