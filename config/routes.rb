@@ -27,6 +27,7 @@ Rails.application.routes.draw do # rubocop:disable BlockLength
   resources :locations, only: :index do
     resources :slots, only: %i[index create destroy]
     resources :rooms, only: :index
+    resource :availability, only: :show
   end
 
   namespace :admin do

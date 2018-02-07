@@ -1,0 +1,71 @@
+<% content_for(:page_title, "Slots for #{location.name}") %>
+<div class="page-header">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Tesco appointment planner', root_path %></li>
+    <li class="active">Slots for <%= location.name %></li>
+  </ol>
+
+  <h1>Slots for <%= location.name %></h1>
+</div>
+
+<div class="t-search filters">
+  <div class="panel panel-default">
+    <header class="panel-heading">
+      <%= form_for @search, url: location_availability_path(location), as: :search, method: :get, html: { class: 'inline form-inline' } do |f| %>
+        <ul class="nav nav-compact nav-pills filters__nav">
+          <li class="filters__item">
+            <%= f.label :date, 'Date', class: 'filters__label' %><%= f.text_field :date, class: 'js-date-range-picker t-date form-control filters__form-control', readonly: true, data: { module: 'date-range-picker' } %>
+          </li>
+          <li class="filters__item">
+            <%= f.label :room, class: 'filters__label' %>
+            <%= f.collection_select :room, rooms, :id, :name, { include_blank: 'All Rooms' }, { class: 't-room form-control filters__form-control filters__form-control--room' } %>
+          </li>
+          <li class="filters__item">
+            <%= f.label :available, class: 'filters__label' %>
+            <%= f.select :available, options_for_select(%w(Yes No), @search.available), { include_blank: 'All Availability' }, { class: 't-availability form-control filters__form-control filters__form-control--availability' } %>
+          </li>
+          <li class="filters__item">
+           <%= f.button class: 't-submit btn btn-default filters__button' do %>
+             <span aria-hidden="true" class="glyphicon glyphicon-search"></span> Search
+           <% end %>
+          </li>
+        </ul>
+      <% end %>
+    </header>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <% if @slots.empty? %>
+      <p class="no-content t-notice">No slots.</p>
+    <% else %>
+      <%= paginate @slots %>
+
+      <table class="table table-bordered centred-table table-striped">
+        <caption><span class="sr-only">Slots</span></caption>
+        <thead>
+          <tr class="table-header">
+            <th>Start at</th>
+            <th>Room</th>
+            <th>Available</th>
+            <th>Created</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @slots.each do |slot| %>
+            <% slot = SlotDecorator.new(slot) %>
+            <tr class="t-slot">
+              <td><%= slot.start_at %></td>
+              <td><%= slot.room %></td>
+              <td><%= slot.available %></td>
+              <td><%= slot.created_at %> ago</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <%= paginate @slots %>
+    <% end %>
+  </div>
+</div>
