@@ -5,7 +5,6 @@ FactoryBot.define do
 
     trait :with_room do
       room { build(:room, :with_location) }
-      delivery_centre { build(:delivery_centre, location: room.location) }
     end
   end
 end

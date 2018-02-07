@@ -1,6 +1,7 @@
 module Admin
   class LocationsController < ApplicationController
     before_action :authorise_administrator!
+    before_action :load_delivery_centres
 
     def index
       @locations = Location.all.order(:name).page(params[:page])
@@ -36,10 +37,15 @@ module Admin
 
     private
 
+    def load_delivery_centres
+      @delivery_centres = DeliveryCentre.order(:name)
+    end
+
     def location_params # rubocop:disable Metrics/MethodLength
       params
         .require(:location)
         .permit(
+          :delivery_centre_id,
           :name,
           :address_line_one,
           :address_line_two,

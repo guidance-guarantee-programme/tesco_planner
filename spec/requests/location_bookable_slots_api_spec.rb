@@ -1,7 +1,7 @@
 # rubocop:disable Metrics/MethodLength
 require 'rails_helper'
 
-RSpec.describe 'GET /slots?start=date&end=date' do
+RSpec.describe 'GET /location/{id}/slots?start=date&end=date' do
   scenario 'Requesting the slots' do
     travel_to '2017-08-11 13:00' do
       given_the_user_is_identified_as_a_booking_manager do
@@ -25,14 +25,14 @@ RSpec.describe 'GET /slots?start=date&end=date' do
     ].each do |date|
       @room.slots << build(
         :slot,
-        start_at: Time.zone.parse(date),
-        delivery_centre: @user.delivery_centre
+        start_at: Time.zone.parse(date)
       )
     end
   end
 
   def when_they_request_the_slots_for_their_location
-    get slots_path(
+    get location_slots_path(
+      @user.location,
       start: Date.current.beginning_of_month,
       end: Date.current.end_of_month
     ), as: :json
@@ -46,7 +46,7 @@ RSpec.describe 'GET /slots?start=date&end=date' do
     JSON.parse(response.body).tap do |json|
       expect(json.count).to eq(4)
 
-      expect(json.first.keys).to match_array(%w[id start end resourceId mine])
+      expect(json.first.keys).to match_array(%w[id start end resourceId])
     end
   end
 end

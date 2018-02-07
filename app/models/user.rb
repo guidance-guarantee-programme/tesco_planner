@@ -8,23 +8,22 @@ class User < ApplicationRecord
 
   belongs_to :delivery_centre, optional: true
 
-  delegate :location, :slots, to: :delivery_centre
+  delegate :locations, to: :delivery_centre
 
   scope :active, -> { where(disabled: false) }
 
+  def location
+    return unless delivery_centre_id?
+
+    locations.first
+  end
+
   def appointments
-    delivery_centre
-      .appointments
-      .includes(slot: :room)
-      .order(:created_at)
+    Appointment.by_delivery_centre(delivery_centre)
   end
 
   def assigned?
     delivery_centre_id?
-  end
-
-  def mine?(slot)
-    slot.delivery_centre_id == delivery_centre_id
   end
 
   def booking_manager?

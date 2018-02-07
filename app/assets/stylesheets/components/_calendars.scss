@@ -22,10 +22,6 @@ $calendar-appointment-cancelled-background: $color-medium-carmine;
   border: 2px solid $color-white;
 }
 
-.fc-event--theirs {
-  @include striped($color-dove-gray);
-}
-
 .fc-event--cancelled {
   @include striped($calendar-appointment-cancelled-background);
   border-color: $calendar-appointment-cancelled-background;

@@ -6,6 +6,7 @@
     start(el) {
       this.$el = el;
       this.$slotsUri = this.$el.data('slots-uri')
+      this.$roomsUri = this.$el.data('rooms-uri')
       this.$modal = this.$el.find('.js-availability-modal')
 
       $(this.$el).fullCalendar({
@@ -31,7 +32,7 @@
         showNonCurrentDates: false,
         defaultDate: moment(el.data('default-date')),
         firstDay: 1,
-        resources: '/rooms.json',
+        resources: this.$roomsUri,
         timezone: 'local',
         eventSources: [
           {
@@ -49,9 +50,7 @@
           jsEvent.preventDefault()
 
           if (jsEvent.target.classList.contains('js-slot')) {
-            if (!jsEvent.target.classList.contains('fc-event--theirs')) {
-              this.deleteSlot(jsEvent)
-            }
+            this.deleteSlot(jsEvent)
           } else {
             this.createSlot(date, resourceObject)
           }
@@ -59,10 +58,6 @@
         eventRender: (event, element) => {
           if (event.source.eventType === 'slot') {
             $(element).addClass('t-slot js-slot')
-
-            if (!event.mine) {
-              $(element).addClass('fc-event--theirs')
-            }
           } else {
             $(element).addClass('t-appointment js-appointment')
 

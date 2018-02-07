@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'GET /rooms.json' do
+RSpec.describe 'GET /location/{id}/rooms.json' do
   scenario 'Retrieving rooms as JSON' do
     given_the_user_is_identified_as_a_booking_manager do
       when_they_request_the_rooms
@@ -10,7 +10,7 @@ RSpec.describe 'GET /rooms.json' do
   end
 
   def when_they_request_the_rooms
-    get rooms_path, as: :json
+    get location_rooms_path(@user.location), as: :json
   end
 
   def then_the_service_responds_ok

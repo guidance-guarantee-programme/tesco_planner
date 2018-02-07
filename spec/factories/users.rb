@@ -6,7 +6,7 @@ FactoryBot.define do
     name 'Rick Sanchez'
     email 'rick@example.com'
     permissions %w[signin booking_manager]
-    delivery_centre
+    delivery_centre { build(:delivery_centre, :with_locations) }
 
     factory :administrator do
       permissions %w[signin booking_manager administrator]

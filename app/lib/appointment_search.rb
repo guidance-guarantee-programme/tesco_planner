@@ -5,16 +5,22 @@ class AppointmentSearch
   attr_accessor :name
   attr_accessor :status
   attr_accessor :date
+  attr_accessor :location
   attr_accessor :user
   attr_accessor :page
 
   def results # rubocop:disable Metrics/AbcSize
-    scope = user.appointments
+    scope = user.appointments.includes(slot: { room: :location })
     scope = scope.where(id: reference) if reference.present?
     scope = scope.where('first_name ILIKE :name or last_name ILIKE :name', name: "%#{name}%") if name.present?
     scope = scope.where(status: status) if status.present?
-    scope = scope.includes(:slot).where(slots: { start_at: date_range }) if date.present?
+    scope = scope.where(slots: { start_at: date_range }) if date.present?
+    scope = scope.where(locations: { id: location }) if location.present?
     scope.page(page)
+  end
+
+  def locations
+    user.locations.order(:name)
   end
 
   private

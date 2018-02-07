@@ -21,11 +21,14 @@ class ReschedulesController < ApplicationController
   end
 
   def load_appointment_and_slots
-    @slots = current_user.slots.available.from_tomorrow.order(:start_at)
-
     @appointment = AppointmentDecorator.new(
       current_user.appointments.find(params[:appointment_id])
     )
+
+    @slots = Slot
+             .for_location(@appointment.location)
+             .from_tomorrow
+             .available
   end
 
   def notify_customer(appointment)

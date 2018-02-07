@@ -8,6 +8,7 @@ FactoryBot.define do
     town 'Some Town'
     county 'Some County'
     postcode 'RG2 9FL'
+    delivery_centre
 
     after(:build) { |location| location.rooms << build(:room) }
   end

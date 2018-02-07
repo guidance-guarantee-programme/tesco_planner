@@ -27,8 +27,7 @@ RSpec.describe 'POST /api/v1/locations/:location_id/appointments' do
       @location = user.location
       @slot = @location.rooms.first.slots << build(
         :slot,
-        start_at: Time.current.advance(days: 1),
-        delivery_centre: user.delivery_centre
+        start_at: Time.current.advance(days: 1)
       )
     end
   end

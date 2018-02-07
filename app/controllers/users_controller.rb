@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authorise_booking_manager!
-  before_action :load_locations
+  before_action :load_delivery_centres
 
   def edit
   end
@@ -19,10 +19,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:delivery_centre_id)
   end
 
-  def load_locations
-    @locations = Location
-                 .joins(:delivery_centres)
-                 .all
-                 .order('locations.name, delivery_centres.name')
+  def load_delivery_centres
+    @delivery_centres = DeliveryCentre.order(:name).pluck(:name, :id)
   end
 end

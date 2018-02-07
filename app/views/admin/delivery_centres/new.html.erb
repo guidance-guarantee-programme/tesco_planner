@@ -1,15 +1,14 @@
-<% content_for(:page_title, "New delivery centre for #{@location.name}") %>
+<% content_for(:page_title, 'New delivery centre') %>
 <div class="page-header">
   <ol class="breadcrumb">
     <li><%= link_to 'Tesco appointment planner', root_path %></li>
-    <li><%= link_to @location.name, edit_admin_location_path(@location) %></li>
-    <li class="active">New delivery centre for <%= @location.name %></li>
+    <li class="active">New delivery centre</li>
   </ol>
 
-  <h1>New delivery centre for <%= @location.name %></h1>
+  <h1>New delivery centre</h1>
 </div>
 
-<%= form_for @delivery_centre, url: admin_location_delivery_centres_path(@location) do |f| %>
+<%= form_for @delivery_centre, url: admin_delivery_centres_path(@delivery_centre) do |f| %>
   <div class="row">
     <div class="col-md-6">
       <% if @delivery_centre.errors.any? %>
@@ -29,9 +28,7 @@
 
   <div class="row">
     <div class="col-md-6">
-      <%= f.button class: 'btn btn-primary t-submit' do %>
-        Create delivery centre for <%= @location.name %>
-      <% end %>
+      <%= f.button 'Create delivery centre', class: 'btn btn-primary t-submit' %>
     </div>
   </div>
 <% end %>

@@ -3,8 +3,8 @@ class Location < ApplicationRecord
   has_many :slots, through: :rooms
   has_many :appointments, through: :slots
 
-  has_many :delivery_centres
-  has_many :users, through: :delivery_centres
+  belongs_to :delivery_centre
+  has_many :users, through: :delivery_centre
 
   validates :name, presence: true
   validates :address_line_one, presence: true

@@ -1,12 +1,11 @@
-<% content_for(:page_title, 'Manage Locations') %>
+<% content_for(:page_title, 'Locations') %>
 <div class="page-header">
   <ol class="breadcrumb">
     <li><%= link_to 'Tesco appointment planner', root_path %></li>
-    <li class="active">Manage Locations</li>
+    <li class="active">Locations</li>
   </ol>
 
-  <h1>Manage Locations</h1>
-  <%= link_to 'New location', new_admin_location_path, class: 'btn btn-default' %>
+  <h1>Locations</h1>
 </div>
 
 <div class="row">
@@ -14,16 +13,12 @@
     <% if @locations.empty? %>
       <p class="no-content t-notice">No locations.</p>
     <% else %>
-      <%= paginate @locations %>
-
       <table class="table table-bordered centred-table table-striped">
         <caption><span class="sr-only">Locations</span></caption>
         <thead>
           <tr class="table-header">
             <th>Name</th>
-            <th>Town</th>
             <th>Status</th>
-            <th>Modified</th>
             <th></th>
           </tr>
         </thead>
@@ -34,24 +29,15 @@
                 <%= location.name %>
               </td>
               <td>
-                <%= location.town %>
-              </td>
-              <td>
                 <%= location.active ? 'Active' : 'Inactive' %>
               </td>
               <td>
-                <%= time_ago_in_words(location.updated_at) %> ago
-              </td>
-              <td>
-                <%= link_to('Manage', edit_admin_location_path(location), class: 'btn btn-info t-manage') %>
-                <%= link_to('Rooms', admin_location_rooms_path(location), class: 'btn btn-info t-rooms') %>
+                <%= link_to('Availability', location_slots_path(location), class: 'btn btn-info t-availability') %>
               </td>
             </tr>
           <% end %>
         </tbody>
       </table>
-
-      <%= paginate @locations %>
     <% end %>
   </div>
 </div>

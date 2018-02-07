@@ -9,11 +9,12 @@
 
 <%= content_for :navbar_items do %>
   <% if current_user.booking_manager? %>
-    <li><%= link_to 'Availability', slots_path %></li>
+    <li><%= link_to 'Availability', locations_path %></li>
     <li><%= link_to 'Appointments', appointments_path %></li>
   <% end %>
   <% if current_user.administrator? %>
-    <li><%= link_to 'Manage Locations', admin_locations_path %></li>
+    <li><%= link_to 'Locations', admin_locations_path %></li>
+    <li><%= link_to 'Delivery Centres', admin_delivery_centres_path %></li>
   <% end %>
 <% end %>
 

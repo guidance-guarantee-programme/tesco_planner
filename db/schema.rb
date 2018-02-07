@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180111162227) do
+ActiveRecord::Schema.define(version: 20180205162025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,13 +46,6 @@ ActiveRecord::Schema.define(version: 20180111162227) do
     t.index ["slot_id"], name: "index_appointments_on_slot_id", unique: true
   end
 
-  create_table "assignments", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "delivery_centre_id"
-    t.index ["delivery_centre_id"], name: "index_assignments_on_delivery_centre_id"
-    t.index ["user_id"], name: "index_assignments_on_user_id"
-  end
-
   create_table "audits", force: :cascade do |t|
     t.integer "auditable_id"
     t.string "auditable_type"
@@ -76,12 +69,10 @@ ActiveRecord::Schema.define(version: 20180111162227) do
   end
 
   create_table "delivery_centres", force: :cascade do |t|
-    t.bigint "location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name", default: "", null: false
     t.string "reply_to", default: "", null: false
-    t.index ["location_id"], name: "index_delivery_centres_on_location_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -95,6 +86,7 @@ ActiveRecord::Schema.define(version: 20180111162227) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "active", default: true, null: false
+    t.integer "delivery_centre_id"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -111,8 +103,6 @@ ActiveRecord::Schema.define(version: 20180111162227) do
     t.bigint "room_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "delivery_centre_id"
-    t.index ["delivery_centre_id"], name: "index_slots_on_delivery_centre_id"
     t.index ["room_id"], name: "index_slots_on_room_id"
   end
 
@@ -134,10 +124,6 @@ ActiveRecord::Schema.define(version: 20180111162227) do
   add_foreign_key "activities", "appointments"
   add_foreign_key "activities", "users"
   add_foreign_key "appointments", "slots"
-  add_foreign_key "assignments", "delivery_centres"
-  add_foreign_key "assignments", "users"
-  add_foreign_key "delivery_centres", "locations"
-  add_foreign_key "slots", "delivery_centres"
   add_foreign_key "slots", "rooms"
   add_foreign_key "users", "delivery_centres"
 end

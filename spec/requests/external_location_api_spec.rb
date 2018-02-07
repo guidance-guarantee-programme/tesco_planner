@@ -5,7 +5,6 @@ RSpec.describe 'GET /api/v1/locations/:location_id' do
     travel_to @now = Time.zone.parse('2017-09-06 13:00') do
       given_the_location_exists
       and_it_has_multiple_rooms
-      and_it_has_multiple_delivery_centres
       and_it_has_associated_slots
       when_the_location_is_requested
       then_the_service_responds_ok
@@ -22,23 +21,19 @@ RSpec.describe 'GET /api/v1/locations/:location_id' do
     @room_two = create(:room, location: @location)
   end
 
-  def and_it_has_multiple_delivery_centres
-    @delivery_centre_one = @location.delivery_centres.first
-    @delivery_centre_two = create(:delivery_centre, location: @location)
-  end
-
   def and_it_has_associated_slots
+    @delivery_centre_one = @location.delivery_centre
     # won't appear as it occurs today
-    @today = build_slot(@room_one, @now, @delivery_centre_one)
+    @today = create(:slot, room: @room_one, start_at: @now)
     # appears singularly
-    @tomorrow = build_slot(@room_one, @now.advance(days: 1), @delivery_centre_two)
+    @tomorrow = create(:slot, room: @room_one, start_at: @now.advance(days: 1))
     # will be combined into a single slot
-    @combined = build_slot(@room_one, @now.advance(weeks: 1), @delivery_centre_one)
+    @combined = create(:slot, room: @room_one, start_at: @now.advance(weeks: 1))
     # will be combined with the slot above
-    @other_combined = build_slot(@room_two, @now.advance(weeks: 1), @delivery_centre_two)
+    @other_combined = create(:slot, room: @room_two, start_at: @now.advance(weeks: 1))
 
     # this won't appear as it has an associated appointment
-    @other_slot = build_slot(@room_one, @now.advance(weeks: 1, hours: 1), @delivery_centre_one)
+    @other_slot = create(:slot, room: @room_one, start_at: @now.advance(weeks: 1, hours: 1))
     create(:appointment, slot: @other_slot)
   end
 
@@ -57,12 +52,6 @@ RSpec.describe 'GET /api/v1/locations/:location_id' do
 
       expect(slots['2017-09-07']).to match_array(%w[2017-09-07T13:00:00.000Z])
       expect(slots['2017-09-13']).to match_array(%w[2017-09-13T13:00:00.000Z])
-    end
-  end
-
-  def build_slot(room, start_at, delivery_centre)
-    build(:slot, start_at: start_at, delivery_centre: delivery_centre) do |slot|
-      room.slots << slot
     end
   end
 end
