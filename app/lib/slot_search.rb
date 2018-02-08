@@ -9,7 +9,7 @@ class SlotSearch
 
   def results
     scope = Slot.includes(room: :location).where(locations: { id: location.id })
-    scope = scope.where(start_at: date_range)
+    scope = scope.where(start_at: date_range) if date.present?
     scope = availability(scope)
     scope = scope.order(:start_at)
     scope.page(page)
@@ -31,11 +31,9 @@ class SlotSearch
   end
 
   def date_range
-    if date.blank?
-      Time.current.beginning_of_month..Time.current.end_of_month
-    else
-      first, last = date.split(' - ').map(&:to_date)
-      first.beginning_of_day..last.end_of_day
-    end
+    return if date.blank?
+
+    first, last = date.split(' - ').map(&:to_date)
+    first.beginning_of_day..last.end_of_day
   end
 end
