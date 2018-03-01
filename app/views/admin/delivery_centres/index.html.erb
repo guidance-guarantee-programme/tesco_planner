@@ -20,6 +20,7 @@
           <tr class="table-header">
             <th>Name</th>
             <th>Booking managers</th>
+            <th>Hidden</th>
             <th>Modified</th>
             <th></th>
           </tr>
@@ -32,6 +33,10 @@
               </td>
               <td>
                 <%= delivery_centre.users.pluck(:name).to_sentence %>
+              </td>
+              <td>
+                <%= delivery_centre.hidden ? 'Yes' : 'No' %>
+              </td>
               <td>
                 <%= time_ago_in_words(delivery_centre.updated_at) %> ago
               </td>

@@ -14,7 +14,7 @@ module Admin
       @delivery_centre = DeliveryCentre.new(delivery_centre_params)
 
       if @delivery_centre.save
-        redirect_to admin_delivery_centres_path(@delivery_centre), success: 'Delivery centre created.'
+        redirect_to admin_delivery_centres_path, success: 'Delivery centre created.'
       else
         render :new
       end
@@ -28,7 +28,7 @@ module Admin
       @delivery_centre = DeliveryCentre.find(params[:id])
 
       if @delivery_centre.update(delivery_centre_params)
-        redirect_to admin_delivery_centres_path(@delivery_centre), success: 'Delivery centre updated.'
+        redirect_to admin_delivery_centres_path, success: 'Delivery centre updated.'
       else
         render :edit
       end
@@ -37,7 +37,7 @@ module Admin
     private
 
     def delivery_centre_params
-      params.require(:delivery_centre).permit(:name, :reply_to)
+      params.require(:delivery_centre).permit(:name, :reply_to, :hidden)
     end
   end
 end
