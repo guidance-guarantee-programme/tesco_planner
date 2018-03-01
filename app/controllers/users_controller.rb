@@ -20,6 +20,6 @@ class UsersController < ApplicationController
   end
 
   def load_delivery_centres
-    @delivery_centres = DeliveryCentre.order(:name).pluck(:name, :id)
+    @delivery_centres = DeliveryCentre.order(:name).visible.pluck(:name, :id)
   end
 end

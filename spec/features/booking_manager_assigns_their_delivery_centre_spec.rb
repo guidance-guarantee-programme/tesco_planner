@@ -19,6 +19,7 @@ RSpec.feature 'Booking manager assigns their delivery centre' do
 
   def and_a_delivery_centre_exists
     @delivery_centre = create(:delivery_centre)
+    @hidden_delivery_centre = create(:delivery_centre, :hidden, name: 'Hidden DC')
   end
 
   def when_they_visit_the_application
@@ -26,6 +27,8 @@ RSpec.feature 'Booking manager assigns their delivery centre' do
   end
 
   def and_they_choose_a_delivery_centre
+    expect(page).to have_no_content('Hidden DC')
+
     page.find('.t-delivery-centres').select(@delivery_centre.name)
     page.find('.t-submit').click
   end

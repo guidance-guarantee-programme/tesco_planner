@@ -4,4 +4,6 @@ class DeliveryCentre < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   validates :reply_to, presence: true, email: true
+
+  scope :visible, -> { where(hidden: false) }
 end
