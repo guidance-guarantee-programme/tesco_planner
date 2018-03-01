@@ -34,8 +34,7 @@
   Appointment location:
   <br>
   <strong class="emphasize">
-    <%= @appointment.slot.room.name %><br>
-    <%= simple_format(@appointment.slot.room.location.address) %>
+    <%= simple_format(@appointment.location.address(@appointment.room.name)) %>
   </strong>
 </p>
 
@@ -45,6 +44,12 @@
   <strong class="emphasize">
     <%= @appointment.id %>
   </strong>
+</p>
+
+<p>
+  All appointments will be private and held in a colleague area in your
+  workplace. If you're not sure which room it will be held in, please ask your
+  manager or people manager.
 </p>
 
 <p>Email us to change or cancel your booking. You may be asked for your booking reference number.</p>

@@ -28,8 +28,9 @@ class Location < ApplicationRecord
       .transform_values { |value| value.map(&:start_at).uniq }
   end
 
-  def address
+  def address(room = '')
     [
+      room,
       address_line_one,
       address_line_two,
       address_line_three,
