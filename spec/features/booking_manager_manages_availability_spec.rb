@@ -71,11 +71,12 @@ RSpec.feature 'Booking manager manages availability' do
     # switch to day view so we can find the slot easily
     @page.day.click
 
-    @page.click_slot('09:30')
+    @page.click_slot('07:30')
   end
 
   def then_the_slot_is_created
     @page.wait_for_calendar_events
+
     expect(@page).to have_slots(count: 1)
   end
 end
