@@ -4,7 +4,7 @@ class SlackPingerJob < ApplicationJob
   def perform(appointment)
     return unless hook_uri
 
-    json = payload(appointment.delivery_centre.location)
+    json = payload(appointment.location)
     WebHook.new(hook_uri).call(json)
   end
 
