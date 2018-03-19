@@ -2,10 +2,12 @@ require 'rails_helper'
 
 RSpec.feature 'Appointment reminders' do
   scenario 'Sending scheduled appointment reminders' do
-    given_an_appointment_exists_and_is_due_a_reminder
-    when_the_scheduled_job_runs
-    then_the_reminder_is_sent
-    and_the_appointment_is_marked_as_reminded
+    perform_enqueued_jobs do
+      given_an_appointment_exists_and_is_due_a_reminder
+      when_the_scheduled_job_runs
+      then_the_reminder_is_sent
+      and_the_appointment_is_marked_as_reminded
+    end
   end
 
   def given_an_appointment_exists_and_is_due_a_reminder

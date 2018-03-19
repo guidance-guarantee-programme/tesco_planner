@@ -11,14 +11,16 @@ RSpec.describe 'POST /api/v1/locations/:location_id/appointments' do
   end
 
   scenario 'Creating a valid appointment' do
-    travel_to '2017-09-12 13:00 UTC' do
-      given_a_location_with_availability
-      when_an_appointment_request_is_made
-      then_the_service_responds_created
-      and_the_appointment_is_identified_in_the_response
-      and_the_appointment_is_created
-      and_the_booking_managers_are_notified
-      and_the_customer_is_notified
+    perform_enqueued_jobs do
+      travel_to '2017-09-12 13:00 UTC' do
+        given_a_location_with_availability
+        when_an_appointment_request_is_made
+        then_the_service_responds_created
+        and_the_appointment_is_identified_in_the_response
+        and_the_appointment_is_created
+        and_the_booking_managers_are_notified
+        and_the_customer_is_notified
+      end
     end
   end
 

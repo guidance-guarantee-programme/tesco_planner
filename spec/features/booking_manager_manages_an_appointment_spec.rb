@@ -19,11 +19,13 @@ RSpec.feature 'Booking manager manages an appointment' do
   end
 
   scenario 'Cancelling an appointment' do
-    given_the_user_is_identified_as_a_booking_manager do
-      and_they_have_an_associated_appointment
-      when_the_appointment_is_cancelled
-      then_the_customer_is_notified
-      and_the_original_slot_is_still_available
+    perform_enqueued_jobs do
+      given_the_user_is_identified_as_a_booking_manager do
+        and_they_have_an_associated_appointment
+        when_the_appointment_is_cancelled
+        then_the_customer_is_notified
+        and_the_original_slot_is_still_available
+      end
     end
   end
 

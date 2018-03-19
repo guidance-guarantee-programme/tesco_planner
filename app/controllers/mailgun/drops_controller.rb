@@ -2,7 +2,7 @@ module Mailgun
   class DropsController < ActionController::Base
     def create
       @activity = DropForm.new(drop_params).create_activity
-      PusherNotificationJob.perform_later(@activity)
+      PusherNotificationJob.perform_later(@activity) if @activity
 
       head :ok
     end
