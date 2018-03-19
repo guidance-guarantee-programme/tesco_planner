@@ -10,7 +10,11 @@
     <div class="col-md-7">
       <h1>
         Manage appointment for <%= @appointment.full_name %>
-        <small><%= @appointment.location_name %><br><%= link_to @appointment.slot, edit_appointment_reschedule_path(@appointment) %></small>
+        <small>
+          Booking reference: <%= @appointment.id %><br>
+          Location: <%= @appointment.location_name %><br>
+          <%= link_to @appointment.slot, edit_appointment_reschedule_path(@appointment) %>
+        </small>
       </h1>
     </div>
     <div class="col-md-5 action-buttons">
