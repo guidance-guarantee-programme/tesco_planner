@@ -2,12 +2,14 @@ require 'rails_helper'
 
 RSpec.feature 'Booking manager creates activities' do
   scenario 'Creating a message activity', js: true do
-    given_the_user_is_identified_as_a_booking_manager do
-      and_there_is_an_appointment
-      when_they_view_the_appointment
-      and_they_leave_a_message
-      then_they_see_their_new_message
-      and_the_message_field_is_cleared
+    perform_enqueued_jobs do
+      given_the_user_is_identified_as_a_booking_manager do
+        and_there_is_an_appointment
+        when_they_view_the_appointment
+        and_they_leave_a_message
+        then_they_see_their_new_message
+        and_the_message_field_is_cleared
+      end
     end
   end
 

@@ -2,13 +2,15 @@ require 'rails_helper'
 
 RSpec.feature 'Booking manager reschedules appointment' do
   scenario 'Successfully rescheduling an appointment' do
-    travel_to '2017-09-21 13:00UTC' do
-      given_the_user_is_identified_as_a_booking_manager do
-        and_an_appointment_exists
-        and_another_slot_exists
-        when_they_reschedule_the_appointment
-        then_the_appointment_is_rescheduled
-        and_the_customer_is_notified
+    perform_enqueued_jobs do
+      travel_to '2017-09-21 13:00UTC' do
+        given_the_user_is_identified_as_a_booking_manager do
+          and_an_appointment_exists
+          and_another_slot_exists
+          when_they_reschedule_the_appointment
+          then_the_appointment_is_rescheduled
+          and_the_customer_is_notified
+        end
       end
     end
   end
