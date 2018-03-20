@@ -16,7 +16,8 @@ class AppointmentSearch
     scope = scope.where(status: status) if status.present?
     scope = scope.where(slots: { start_at: date_range }) if date.present?
     scope = scope.where(locations: { id: location }) if location.present?
-    scope.page(page)
+
+    scope.order(created_at: :desc).page(page)
   end
 
   def locations
