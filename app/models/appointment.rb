@@ -1,7 +1,7 @@
 class Appointment < ApplicationRecord
   belongs_to :slot
   has_one :room, through: :slot
-  has_many :activities
+  has_many :activities, -> { order('created_at DESC') }
 
   before_validation :calculate_type_of_appointment
 
