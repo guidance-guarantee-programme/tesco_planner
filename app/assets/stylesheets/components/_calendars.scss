@@ -1,5 +1,5 @@
 $calendar-loading-view-background: transparentize($color-white, .2);
-$calendar-appointment-cancelled-background: $color-medium-carmine;
+$calendar-appointment-cancelled-background: lighten($color-medium-carmine, 20%);
 
 .fc {
   a,
@@ -24,6 +24,7 @@ $calendar-appointment-cancelled-background: $color-medium-carmine;
 
 .fc-event--cancelled {
   @include striped($calendar-appointment-cancelled-background);
+  margin: 3px;
   border-color: $calendar-appointment-cancelled-background;
 
   &:hover td {
