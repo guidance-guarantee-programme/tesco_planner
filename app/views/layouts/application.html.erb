@@ -13,8 +13,26 @@
     <li><%= link_to 'Appointments', appointments_path %></li>
   <% end %>
   <% if current_user.administrator? %>
-    <li><%= link_to 'Locations', admin_locations_path %></li>
-    <li><%= link_to 'Delivery Centres', admin_delivery_centres_path %></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administration <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li><%= link_to 'Locations', admin_locations_path %></li>
+        <li><%= link_to 'Delivery Centres', admin_delivery_centres_path %></li>
+      </ul>
+    </li>
+    <li>
+      <%= form_for current_user, html: { class: 'navbar-form navbar-right js-delivery-centre-form' } do |f| %>
+        <div class="form-group">
+          <%= f.select(
+                :delivery_centre_id,
+                options_for_select(delivery_centre_options, current_user.delivery_centre_id),
+                { include_blank: '' },
+                { class: 'js-delivery-centre form-control input-sm' }
+              )
+          %>
+        </div>
+      <% end %>
+    </li>
   <% end %>
 <% end %>
 
