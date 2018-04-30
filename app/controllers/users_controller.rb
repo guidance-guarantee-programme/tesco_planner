@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :authorise_booking_manager!
-  before_action :load_delivery_centres
 
   def edit
   end
@@ -17,9 +16,5 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:delivery_centre_id)
-  end
-
-  def load_delivery_centres
-    @delivery_centres = DeliveryCentre.order(:name).visible.pluck(:name, :id)
   end
 end
