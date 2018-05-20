@@ -4,7 +4,7 @@ FactoryBot.define do
     last_name 'Sanchez'
     email 'rick@example.com'
     phone '0208 252 4758'
-    opt_out_of_market_research true
+    gdpr_consent 'yes'
     dc_pot_confirmed true
     memorable_word 'snootbooper'
     date_of_birth '1945-01-01'

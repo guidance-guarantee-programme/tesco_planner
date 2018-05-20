@@ -87,9 +87,29 @@
               Don’t know
             <% end %>
           </div>
+
+          <h2 class="h3">Research</h2>
           <div class="form-group">
-            <%= f.label :opt_out_of_market_research %>
-            <%= f.check_box :opt_out_of_market_research, class: 't-opt-out-of-market-research' %>
+            <p><strong>Customer research consent</strong></p>
+            <p class="help-block">
+              Your feedback helps us improve the service. Is it OK if we share your
+              contact details with our trusted research partner? Ipsos MORI may
+              contact you to ask if you would like to provide feedback and you can
+              decide then if you want to take part.
+            </p>
+
+            <%= f.label :gdpr_consent, value: 'yes', class: 'radio-inline' do %>
+              <%= f.radio_button :gdpr_consent, 'yes', class: 't-gdpr-consent-yes' %>
+              Yes
+            <% end %>
+            <%= f.label :gdpr_consent, value: 'no', class: 'radio-inline' do %>
+              <%= f.radio_button :gdpr_consent, 'no', class: 't-gdpr-consent-no' %>
+              No
+            <% end %>
+            <%= f.label :gdpr_consent, value: '', class: 'radio-inline' do %>
+              <%= f.radio_button :gdpr_consent, '', class: 't-gdpr-consent-no-response' %>
+              No response
+            <% end %>
           </div>
         </div>
       </div>

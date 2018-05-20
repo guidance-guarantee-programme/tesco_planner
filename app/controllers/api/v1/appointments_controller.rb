@@ -3,6 +3,8 @@ module Api
     class AppointmentsController < ActionController::Base
       include LogrageFilterer
 
+      wrap_parameters false
+
       def create
         @appointment = Appointment.new(appointment_params.merge(slot: slot))
 
@@ -25,7 +27,7 @@ module Api
           :memorable_word,
           :date_of_birth,
           :dc_pot_confirmed,
-          :opt_out_of_market_research
+          :gdpr_consent
         )
       end
 

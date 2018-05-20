@@ -17,7 +17,9 @@ module Pages
     element :year_of_birth, '.t-date-of-birth-year'
     element :dc_pot_confirmed_yes, '.t-dc-pot-confirmed-yes'
     element :dc_pot_confirmed_dont_know, '.t-dc-pot-confirmed-dont-know'
-    element :opt_out_of_market_research, '.t-opt-out-of-market-research'
+    element :gdpr_consent_yes, '.t-gdpr-consent-yes'
+    element :gdpr_consent_no, '.t-gdpr-consent-no'
+    element :gdpr_consent_no_response, '.t-gdpr-consent-no-response'
 
     element :submit, '.t-submit'
 

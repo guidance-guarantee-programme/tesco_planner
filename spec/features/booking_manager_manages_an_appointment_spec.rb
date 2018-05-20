@@ -43,7 +43,7 @@ RSpec.feature 'Booking manager manages an appointment' do
     @page.phone.set '07715 999 1234'
     @page.memorable_word.set 'spaceboot'
     @page.status.select 'No Show'
-    @page.opt_out_of_market_research.set false
+    @page.gdpr_consent_no.set true
     @page.dc_pot_confirmed_dont_know.set true
 
     @page.submit.click
@@ -61,7 +61,7 @@ RSpec.feature 'Booking manager manages an appointment' do
       phone: '07715 999 1234',
       memorable_word: 'spaceboot',
       status: 'no_show',
-      opt_out_of_market_research: false,
+      gdpr_consent: 'no',
       dc_pot_confirmed: false
     )
   end

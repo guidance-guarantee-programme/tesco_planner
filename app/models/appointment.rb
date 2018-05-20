@@ -24,6 +24,7 @@ class Appointment < ApplicationRecord
   validates :date_of_birth, presence: true
   validates :slot, presence: true, uniqueness: true
   validates :type_of_appointment, presence: true
+  validates :gdpr_consent, inclusion: { in: ['yes', 'no', ''] }
 
   scope :by_delivery_centre, lambda { |delivery_centre|
     includes(slot: { room: :location })
