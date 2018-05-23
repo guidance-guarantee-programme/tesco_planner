@@ -3,7 +3,7 @@
   data-activity-id="<%= message_activity.id %>">
   <div class="activity__inner">
     <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-    <strong><%= message_activity.user.name %></strong> said <em><%= message_activity.message %></em>
+    <strong><%= message_activity.owner %></strong> said <em><%= message_activity.message %></em>
     <span class="activity__date">
       <%= message_activity.created_at.in_time_zone('London').to_s(:govuk_date_short) %> (<%= time_ago_in_words(message_activity.created_at.in_time_zone('London'))%> ago)
     </span>

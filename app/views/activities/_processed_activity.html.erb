@@ -3,7 +3,7 @@
   data-activity-id="<%= processed_activity.id %>">
   <div class="activity__inner">
     <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
-    <strong><%= processed_activity.user.name %></strong> processed the appointment.
+    <strong><%= processed_activity.owner %></strong> processed the appointment.
     <span class="activity__date">
       <%= processed_activity.created_at.in_time_zone('London').to_s(:govuk_date_short) %> (<%= time_ago_in_words(processed_activity.created_at.in_time_zone('London'))%> ago)
     </span>
