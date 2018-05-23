@@ -5,4 +5,8 @@ class Activity < ApplicationRecord
   def to_partial_path
     "activities/#{model_name.singular}"
   end
+
+  def owner
+    user ? user.name : 'Someone'
+  end
 end
