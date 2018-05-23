@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   include GDS::SSO::ControllerMethods
   include LogrageFilterer
 
+  before_action :authenticate_user!
+
   protect_from_forgery with: :exception
 
   add_flash_types :success, :notice, :warning
