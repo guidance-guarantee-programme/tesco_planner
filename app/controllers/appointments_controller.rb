@@ -66,7 +66,7 @@ class AppointmentsController < ApplicationController
         :status,
         :date_of_birth,
         :dc_pot_confirmed,
-        :opt_out_of_market_research
+        :gdpr_consent
       )
   end
 

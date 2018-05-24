@@ -44,7 +44,7 @@ RSpec.describe 'POST /api/v1/locations/:location_id/appointments' do
       'memorable_word'   => 'snootboop',
       'date_of_birth'    => '1950-02-02',
       'dc_pot_confirmed' => true,
-      'opt_out_of_market_research' => true
+      'gdpr_consent'     => 'yes'
     }
 
     path = api_v1_location_appointments_path(location_id: @location.id)
@@ -74,7 +74,7 @@ RSpec.describe 'POST /api/v1/locations/:location_id/appointments' do
       type_of_appointment: '55-plus',
       date_of_birth: Date.parse('1950-02-02'),
       dc_pot_confirmed: true,
-      opt_out_of_market_research: true,
+      gdpr_consent: 'yes',
       status: 'pending'
     )
   end
