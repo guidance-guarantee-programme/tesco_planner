@@ -13,6 +13,8 @@
     <% if @locations.empty? %>
       <p class="no-content t-notice">No locations.</p>
     <% else %>
+      <%= paginate @locations %>
+
       <table class="table table-bordered centred-table table-striped">
         <caption><span class="sr-only">Locations</span></caption>
         <thead>
@@ -39,6 +41,8 @@
           <% end %>
         </tbody>
       </table>
+
+      <%= paginate @locations %>
     <% end %>
   </div>
 </div>
