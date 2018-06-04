@@ -8,7 +8,7 @@ class AppointmentDecorator < SimpleDelegator
   end
 
   def status
-    object.status.humanize
+    object.status.titleize
   end
 
   def slot
