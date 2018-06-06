@@ -5,5 +5,6 @@
 //= require bootstrap-daterangepicker
 //= require pusher
 //= require alertifyjs
+//= require select2
 
 //= require_tree .
