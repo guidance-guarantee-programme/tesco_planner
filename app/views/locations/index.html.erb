@@ -17,7 +17,7 @@
             <%= f.label :location, class: 'filters__label' %>
             <%= f.select(
                   :location,
-                  location_options(current_user),
+                  location_options(@search.scoped),
                   { include_blank: 'All Locations' },
                   {
                     class: 't-search-location form-control filters__form-control',
