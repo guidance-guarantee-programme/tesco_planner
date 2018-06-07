@@ -17,7 +17,7 @@ Rails.application.routes.draw do # rubocop:disable BlockLength
     end
   end
 
-  resources :appointments, only: %i[index show edit update] do
+  resources :appointments, only: %i[index edit update] do
     resource :reschedule, only: %i[edit update]
     resource :process, only: :create
 
@@ -35,6 +35,7 @@ Rails.application.routes.draw do # rubocop:disable BlockLength
     resources :locations do
       resources :rooms
     end
+    resources :appointments, only: :index
   end
 
   mount Sidekiq::Web, at: '/sidekiq', constraints: AuthenticatedUser.new
