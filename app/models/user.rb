@@ -12,6 +12,12 @@ class User < ApplicationRecord
 
   scope :active, -> { where(disabled: false) }
 
+  def assign!(dc)
+    return if dc.id == delivery_centre_id
+
+    update!(delivery_centre: dc)
+  end
+
   def location
     return unless delivery_centre_id?
 
