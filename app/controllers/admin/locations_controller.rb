@@ -4,7 +4,8 @@ module Admin
     before_action :load_delivery_centres
 
     def index
-      @locations = Location.all.order(:name).page(params[:page])
+      @search    = LocationSearch.new(location_search_params)
+      @locations = @search.locations
     end
 
     def edit
@@ -36,6 +37,16 @@ module Admin
     end
 
     private
+
+    def location_search_params
+      params
+        .fetch(:search, {})
+        .permit(:location)
+        .merge(
+          scoped: Location.all,
+          page: params[:page]
+        )
+    end
 
     def load_delivery_centres
       @delivery_centres = DeliveryCentre.order(:name)

@@ -13,7 +13,7 @@ class LocationsController < ApplicationController
       .fetch(:search, {})
       .permit(:location)
       .merge(
-        current_user: current_user,
+        scoped: current_user.locations,
         page: params[:page]
       )
   end
