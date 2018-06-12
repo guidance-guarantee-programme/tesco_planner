@@ -11,7 +11,7 @@ RSpec.feature 'Appointment reminders' do
   end
 
   def given_an_appointment_exists_and_is_due_a_reminder
-    @appointment      = build(:appointment)
+    @appointment      = build(:appointment, created_at: 1.day.ago)
     @appointment.slot = build(:slot, :with_room, start_at: 36.hours.from_now)
 
     @appointment.save!

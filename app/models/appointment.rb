@@ -31,6 +31,8 @@ class Appointment < ApplicationRecord
       .where(locations: { delivery_centre_id: delivery_centre.id })
   }
 
+  scope :not_booked_today, -> { where.not(created_at: Time.current.beginning_of_day..Time.current.end_of_day) }
+
   delegate :location, to: :room
   delegate :delivery_centre, to: :location
 
@@ -65,6 +67,7 @@ class Appointment < ApplicationRecord
 
   def self.needing_reminder
     pending
+      .not_booked_today
       .joins(:slot)
       .where(reminder_sent_at: nil)
       .where(slots: { start_at: Time.current..48.hours.from_now })
