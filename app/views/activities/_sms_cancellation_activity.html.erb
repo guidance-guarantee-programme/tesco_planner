@@ -1,0 +1,11 @@
+<li
+  class="activity list-group-item t-activity <%= 't-hidden-activity activity--hideable activity--hide' if hide %>"
+  data-activity-id="<%= sms_cancellation_activity.id %>">
+  <div class="activity__inner">
+    <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
+    <strong>The customer</strong> cancelled the appointment by SMS
+    <span class="activity__date">
+      <%= sms_cancellation_activity.created_at.in_time_zone('London').to_s(:govuk_date_short) %> (<%= time_ago_in_words(sms_cancellation_activity.created_at.in_time_zone('London'))%> ago)
+    </span>
+  </div>
+</li>

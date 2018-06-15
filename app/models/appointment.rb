@@ -14,6 +14,7 @@ class Appointment < ApplicationRecord
     ineligible_pension_type
     cancelled_by_customer
     cancelled_by_pension_wise
+    cancelled_by_customer_sms
   ]
 
   validates :first_name, presence: true
@@ -37,6 +38,15 @@ class Appointment < ApplicationRecord
 
   delegate :location, to: :room
   delegate :delivery_centre, to: :location
+
+  def cancel!
+    transaction do
+      update!(status: :cancelled_by_customer_sms)
+      slot.free!
+
+      SmsCancellationActivity.from(self)
+    end
+  end
 
   def process!(by)
     return if processed_at?
@@ -65,6 +75,12 @@ class Appointment < ApplicationRecord
 
   def future?
     slot.start_at.future?
+  end
+
+  def self.for_sms_cancellation(number)
+    pending
+      .order(created_at: :desc)
+      .find_by("REPLACE(phone, ' ', '') = :number", number: number)
   end
 
   def self.needing_reminder
