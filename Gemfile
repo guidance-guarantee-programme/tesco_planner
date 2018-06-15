@@ -23,6 +23,7 @@ source 'https://rubygems.org' do
   gem 'govuk_admin_template'
   gem 'kaminari'
   gem 'momentjs-rails'
+  gem 'notifications-ruby-client'
   gem 'pg', '~> 0.18'
   gem 'plek'
   gem 'puma'

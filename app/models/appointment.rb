@@ -33,6 +33,8 @@ class Appointment < ApplicationRecord
 
   scope :not_booked_today, -> { where.not(created_at: Time.current.beginning_of_day..Time.current.end_of_day) }
 
+  scope :with_mobile, -> { where("phone like '07%'") }
+
   delegate :location, to: :room
   delegate :delivery_centre, to: :location
 
@@ -71,6 +73,12 @@ class Appointment < ApplicationRecord
       .joins(:slot)
       .where(reminder_sent_at: nil)
       .where(slots: { start_at: Time.current..48.hours.from_now })
+  end
+
+  def self.needing_sms_reminder
+    two_day_range = 48.hours.from_now.beginning_of_day..48.hours.from_now.end_of_day
+
+    pending.not_booked_today.with_mobile.joins(:slot).where(slots: { start_at: two_day_range })
   end
 
   private
