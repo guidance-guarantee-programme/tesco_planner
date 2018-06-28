@@ -14,6 +14,7 @@ class Appointment < ApplicationRecord
     ineligible_pension_type
     cancelled_by_customer
     cancelled_by_pension_wise
+    cancelled_by_customer_sms
   ]
 
   validates :first_name, presence: true
@@ -33,8 +34,19 @@ class Appointment < ApplicationRecord
 
   scope :not_booked_today, -> { where.not(created_at: Time.current.beginning_of_day..Time.current.end_of_day) }
 
+  scope :with_mobile, -> { where("phone like '07%'") }
+
   delegate :location, to: :room
   delegate :delivery_centre, to: :location
+
+  def cancel!
+    transaction do
+      update!(status: :cancelled_by_customer_sms)
+      slot.free!
+
+      SmsCancellationActivity.from(self)
+    end
+  end
 
   def process!(by)
     return if processed_at?
@@ -65,12 +77,24 @@ class Appointment < ApplicationRecord
     slot.start_at.future?
   end
 
+  def self.for_sms_cancellation(number)
+    pending
+      .order(created_at: :desc)
+      .find_by("REPLACE(phone, ' ', '') = :number", number: number)
+  end
+
   def self.needing_reminder
     pending
       .not_booked_today
       .joins(:slot)
       .where(reminder_sent_at: nil)
       .where(slots: { start_at: Time.current..48.hours.from_now })
+  end
+
+  def self.needing_sms_reminder
+    two_day_range = 48.hours.from_now.beginning_of_day..48.hours.from_now.end_of_day
+
+    pending.not_booked_today.with_mobile.joins(:slot).where(slots: { start_at: two_day_range })
   end
 
   private

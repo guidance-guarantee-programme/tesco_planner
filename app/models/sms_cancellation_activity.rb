@@ -1,0 +1,2 @@
+class SmsCancellationActivity < Activity
+end

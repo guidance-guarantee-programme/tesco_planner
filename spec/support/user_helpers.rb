@@ -35,8 +35,11 @@ module UserHelpers
     GDS::SSO.test_user = nil
   end
 
-  def appointment_for_user(user, start_at: Time.current)
-    build(:appointment) do |a|
+  def appointment_for_user(user, **opts)
+    start_at = opts.delete(:start_at) || Time.current
+    opts[:created_at] ||= 1.day.ago
+
+    build(:appointment, opts) do |a|
       a.slot = build(
         :slot,
         start_at: start_at,

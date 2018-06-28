@@ -3,6 +3,8 @@ require 'sidekiq/web'
 Rails.application.routes.draw do # rubocop:disable BlockLength
   root 'home#index'
 
+  resources :sms_cancellations, only: :create
+
   namespace :mailgun do
     resources :drops, only: :create
   end

@@ -1,0 +1,2 @@
+class SmsReminderActivity < Activity
+end

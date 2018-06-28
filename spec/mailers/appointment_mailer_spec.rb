@@ -4,6 +4,31 @@ RSpec.describe AppointmentMailer do
   let(:appointment) { create(:appointment, :with_slot) }
   let(:mailgun_headers) { JSON.parse(subject['X-Mailgun-Variables'].value) }
 
+  describe 'SMS cancellation' do
+    let(:booking_manager) { create(:booking_manager, delivery_centre: appointment.delivery_centre) }
+
+    subject(:mail) { described_class.booking_manager_cancellation(booking_manager, appointment) }
+
+    it 'is identified for mailgun' do
+      expect(mailgun_headers).to include('message_type' => 'booking_manager_cancellation')
+    end
+
+    it 'renders the headers' do
+      expect(mail.subject).to eq('Tesco Pension Wise Appointment SMS Cancellation')
+      expect(mail.to).to eq([booking_manager.email])
+      expect(mail.from).to eq(['appointments@pensionwise.gov.uk'])
+    end
+
+    describe 'rendering the body' do
+      let(:body) { subject.body.encoded }
+
+      it 'includes the appointment particulars' do
+        expect(body).to include(appointment.to_param)
+        expect(body).to include("/appointments/#{appointment.id}/edit")
+      end
+    end
+  end
+
   describe '#reminder' do
     subject do
       travel_to '2017-09-16 13:00 UTC' do

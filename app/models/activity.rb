@@ -9,4 +9,8 @@ class Activity < ApplicationRecord
   def owner
     user ? user.name : 'Someone'
   end
+
+  def self.from(appointment)
+    create!(appointment: appointment)
+  end
 end
