@@ -1,4 +1,6 @@
 class Appointment < ApplicationRecord
+  audited
+
   belongs_to :slot
   has_one :room, through: :slot
   has_many :activities, -> { order('created_at DESC') }
