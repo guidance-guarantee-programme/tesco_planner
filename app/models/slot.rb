@@ -1,6 +1,9 @@
 class Slot < ApplicationRecord
   audited
 
+  validates :start_at, :end_at, presence: true
+  validate :check_slot_uniqueness
+
   before_validation :infer_end_at!
 
   belongs_to :room
@@ -27,6 +30,14 @@ class Slot < ApplicationRecord
   end
 
   private
+
+  def check_slot_uniqueness
+    return unless start_at? && room_id?
+
+    if self.class.available.exists?(start_at: start_at, room_id: room_id) # rubocop:disable GuardClause
+      errors.add(:start_at, 'A duplicate, available slot exists')
+    end
+  end
 
   def infer_end_at!
     return if end_at?
