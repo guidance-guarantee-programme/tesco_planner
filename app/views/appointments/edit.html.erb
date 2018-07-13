@@ -115,7 +115,7 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <%= f.button class: 'btn btn-primary t-submit' do %>
+          <%= f.button class: 'btn btn-primary t-submit', data: { disable_with: 'Please wait...' } do %>
             Update appointment details for <%= @appointment.full_name %>
           <% end %>
         </div>
