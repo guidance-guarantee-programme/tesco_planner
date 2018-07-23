@@ -28,7 +28,7 @@ source 'https://rubygems.org' do
   gem 'plek'
   gem 'puma'
   gem 'pusher'
-  gem 'rails', '~> 5.1.2'
+  gem 'rails', '~> 5.2'
   gem 'sassc-rails'
   gem 'select2-rails'
   gem 'sidekiq'
