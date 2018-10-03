@@ -7,6 +7,7 @@
       this.$el = el;
       this.$slotsUri = this.$el.data('slots-uri')
       this.$roomsUri = this.$el.data('rooms-uri')
+      this.$appointmentsUri = this.$el.data('appointments-uri')
       this.$modal = this.$el.find('.js-availability-modal')
 
       $(this.$el).fullCalendar({
@@ -42,7 +43,7 @@
             eventType: 'slot'
           },
           {
-            url: '/appointments.json',
+            url: this.$appointmentsUri,
             eventType: 'appointment'
           }
         ],
