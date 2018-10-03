@@ -13,11 +13,12 @@ RSpec.describe 'GET /appointments.json?start={start}&end={end}' do
   end
 
   def and_they_have_associated_appointments
-    appointment_for_user(@user)
+    @appointment = appointment_for_user(@user)
   end
 
   def when_they_request_the_appointments_json
-    get appointments_path(
+    get location_appointments_path(
+      @appointment.location,
       start: Date.current.beginning_of_month,
       end: Date.current.end_of_month
     ), as: :json

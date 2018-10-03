@@ -45,7 +45,12 @@ class AppointmentsController < ApplicationController
     starts = params[:start].to_date.beginning_of_day
     ends   = params[:end].to_date.end_of_day
 
-    appointments.includes(:slot).where(slots: { start_at: starts..ends })
+    appointments
+      .includes(slot: :room)
+      .where(
+        slots: { start_at: starts..ends },
+        rooms: { location_id: params[:location_id] }
+      )
   end
 
   def handle_cancellation(appointment)
