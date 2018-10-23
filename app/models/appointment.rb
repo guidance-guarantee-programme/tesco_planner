@@ -28,6 +28,7 @@ class Appointment < ApplicationRecord
   validates :slot, presence: true, uniqueness: true
   validates :type_of_appointment, presence: true
   validates :gdpr_consent, inclusion: { in: ['yes', 'no', ''] }
+  validate :cannot_reschedule_when_cancelled
 
   scope :by_delivery_centre, lambda { |delivery_centre|
     includes(slot: { room: :location })
@@ -119,5 +120,11 @@ class Appointment < ApplicationRecord
     age = Time.zone.today.year - date_of_birth.year
     age -= 1 if Time.zone.today.to_date < date_of_birth + age.years
     age
+  end
+
+  def cannot_reschedule_when_cancelled
+    return unless slot_id_changed? && cancelled?
+
+    errors.add(:slot, 'cannot be rescheduled if cancelled')
   end
 end
