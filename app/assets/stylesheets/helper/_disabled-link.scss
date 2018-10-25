@@ -1,0 +1,8 @@
+.disabled-link {
+  pointer-events: none;
+  color: initial;
+
+  &:visited {
+    color: initial;
+  }
+}
