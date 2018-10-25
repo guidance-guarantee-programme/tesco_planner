@@ -13,9 +13,7 @@
         <small>
           Booking reference: <%= @appointment.id %><br>
           Location: <%= @appointment.location_name %><br>
-          <% unless @appointment.cancelled? %>
-            <%= link_to @appointment.slot, edit_appointment_reschedule_path(@appointment) %>
-          <% end %>
+          <%= link_to @appointment.slot, edit_appointment_reschedule_path(@appointment), class: (@appointment.cancelled? ? "disabled-link": "") %>
         </small>
       </h1>
     </div>
