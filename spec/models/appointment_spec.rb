@@ -14,4 +14,16 @@ RSpec.describe Appointment, 'Validation' do
       expect(appointment.errors.messages[:slot]).to include('cannot be rescheduled if cancelled')
     end
   end
+
+  describe '#should_cancel?' do
+    it 'returns true when the status was not already cancelled' do
+      appointment = create(:appointment, :with_slot)
+
+      appointment.update(status: :cancelled_by_customer)
+      expect(appointment).to be_should_cancel
+
+      appointment.update(status: :cancelled_by_customer_sms)
+      expect(appointment).not_to be_should_cancel
+    end
+  end
 end
