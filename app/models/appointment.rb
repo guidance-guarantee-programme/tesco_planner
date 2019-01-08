@@ -1,4 +1,4 @@
-class Appointment < ApplicationRecord
+class Appointment < ApplicationRecord # rubocop:disable ClassLength
   audited
 
   belongs_to :slot
@@ -62,7 +62,7 @@ class Appointment < ApplicationRecord
   end
 
   def handle_cancellation!
-    return unless status_previously_changed? && cancelled?
+    return unless should_cancel?
 
     slot.free!
     yield self
@@ -74,6 +74,13 @@ class Appointment < ApplicationRecord
 
   def cancelled?
     status.start_with?('cancelled')
+  end
+
+  def should_cancel?
+    return unless status_previously_changed? && cancelled?
+    return if status_previous_change.first.to_s.start_with?('cancelled')
+
+    true
   end
 
   def future?
