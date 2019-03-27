@@ -1,6 +1,7 @@
 class AppointmentSearch
   include ActiveModel::Model
 
+  attr_accessor :processed
   attr_accessor :reference
   attr_accessor :name
   attr_accessor :status
@@ -11,6 +12,7 @@ class AppointmentSearch
 
   def results # rubocop:disable Metrics/AbcSize
     scope = user.appointments.includes(slot: { room: :location })
+    scope = processed_scope(scope)
     scope = scope.where(id: reference) if reference.present?
     scope = scope.where('first_name ILIKE :name or last_name ILIKE :name', name: "%#{name}%") if name.present?
     scope = scope.where(status: status) if status.present?
@@ -25,6 +27,14 @@ class AppointmentSearch
   end
 
   private
+
+  def processed_scope(scope)
+    if ActiveRecord::Type::Boolean.new.cast(processed)
+      scope.where.not(processed_at: nil)
+    else
+      scope.where(processed_at: nil)
+    end
+  end
 
   def date_range
     return if date.blank?

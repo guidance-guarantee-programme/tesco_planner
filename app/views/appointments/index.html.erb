@@ -33,6 +33,9 @@
             <%= f.label :date, 'Date', class: 'filters__label' %><%= f.text_field :date, class: 'js-date-range-picker t-date form-control filters__form-control', readonly: true, data: { module: 'date-range-picker' } %>
           </li>
           <li class="filters__item">
+            <%= f.label :processed, class: 'filters__label' %><%= f.select :processed, [['No', 'false'], ['Yes', 'true']], {}, { class: 'form-control filters__form-control t-processed' } %>
+          </li>
+          <li class="filters__item">
            <%= f.button class: 't-submit btn btn-default filters__button' do %>
              <span aria-hidden="true" class="glyphicon glyphicon-search"></span> Search
            <% end %>
