@@ -34,7 +34,8 @@ class AppointmentsController < ApplicationController
         :name,
         :status,
         :date,
-        :location
+        :location,
+        :processed
       ).merge(
         page: params[:page],
         user: current_user

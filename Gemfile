@@ -24,7 +24,7 @@ source 'https://rubygems.org' do
   gem 'kaminari'
   gem 'momentjs-rails'
   gem 'notifications-ruby-client'
-  gem 'pg', '~> 0.18'
+  gem 'pg'
   gem 'plek'
   gem 'puma'
   gem 'pusher'
@@ -38,7 +38,7 @@ source 'https://rubygems.org' do
 
   group :development, :test do
     gem 'capybara'
-    gem 'factory_bot_rails'
+    gem 'factory_bot_rails', '4.11.0'
     gem 'phantomjs'
     gem 'pry-byebug'
     gem 'pusher-fake'
