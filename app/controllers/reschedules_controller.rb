@@ -7,7 +7,7 @@ class ReschedulesController < ApplicationController
 
   def update
     if @appointment.update(appointment_params)
-      notify_customer(@appointment)
+      notify_customer(@appointment.object)
       redirect_to appointments_path, success: 'The appointment was rescheduled.'
     else
       render :edit
@@ -32,6 +32,7 @@ class ReschedulesController < ApplicationController
   end
 
   def notify_customer(appointment)
-    AppointmentMailer.customer(appointment.object).deliver_later
+    EmailActivity.from(appointment)
+    AppointmentMailer.customer(appointment).deliver_later
   end
 end

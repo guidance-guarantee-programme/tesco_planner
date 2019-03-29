@@ -85,6 +85,8 @@ RSpec.feature 'Booking manager reschedules appointment' do
   end
 
   def and_the_customer_is_notified
+    expect(@appointment.activities.first).to be_an(EmailActivity)
+
     expect(ActionMailer::Base.deliveries.first.to).to match_array(@appointment.email)
   end
 end
