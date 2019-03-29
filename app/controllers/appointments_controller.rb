@@ -18,6 +18,7 @@ class AppointmentsController < ApplicationController
   def update
     if @appointment.update(appointment_params)
       handle_cancellation(@appointment)
+      handle_notification(@appointment)
       redirect_to appointments_path, success: 'The appointment was updated.'
     else
       render :edit
@@ -58,6 +59,12 @@ class AppointmentsController < ApplicationController
     appointment.handle_cancellation! do
       AppointmentMailer.cancellation(appointment.object).deliver_later
     end
+  end
+
+  def handle_notification(appointment)
+    return unless appointment.notify?
+
+    AppointmentMailer.customer(appointment.object).deliver_later
   end
 
   def appointment_params # rubocop:disable Metrics/MethodLength

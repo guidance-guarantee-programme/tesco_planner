@@ -26,4 +26,36 @@ RSpec.describe Appointment, 'Validation' do
       expect(appointment).not_to be_should_cancel
     end
   end
+
+  describe '#notify?' do
+    subject { create(:appointment, :with_slot) }
+
+    context 'when the status was changed' do
+      it 'handles correctly' do
+        travel_to 2.days.ago do
+          subject.update(status: :complete)
+          expect(subject).to_not be_notify
+
+          subject.update(status: :pending)
+          expect(subject).to be_notify
+        end
+      end
+
+      context 'when the appointment has elapsed' do
+        it 'is false' do
+          expect(subject).not_to be_notify
+        end
+      end
+    end
+
+    context 'when the status was not changed' do
+      it 'returns true' do
+        travel_to 2.days.ago do
+          subject.update(first_name: 'George')
+
+          expect(subject).to be_notify
+        end
+      end
+    end
+  end
 end
