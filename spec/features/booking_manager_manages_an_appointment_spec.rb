@@ -25,11 +25,13 @@ RSpec.feature 'Booking manager manages an appointment' do
 
   scenario 'Cancelling an appointment' do
     perform_enqueued_jobs do
-      given_the_user_is_identified_as_a_booking_manager do
-        and_they_have_an_associated_appointment
-        when_the_appointment_is_cancelled
-        then_the_customer_is_notified
-        and_the_original_slot_is_still_available
+      travel_to 2.days.ago do # so the appointment is not `past?`
+        given_the_user_is_identified_as_a_booking_manager do
+          and_they_have_an_associated_appointment
+          when_the_appointment_is_cancelled
+          then_the_customer_is_notified
+          and_the_original_slot_is_still_available
+        end
       end
     end
   end
@@ -92,6 +94,8 @@ RSpec.feature 'Booking manager manages an appointment' do
   end
 
   def then_the_customer_is_notified
+    expect(@appointment.activities.first).to be_an(EmailActivity)
+
     expect(ActionMailer::Base.deliveries.first.to).to match_array(@appointment.email)
   end
   alias_method :and_the_customer_is_notified, :then_the_customer_is_notified

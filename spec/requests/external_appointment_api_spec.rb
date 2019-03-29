@@ -86,6 +86,8 @@ RSpec.describe 'POST /api/v1/locations/:location_id/appointments' do
   end
 
   def and_the_customer_is_notified
+    expect(@appointment.activities.first).to be_an(EmailActivity)
+
     expect(ActionMailer::Base.deliveries.map(&:to).flatten).to include(@appointment.email)
   end
 

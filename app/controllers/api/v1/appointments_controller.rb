@@ -40,6 +40,7 @@ module Api
       end
 
       def deliver_notifications(appointment)
+        EmailActivity.from(appointment)
         AppointmentMailer.customer(appointment).deliver_later
         SlackPingerJob.perform_later(appointment)
 

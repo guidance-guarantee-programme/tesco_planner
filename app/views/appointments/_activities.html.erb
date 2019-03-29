@@ -19,9 +19,9 @@
       </div>
 
       <ol class="list-group" aria-live="polite" data-module="activity-feed" id="activity-list" data-config='{"event": "appointment_activity_<%= appointment.id %>"}' aria-label="Activities">
-        <%= render(appointment.activities[0..2], hide: false) if appointment.activities.present? %>
+        <%= render(appointment.activities.order(created_at: :desc)[0..2], hide: false) if appointment.activities.present? %>
         <% if appointment.activities.count > 3 %>
-          <%= render(appointment.activities - Array(appointment.activities[0..2]), hide: true) %>
+          <%= render(appointment.activities.order(created_at: :desc) - Array(appointment.activities.order(created_at: :desc)[0..2]), hide: true) %>
         <% end %>
       </ol>
 
