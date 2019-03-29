@@ -42,6 +42,13 @@ class Appointment < ApplicationRecord # rubocop:disable ClassLength
   delegate :location, to: :room
   delegate :delivery_centre, to: :location
 
+  def notify?
+    return false if past? || previous_changes.none?
+    return true  if previous_changes.exclude?(:status)
+
+    previous_changes[:status] && pending?
+  end
+
   def cancel!
     transaction do
       update!(status: :cancelled_by_customer_sms)
@@ -85,6 +92,10 @@ class Appointment < ApplicationRecord # rubocop:disable ClassLength
 
   def future?
     slot.start_at.future?
+  end
+
+  def past?
+    slot.start_at.past?
   end
 
   def self.for_sms_cancellation(number)

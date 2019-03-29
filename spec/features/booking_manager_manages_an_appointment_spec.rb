@@ -3,10 +3,15 @@ require 'rails_helper'
 
 RSpec.feature 'Booking manager manages an appointment' do
   scenario 'Modifying an appointment' do
-    given_the_user_is_identified_as_a_booking_manager do
-      and_they_have_an_associated_appointment
-      when_they_modify_the_customer_details
-      then_the_details_are_changed
+    perform_enqueued_jobs do
+      travel_to 2.days.ago do # so the appointment is not `past?`
+        given_the_user_is_identified_as_a_booking_manager do
+          and_they_have_an_associated_appointment
+          when_they_modify_the_customer_details
+          then_the_details_are_changed
+          and_the_customer_is_notified
+        end
+      end
     end
   end
 
@@ -42,7 +47,6 @@ RSpec.feature 'Booking manager manages an appointment' do
     @page.email.set 'bob@example.com'
     @page.phone.set '07715 999 1234'
     @page.memorable_word.set 'spaceboot'
-    @page.status.select 'No Show'
     @page.gdpr_consent_no.set true
     @page.dc_pot_confirmed_dont_know.set true
 
@@ -60,7 +64,6 @@ RSpec.feature 'Booking manager manages an appointment' do
       email: 'bob@example.com',
       phone: '07715 999 1234',
       memorable_word: 'spaceboot',
-      status: 'no_show',
       gdpr_consent: 'no',
       dc_pot_confirmed: false
     )
@@ -91,6 +94,7 @@ RSpec.feature 'Booking manager manages an appointment' do
   def then_the_customer_is_notified
     expect(ActionMailer::Base.deliveries.first.to).to match_array(@appointment.email)
   end
+  alias_method :and_the_customer_is_notified, :then_the_customer_is_notified
 
   def and_the_original_slot_is_still_available
     expect(
