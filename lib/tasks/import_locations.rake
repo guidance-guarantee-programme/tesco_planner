@@ -9,7 +9,7 @@ namespace :import do
     data    = open(csv_url, read_timeout: timeout).read
 
     ActiveRecord::Base.transaction do
-      CSV.new(data).tap(&:shift).each do |row|
+      CSV.new(data, headers: true, return_headers: false).each do |row|
         delivery_centre = DeliveryCentre.find_by(name: row[0])
 
         raise "Could not find: #{row[0]}" unless delivery_centre
