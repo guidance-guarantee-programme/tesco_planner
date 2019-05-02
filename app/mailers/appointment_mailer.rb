@@ -1,11 +1,11 @@
 class AppointmentMailer < ApplicationMailer
-  default subject: 'Your Tesco Pension Wise Appointment'
+  default subject: 'Your Employer Pension Wise Appointment'
 
   def booking_manager_cancellation(booking_manager, appointment)
     @appointment = appointment
 
     mailgun_headers(:booking_manager_cancellation, appointment)
-    mail to: booking_manager.email, subject: 'Tesco Pension Wise Appointment SMS Cancellation'
+    mail to: booking_manager.email, subject: 'Employer Pension Wise Appointment SMS Cancellation'
   end
 
   def reminder(appointment)
@@ -30,6 +30,6 @@ class AppointmentMailer < ApplicationMailer
   end
 
   def booking_manager(booking_manager)
-    mail to: booking_manager.email, subject: 'Tesco Pension Wise Appointment'
+    mail to: booking_manager.email, subject: 'Employer Pension Wise Appointment'
   end
 end

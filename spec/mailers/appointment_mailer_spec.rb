@@ -14,7 +14,7 @@ RSpec.describe AppointmentMailer do
     end
 
     it 'renders the headers' do
-      expect(mail.subject).to eq('Tesco Pension Wise Appointment SMS Cancellation')
+      expect(mail.subject).to eq('Employer Pension Wise Appointment SMS Cancellation')
       expect(mail.to).to eq([booking_manager.email])
       expect(mail.from).to eq(['appointments@pensionwise.gov.uk'])
     end

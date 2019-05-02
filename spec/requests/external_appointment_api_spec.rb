@@ -82,7 +82,7 @@ RSpec.describe 'POST /api/v1/locations/:location_id/appointments' do
   def and_the_booking_managers_are_notified
     expect(
       ActionMailer::Base.deliveries.map(&:subject).flatten
-    ).to include('Tesco Pension Wise Appointment')
+    ).to include('Employer Pension Wise Appointment')
   end
 
   def and_the_customer_is_notified
