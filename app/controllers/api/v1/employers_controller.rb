@@ -3,6 +3,8 @@ module Api
     class EmployersController < ActionController::Base
       include LogrageFilterer
 
+      rescue_from(ActiveRecord::RecordNotFound) { head :not_found }
+
       def show
         render json: employer
       end

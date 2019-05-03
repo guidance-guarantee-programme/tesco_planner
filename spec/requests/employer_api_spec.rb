@@ -1,11 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe 'GET /api/v1/employers/{:id}.json' do
+  scenario 'Attempting to request a missing employer' do
+    when_a_client_requests_a_non_existent_employer
+    then_the_service_responds_with_a_404
+  end
+
   scenario 'Requesting the employer' do
     given_an_employer_with_locations_exists
     when_a_client_requests_the_employer
     then_the_service_responds_ok
     and_the_employer_is_serialized_as_json
+  end
+
+  def when_a_client_requests_a_non_existent_employer
+    get api_v1_employer_path('2'), as: :json
+  end
+
+  def then_the_service_responds_with_a_404
+    expect(response).to be_not_found
   end
 
   def given_an_employer_with_locations_exists
