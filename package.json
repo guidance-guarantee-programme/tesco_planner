@@ -9,7 +9,7 @@
     "eslint": "^1.10.3"
   },
   "scripts": {
-    "js": "npm run eslint",
+    "js": "yarn run eslint",
     "eslint": "eslint app/assets/javascripts/**/*.es6"
   }
 }
