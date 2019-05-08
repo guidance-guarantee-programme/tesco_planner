@@ -16,6 +16,7 @@ To do this you can:
 </p>
 
 <ul style="color: #0B0C0C;font-family: Helvetica, Arial, sans-serif;margin-top: 15px;margin-bottom: 15px;line-height: 1.315789474;">
+  <% if @appointment.tesco? %>
   <li>
     Look at your latest Tesco Benefit Report
   </li>
@@ -24,6 +25,7 @@ To do this you can:
     includes the Tesco Retirement Savings Plan statement which should be sent once
     a year.
   </li>
+  <% end %>
   <li>
     Check your ‘wake-up’ pack if you’ve received one – you normally
     get this from your provider up to 6 months before the age you

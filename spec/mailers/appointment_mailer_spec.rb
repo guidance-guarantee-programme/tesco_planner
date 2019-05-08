@@ -81,6 +81,22 @@ RSpec.describe AppointmentMailer do
     it 'ensures replies are directed to the DC alias' do
       expect(subject.reply_to).to match_array(appointment.delivery_centre.reply_to)
     end
+
+    context 'when tesco' do
+      it 'contains the customised tesco content' do
+        allow(appointment).to receive(:tesco?).and_return(true)
+
+        expect(subject.body.encoded).to include('Tesco Benefit Report')
+      end
+    end
+
+    context 'when not tesco' do
+      it 'does not contain the customised tesco content' do
+        allow(appointment).to receive(:tesco?).and_return(false)
+
+        expect(subject.body.encoded).not_to include('Tesco Benefit Report')
+      end
+    end
   end
 
   describe '#cancellation' do
