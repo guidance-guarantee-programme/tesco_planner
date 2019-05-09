@@ -35,6 +35,7 @@ class AppointmentsController < ApplicationController
         :name,
         :status,
         :date,
+        :employer,
         :location,
         :processed
       ).merge(
