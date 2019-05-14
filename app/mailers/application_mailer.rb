@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'Tesco Pension Wise Appointments <appointments@pensionwise.gov.uk>'
+  default from: 'Pension Wise Appointments <appointments@pensionwise.gov.uk>'
 
   layout 'mailer'
 
