@@ -169,6 +169,10 @@
         success: () => {
           $(this.$el).fullCalendar('refetchEvents')
         },
+        error: () => {
+          this.hideSpinner();
+          alertify.theme('bootstrap').alert('You cannot create a duplicate or overlapping slot.')
+        },
         always: () => {
           this.hideSpinner();
         }
