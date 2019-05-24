@@ -34,8 +34,11 @@ class Slot < ApplicationRecord
   def check_slot_uniqueness
     return unless start_at? && room_id?
 
-    if self.class.available.exists?(start_at: start_at, room_id: room_id) # rubocop:disable GuardClause
-      errors.add(:start_at, 'A duplicate, available slot exists')
+    if self.class.available
+           .where(room_id: room_id)
+           .where("(start_at, interval '1 hour') overlaps (?, interval '1 hour')", start_at)
+           .exists?
+      errors.add(:start_at, 'A duplicate or overlapping, available slot exists')
     end
   end
 

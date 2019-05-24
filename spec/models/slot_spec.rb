@@ -12,6 +12,11 @@ RSpec.describe Slot do
         @slot = create(:slot, :with_room)
         expect(build(:slot, room: @slot.room)).to be_invalid
 
+        # Don't allow overlapping, available duplicates
+        expect(
+          build(:slot, start_at: Time.zone.parse('2018-01-01 13:30'), room: @slot.room)
+        ).to be_invalid
+
         # Allow duplicates without availability
         @appointment = create(:appointment, :with_slot)
         expect(build(:slot, room: @appointment.room)).to be_valid

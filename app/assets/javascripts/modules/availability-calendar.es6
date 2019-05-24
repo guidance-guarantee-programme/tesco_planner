@@ -160,12 +160,21 @@
     }
 
     createSlot(date, resourceObject) {
+      this.showSpinner();
+
       $.post({
         url: this.$slotsUri,
         data: { start_at: date.utc().format(), room_id: resourceObject.id },
         headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
         success: () => {
           $(this.$el).fullCalendar('refetchEvents')
+        },
+        error: () => {
+          this.hideSpinner();
+          alertify.theme('bootstrap').alert('You cannot create a duplicate or overlapping slot.')
+        },
+        always: () => {
+          this.hideSpinner();
         }
       })
     }
