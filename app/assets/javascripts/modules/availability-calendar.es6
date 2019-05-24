@@ -160,12 +160,17 @@
     }
 
     createSlot(date, resourceObject) {
+      this.showSpinner();
+
       $.post({
         url: this.$slotsUri,
         data: { start_at: date.utc().format(), room_id: resourceObject.id },
         headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
         success: () => {
           $(this.$el).fullCalendar('refetchEvents')
+        },
+        always: () => {
+          this.hideSpinner();
         }
       })
     }
