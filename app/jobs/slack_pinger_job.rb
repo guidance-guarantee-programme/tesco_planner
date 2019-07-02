@@ -19,10 +19,10 @@ class SlackPingerJob < ApplicationJob
     slots = location.slots.size
 
     {
-      username: 'tesco',
+      username: 'employer',
       channel: '#online-bookings',
       text: ":rotating_light: #{location.name} #{appointments}/#{slots} :rotating_light:",
-      icon_emoji: ':tesco:'
+      icon_emoji: ':factory:'
     }
   end
 end
