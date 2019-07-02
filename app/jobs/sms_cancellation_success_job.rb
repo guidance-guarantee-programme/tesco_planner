@@ -12,7 +12,8 @@ class SmsCancellationSuccessJob < SmsJobBase
       reference: appointment.to_param,
       personalisation: {
         date: appointment.slot,
-        location: appointment.location_name
+        location: appointment.location_name,
+        employer: appointment.employer_name
       }
     )
   end
