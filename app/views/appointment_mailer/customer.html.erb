@@ -49,7 +49,7 @@
 <p>
   All appointments will be private and held in a colleague area in your
   workplace. If you're not sure which room it will be held in, please ask your
-  manager or people manager.
+  manager<% if @appointment.tesco? %> or people manager<% end %>.
 </p>
 
 <p>Email us to change or cancel your booking. You may be asked for your booking reference number.</p>

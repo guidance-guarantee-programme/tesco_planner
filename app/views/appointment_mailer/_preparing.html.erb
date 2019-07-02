@@ -8,7 +8,7 @@ will help you get the most from your appointment.
 </p>
 
 <h3 style="color: #0B0C0C !important;font-family: Helvetica, Arial, sans-serif;margin: 15px 0;font-weight: 700;font-size: 18px;line-height: 1.111111111;padding: 15px 0;">
-1. Check how much is in your retirement savings
+  1. Check how much is in your <% if @appointment.tesco? %> retirement savings <% else %> pension pot<% end %>
 </h3>
 
 <p>
@@ -24,6 +24,11 @@ To do this you can:
     Look at your pension statement from any pension providers you may have. This
     includes the Tesco Retirement Savings Plan statement which should be sent once
     a year.
+  </li>
+  <% else %>
+  <li>
+    Look at your pension statement from any pension providers you may have.
+    Your provider should send this once a year.
   </li>
   <% end %>
   <li>
@@ -72,7 +77,7 @@ You’ll need to consider how much money you’ll need in retirement.
 
 <ul style="color: #0B0C0C;font-family: Helvetica, Arial, sans-serif;margin-top: 15px;margin-bottom: 15px;line-height: 1.315789474;">
   <li>
-    Find out what you’ll get in total from your retirement savings, the
+    Find out what you’ll get in total from your <% if @appointment.tesco? %> retirement savings<% else %>pension pot<% end %>, the
     State Pension and any other income you may have
   </li>
   <li>

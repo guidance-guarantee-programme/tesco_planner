@@ -11,7 +11,7 @@ class SmsAppointmentReminderJob < SmsJobBase
 
   private
 
-  def send_sms_reminder(appointment)
+  def send_sms_reminder(appointment) # rubocop:disable MethodLength
     appointment = AppointmentDecorator.new(appointment)
 
     sms_client.send_sms(
@@ -20,7 +20,8 @@ class SmsAppointmentReminderJob < SmsJobBase
       reference: appointment.to_param,
       personalisation: {
         date: appointment.slot,
-        location: appointment.location_name
+        location: appointment.location_name,
+        employer: appointment.employer_name
       }
     )
   end

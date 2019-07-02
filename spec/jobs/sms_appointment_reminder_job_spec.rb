@@ -11,7 +11,8 @@ RSpec.describe SmsAppointmentReminderJob, '#perform' do
       reference: appointment.to_param,
       personalisation: {
         date: '2:00pm, 15 June 2018',
-        location: a_string_matching(/\ATesco \d+/)
+        location: a_string_matching(/\ATesco \d+/),
+        employer: a_string_matching(/\AEmployer \d+/)
       }
     )
 
