@@ -25,7 +25,7 @@ RSpec.describe 'POST /api/v1/locations/:location_id/appointments' do
   end
 
   def given_a_location_with_availability
-    create(:booking_manager) do |user|
+    @booking_manager = create(:booking_manager) do |user|
       @location = user.location
       @slot = @location.rooms.first.slots << build(
         :slot,
@@ -80,9 +80,7 @@ RSpec.describe 'POST /api/v1/locations/:location_id/appointments' do
   end
 
   def and_the_booking_managers_are_notified
-    expect(
-      ActionMailer::Base.deliveries.map(&:subject).flatten
-    ).to include('Tesco Pension Wise Appointment')
+    expect(ActionMailer::Base.deliveries.map(&:to).flatten).to include(@booking_manager.email)
   end
 
   def and_the_customer_is_notified

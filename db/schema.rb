@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180520134037) do
+ActiveRecord::Schema.define(version: 2019_04_23_140319) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
   enable_extension "pg_stat_statements"
+  enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
     t.bigint "user_id"
@@ -44,6 +44,13 @@ ActiveRecord::Schema.define(version: 20180520134037) do
     t.datetime "processed_at"
     t.string "gdpr_consent", default: "", null: false
     t.index ["slot_id"], name: "index_appointments_on_slot_id", unique: true
+  end
+
+  create_table "assignments", id: false, force: :cascade do |t|
+    t.bigint "employer_id", null: false
+    t.bigint "delivery_centre_id", null: false
+    t.index ["delivery_centre_id"], name: "index_assignments_on_delivery_centre_id"
+    t.index ["employer_id"], name: "index_assignments_on_employer_id"
   end
 
   create_table "audits", force: :cascade do |t|
@@ -76,6 +83,12 @@ ActiveRecord::Schema.define(version: 20180520134037) do
     t.boolean "hidden", default: false, null: false
   end
 
+  create_table "employers", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "address_line_one", default: "", null: false
@@ -88,6 +101,8 @@ ActiveRecord::Schema.define(version: 20180520134037) do
     t.datetime "updated_at", null: false
     t.boolean "active", default: true, null: false
     t.integer "delivery_centre_id"
+    t.bigint "employer_id"
+    t.index ["employer_id"], name: "index_locations_on_employer_id"
   end
 
   create_table "rooms", force: :cascade do |t|

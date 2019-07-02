@@ -1,7 +1,7 @@
 <% content_for(:page_title, 'Appointments') %>
 <div class="page-header">
   <ol class="breadcrumb">
-    <li><%= link_to 'Tesco appointment planner', root_path %></li>
+    <li><%= link_to 'Employer planner', root_path %></li>
     <li class="active">Appointments</li>
   </ol>
 
@@ -26,8 +26,12 @@
             <%= f.select :status, friendly_options(Appointment.statuses), { include_blank: 'All Statuses' }, { class: 't-status form-control filters__form-control filters__form-control--status' } %>
           </li>
           <li class="filters__item">
+            <%= f.label :employer, class: 'filters__label' %>
+            <%= f.collection_select :employer, @search.employers, :id, :name, { include_blank: 'All Employers' }, { class: 'js-employers t-employer form-control filters__form-control filters__form-control--location' } %>
+          </li>
+          <li class="filters__item">
             <%= f.label :location, class: 'filters__label' %>
-            <%= f.collection_select :location, @search.locations, :id, :name, { include_blank: 'All Locations' }, { class: 't-location form-control filters__form-control filters__form-control--location' } %>
+            <%= f.grouped_collection_select :location, @search.employers, :locations, :name, :id, :name, { include_blank: 'All Locations' }, { class: 'js-locations t-location form-control filters__form-control filters__form-control--location' } %>
           </li>
           <li class="filters__item">
             <%= f.label :date, 'Date', class: 'filters__label' %><%= f.text_field :date, class: 'js-date-range-picker t-date form-control filters__form-control', readonly: true, data: { module: 'date-range-picker' } %>

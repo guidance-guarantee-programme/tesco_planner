@@ -6,6 +6,7 @@ class AppointmentSearch
   attr_accessor :name
   attr_accessor :status
   attr_accessor :date
+  attr_accessor :employer
   attr_accessor :location
   attr_accessor :user
   attr_accessor :page
@@ -17,16 +18,22 @@ class AppointmentSearch
     scope = scope.where('first_name ILIKE :name or last_name ILIKE :name', name: "%#{name}%") if name.present?
     scope = scope.where(status: status) if status.present?
     scope = scope.where(slots: { start_at: date_range }) if date.present?
-    scope = scope.where(locations: { id: location }) if location.present?
-
+    scope = employer_location_scope(scope)
     scope.order(created_at: :desc).page(page)
   end
 
-  def locations
-    user.locations.order(:name)
+  def employers
+    user.delivery_centre.employers.order(:name)
   end
 
   private
+
+  def employer_location_scope(scope)
+    return scope.where(locations: { id: location }) if location.present?
+    return scope.where(locations: { employer_id: employer }) if employer.present?
+
+    scope
+  end
 
   def processed_scope(scope)
     if ActiveRecord::Type::Boolean.new.cast(processed)

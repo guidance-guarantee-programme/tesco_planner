@@ -2,10 +2,10 @@ module Admin
   class LocationsController < ApplicationController
     before_action :authorise_administrator!
     before_action :load_delivery_centres
+    before_action :load_employers
 
     def index
-      @search    = LocationSearch.new(location_search_params)
-      @locations = @search.locations
+      @search = LocationSearch.new(location_search_params)
     end
 
     def edit
@@ -44,6 +44,7 @@ module Admin
         .permit(:location)
         .merge(
           scoped: Location.all,
+          user: current_user,
           page: params[:page]
         )
     end
@@ -52,10 +53,15 @@ module Admin
       @delivery_centres = DeliveryCentre.order(:name)
     end
 
+    def load_employers
+      @employers = Employer.order(:name)
+    end
+
     def location_params # rubocop:disable Metrics/MethodLength
       params
         .require(:location)
         .permit(
+          :employer_id,
           :delivery_centre_id,
           :name,
           :address_line_one,

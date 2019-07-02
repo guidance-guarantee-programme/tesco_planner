@@ -6,7 +6,7 @@ class AppointmentMailerPreview < ActionMailer::Preview
   end
 
   def booking_manager
-    AppointmentMailer.booking_manager(User.first)
+    AppointmentMailer.booking_manager(User.first, Appointment.first)
   end
 
   def customer

@@ -45,7 +45,7 @@ module Api
         SlackPingerJob.perform_later(appointment)
 
         appointment.booking_managers.each do |booking_manager|
-          AppointmentMailer.booking_manager(booking_manager).deliver_later
+          AppointmentMailer.booking_manager(booking_manager, appointment).deliver_later
         end
       end
     end

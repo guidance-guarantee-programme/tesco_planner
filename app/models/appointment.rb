@@ -42,6 +42,18 @@ class Appointment < ApplicationRecord # rubocop:disable ClassLength
   delegate :location, to: :room
   delegate :delivery_centre, to: :location
 
+  def employer_name
+    return '' unless location&.employer
+
+    location.employer.name
+  end
+
+  def tesco?
+    return unless location&.employer_id
+
+    location.employer_id.to_s == ENV['TESCO_EMPLOYER_ID']
+  end
+
   def notify?
     return false if past? || previous_changes.none?
     return true  if previous_changes.exclude?(:status)
