@@ -9,6 +9,7 @@ class LocationSearch
 
   def locations
     scope = scoped
+    scope = scope.includes(:employer)
     scope = scope.where(locations: { id: location }) if location.present?
     scope = scope.where(locations: { employer_id: employer }) if employer.present?
     scope = scope.order(:name)
