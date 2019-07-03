@@ -43,6 +43,7 @@
         <caption><span class="sr-only">Locations</span></caption>
         <thead>
           <tr class="table-header">
+            <th>Employer</th>
             <th>Name</th>
             <th>Status</th>
             <th></th>
@@ -51,6 +52,9 @@
         <tbody>
           <% @search.locations.each do |location| %>
             <tr class="t-location">
+              <td>
+                <%= location.employer.name %>
+              </td>
               <td>
                 <%= location.name %>
               </td>
