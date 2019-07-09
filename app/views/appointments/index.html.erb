@@ -31,7 +31,7 @@
           </li>
           <li class="filters__item">
             <%= f.label :location, class: 'filters__label' %>
-            <%= f.grouped_collection_select :location, @search.employers, :locations, :name, :id, :name, { include_blank: 'All Locations' }, { class: 'js-locations t-location form-control filters__form-control filters__form-control--location' } %>
+            <%= f.select :location, grouped_options_for_select(grouped_employer_locations(current_user)), { include_blank: 'All Locations' }, { class: 'js-locations t-location form-control filters__form-control filters__form-control--location' } %>
           </li>
           <li class="filters__item">
             <%= f.label :date, 'Date', class: 'filters__label' %><%= f.text_field :date, class: 'js-date-range-picker t-date form-control filters__form-control', readonly: true, data: { module: 'date-range-picker' } %>
