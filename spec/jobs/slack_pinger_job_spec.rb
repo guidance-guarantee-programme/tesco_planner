@@ -19,7 +19,7 @@ RSpec.describe SlackPingerJob, '#perform' do
     subject.perform(appointment)
 
     expect(webhook).to have_received(:call).with(
-      hash_including(text: %r{Tesco \d+ 1/1})
+      hash_including(text: %r{Employer \d+ - Tesco \d+ 1/1})
     )
   end
 end

@@ -21,7 +21,7 @@ class SlackPingerJob < ApplicationJob
     {
       username: 'employer',
       channel: '#online-bookings',
-      text: ":rotating_light: #{location.name} #{appointments}/#{slots} :rotating_light:",
+      text: ":rotating_light: #{location.employer.name} - #{location.name} #{appointments}/#{slots} :rotating_light:",
       icon_emoji: ':factory:'
     }
   end
