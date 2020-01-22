@@ -1,4 +1,6 @@
 class Location < ApplicationRecord
+  before_create :build_default_room
+
   has_many :rooms
   has_many :slots, through: :rooms
   has_many :appointments, through: :slots
@@ -39,5 +41,13 @@ class Location < ApplicationRecord
       county,
       postcode
     ].reject(&:blank?).join("\n")
+  end
+
+  private
+
+  def build_default_room
+    return unless rooms.empty?
+
+    rooms.build(name: 'Colleague Area')
   end
 end

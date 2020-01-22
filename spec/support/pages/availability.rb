@@ -20,7 +20,7 @@ module Pages
       ok.click
     end
 
-    def click_slot(time, resource_name = 'Room no.') # rubocop:disable Metrics/MethodLength
+    def click_slot(time, resource_name = 'Colleague Area') # rubocop:disable Metrics/MethodLength
       x, y = page.driver.evaluate_script <<-JS
         function() {
           var $calendar = $('.t-calendar');

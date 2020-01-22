@@ -10,7 +10,5 @@ FactoryBot.define do
     postcode { 'RG2 9FL' }
     delivery_centre
     employer
-
-    after(:build) { |location| location.rooms << build(:room) }
   end
 end
