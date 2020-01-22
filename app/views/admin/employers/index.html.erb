@@ -1,0 +1,48 @@
+<% content_for(:page_title, 'Manage Employers') %>
+<div class="page-header">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Employer planner', root_path %></li>
+    <li class="active">Employers</li>
+  </ol>
+
+  <h1>Manage Employers</h1>
+  <%= link_to 'New employer', new_admin_employer_path, class: 'btn btn-default' %>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <% if @employers.empty? %>
+      <p class="no-content t-notice">No employers.</p>
+    <% else %>
+      <%= paginate @employers %>
+
+      <table class="table table-bordered centred-table table-striped">
+        <caption><span class="sr-only">Employers</span></caption>
+        <thead>
+          <tr class="table-header">
+            <th>Name</th>
+            <th>URL</th>
+            <th>Delivery Centres</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @employers.each do |employer| %>
+            <tr class="t-employer">
+              <td class="t-name">
+                <%= employer.name %>
+              </td>
+              <td class="t-url">
+                <%= employer.url %>
+              </td>
+              <td class="t-delivery-centres">
+                <%= employer.delivery_centres.pluck(:name).to_sentence %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <%= paginate @employers %>
+    <% end %>
+  </div>
+</div>

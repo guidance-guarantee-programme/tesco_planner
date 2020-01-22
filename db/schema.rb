@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_23_140319) do
+ActiveRecord::Schema.define(version: 2020_01_22_124748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 2019_04_23_140319) do
     t.string "name", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "url", default: "", null: false
   end
 
   create_table "locations", force: :cascade do |t|
