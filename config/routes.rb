@@ -36,6 +36,7 @@ Rails.application.routes.draw do # rubocop:disable BlockLength
   end
 
   namespace :admin do
+    resources :employers, only: %i[index new create]
     resources :delivery_centres
     resources :locations do
       resources :rooms
