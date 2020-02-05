@@ -3,6 +3,8 @@ module Api
     class LocationsController < ActionController::Base
       include LogrageFilterer
 
+      rescue_from(ActiveRecord::RecordNotFound) { head :not_found }
+
       def show
         render json: location, include_slots: true
       end
