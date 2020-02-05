@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'GET /api/v1/locations/:location_id' do
+  scenario 'Requesting an inactive location' do
+    given_the_location_exists
+    and_it_is_inactive
+    when_a_request_for_an_inactive_location_is_made
+    then_the_service_responds_with_a_404
+  end
+
   scenario 'Requesting the given location' do
     travel_to @now = Time.zone.parse('2017-09-06 13:00') do
       given_the_location_exists
@@ -10,6 +17,18 @@ RSpec.describe 'GET /api/v1/locations/:location_id' do
       then_the_service_responds_ok
       and_the_location_is_serialized_as_json
     end
+  end
+
+  def and_it_is_inactive
+    @location.update(active: false)
+  end
+
+  def when_a_request_for_an_inactive_location_is_made
+    get api_v1_location_path(@location), as: :json
+  end
+
+  def then_the_service_responds_with_a_404
+    expect(response).to be_missing
   end
 
   def given_the_location_exists
