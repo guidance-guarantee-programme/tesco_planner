@@ -1,6 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe Appointment, 'Validation' do
+  describe '#booking_managers' do
+    it 'does not include regular, permissionless users' do
+      appointment = create(:appointment, :with_slot)
+      # this will not appear as it has no `booking_manager` permission
+      create(:orphaned_user, delivery_centre: appointment.delivery_centre)
+
+      expect(appointment.booking_managers).to be_empty
+
+      # this will appear as it has the right permission
+      create(:user, delivery_centre: appointment.delivery_centre)
+
+      expect(appointment.booking_managers).not_to be_empty
+    end
+  end
+
   %i[
     cancelled_by_customer
     cancelled_by_pension_wise
