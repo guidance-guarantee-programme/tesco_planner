@@ -88,7 +88,7 @@ class Appointment < ApplicationRecord # rubocop:disable ClassLength
   end
 
   def booking_managers
-    delivery_centre.users.active
+    delivery_centre.users.active.select(&:booking_manager?)
   end
 
   def cancelled?

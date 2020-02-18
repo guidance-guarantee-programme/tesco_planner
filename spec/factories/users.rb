@@ -11,5 +11,9 @@ FactoryBot.define do
     factory :administrator do
       permissions { %w[signin booking_manager administrator] }
     end
+
+    factory :orphaned_user do
+      permissions { %w[signin] }
+    end
   end
 end

@@ -28,7 +28,7 @@ RSpec.describe 'GET /api/v1/locations/:location_id' do
   end
 
   def then_the_service_responds_with_a_404
-    expect(response).to be_missing
+    expect(response).to be_not_found
   end
 
   def given_the_location_exists
