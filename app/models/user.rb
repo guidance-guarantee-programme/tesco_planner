@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   ADMINISTRATOR   = 'administrator'.freeze
   BOOKING_MANAGER = 'booking_manager'.freeze
+  API_USER        = 'api_user'.freeze
 
   include GDS::SSO::User
 

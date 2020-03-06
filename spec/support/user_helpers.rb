@@ -8,6 +8,24 @@ module UserHelpers
     ENV['GDS_SSO_MOCK_INVALID'] = sso_env
   end
 
+  def given_the_user_has_no_permissions
+    @user = create(:orphaned_user)
+    GDS::SSO.test_user = @user
+
+    yield
+  ensure
+    GDS::SSO.test_user = nil
+  end
+
+  def given_the_user_is_identified_as_an_api_user
+    @user = create(:api_user)
+    GDS::SSO.test_user = @user
+
+    yield
+  ensure
+    GDS::SSO.test_user = nil
+  end
+
   def given_the_user_is_identified_as_an_administrator
     @user = create(:administrator)
     GDS::SSO.test_user = @user

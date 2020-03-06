@@ -42,6 +42,10 @@ class Appointment < ApplicationRecord # rubocop:disable ClassLength
   delegate :location, to: :room
   delegate :delivery_centre, to: :location
 
+  def customer_name
+    "#{first_name} #{last_name}"
+  end
+
   def employer_name
     return '' unless location&.employer
 

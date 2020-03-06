@@ -4,4 +4,6 @@ GDS::SSO.config do |config|
   config.oauth_id   = ENV['OAUTH_ID']
   config.oauth_root_url = ENV.fetch('OAUTH_ROOT_URL') { 'http://localhost:3006' }
   config.oauth_secret   = ENV['OAUTH_SECRET']
+
+  config.additional_mock_permissions_required = [User::API_USER]
 end
