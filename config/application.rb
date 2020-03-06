@@ -29,5 +29,12 @@ module TescoPlanner
     config.generators.system_tests = nil
 
     config.action_mailer.preview_path = Rails.root.join('spec', 'mailers', 'previews')
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '/api/v1/searches', headers: :any, methods: %i[get options]
+      end
+    end
   end
 end

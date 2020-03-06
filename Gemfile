@@ -28,6 +28,7 @@ source 'https://rubygems.org' do
   gem 'plek'
   gem 'puma'
   gem 'pusher'
+  gem 'rack-cors'
   gem 'rails', '~> 5.2'
   gem 'sassc-rails'
   gem 'sidekiq'
