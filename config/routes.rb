@@ -13,6 +13,7 @@ Rails.application.routes.draw do # rubocop:disable BlockLength
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
+      resources :searches, only: :index
       resources :employers do
         resources :locations, only: :show, shallow: true do
           resources :appointments, only: :create
