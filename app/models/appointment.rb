@@ -114,6 +114,12 @@ class Appointment < ApplicationRecord # rubocop:disable ClassLength
     slot.start_at.past?
   end
 
+  def self.for_redaction
+    where
+      .not(first_name: 'redacted')
+      .where('created_at < ?', 2.years.ago.beginning_of_day)
+  end
+
   def self.for_sms_cancellation(number)
     pending
       .order(:created_at)
