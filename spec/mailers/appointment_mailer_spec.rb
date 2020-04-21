@@ -47,7 +47,8 @@ RSpec.describe AppointmentMailer do
         expect(body).to include('Dear Rick')
         expect(body).to include('16 September 2017')
         expect(body).to include('2:00pm')
-        expect(body).to include('Room no.')
+        expect(body).to include('Phone appointment')
+        expect(body).to include('coronavirus')
       end
     end
 
@@ -74,7 +75,8 @@ RSpec.describe AppointmentMailer do
         expect(body).to include('Dear Rick')
         expect(body).to include('16 September 2017')
         expect(body).to include('2:00pm')
-        expect(body).to include('Room no.')
+        expect(body).to include('Phone appointment')
+        expect(body).to include('coronavirus')
       end
     end
 
