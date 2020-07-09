@@ -12,6 +12,7 @@ end
 source 'https://rubygems.org' do
   gem 'active_model_serializers'
   gem 'audited'
+  gem 'azure-storage-blob'
   gem 'bootsnap', require: false
   gem 'bootstrap-kaminari-views'
   gem 'bugsnag'
@@ -26,6 +27,7 @@ source 'https://rubygems.org' do
   gem 'notifications-ruby-client'
   gem 'pg'
   gem 'plek'
+  gem 'postgres-copy'
   gem 'puma'
   gem 'pusher'
   gem 'rack-cors'
