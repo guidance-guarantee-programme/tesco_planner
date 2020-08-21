@@ -20,7 +20,8 @@ class AppointmentMailer < ApplicationMailer
     mail to: appointment.email, reply_to: appointment.delivery_centre.reply_to, subject: employer_subject(appointment)
   end
 
-  def customer(appointment)
+  def customer(appointment, rescheduled: false)
+    @rescheduled = rescheduled
     @appointment = appointment
 
     mailgun_headers(:confirmation, appointment)

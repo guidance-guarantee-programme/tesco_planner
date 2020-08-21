@@ -33,6 +33,6 @@ class ReschedulesController < ApplicationController
 
   def notify_customer(appointment)
     EmailActivity.from(appointment)
-    AppointmentMailer.customer(appointment).deliver_later
+    AppointmentMailer.customer(appointment, rescheduled: true).deliver_later
   end
 end

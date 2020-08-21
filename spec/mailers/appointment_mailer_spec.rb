@@ -58,9 +58,22 @@ RSpec.describe AppointmentMailer do
   end
 
   describe '#customer' do
+    let(:rescheduled) { false }
+
     subject do
       travel_to '2017-09-16 13:00 UTC' do
-        described_class.customer(appointment)
+        described_class.customer(appointment, rescheduled: rescheduled)
+      end
+    end
+
+    context 'when it has been rescheduled' do
+      let(:rescheduled) { true }
+
+      it 'contains the necessary detail' do
+        subject.body.encoded.tap do |body|
+          expect(body).to include('We’ve rescheduled your appointment')
+          expect(body).to include('We’ve updated your appointment')
+        end
       end
     end
 
@@ -72,11 +85,12 @@ RSpec.describe AppointmentMailer do
       expect(subject.to).to match_array('rick@example.com')
 
       subject.body.encoded.tap do |body|
+        expect(body).to include('We’ve booked your appointment')
+        expect(body).to include('Thank you for booking')
         expect(body).to include('Dear Rick')
         expect(body).to include('16 September 2017')
         expect(body).to include('2:00pm')
-        expect(body).to include('Phone appointment')
-        expect(body).to include('coronavirus')
+        expect(body).to include('delivered by telephone')
       end
     end
 
