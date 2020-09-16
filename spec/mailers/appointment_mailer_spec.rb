@@ -90,7 +90,8 @@ RSpec.describe AppointmentMailer do
         expect(body).to include('Dear Rick')
         expect(body).to include('16 September 2017')
         expect(body).to include('2:00pm')
-        expect(body).to include('delivered by telephone')
+        expect(body).to include('Tesco')
+        expect(body).to include('Room no.')
       end
     end
 

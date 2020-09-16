@@ -39,16 +39,20 @@
 </p>
 
 <p>
+   Appointment location:
+   <br>
+   <strong class="emphasize">
+     <%= @appointment.location.name %><br>
+     <%= @appointment.room.name %>
+   </strong>
+</p>
+
+<p>
   Reference number:
   <br>
   <strong class="emphasize">
     <%= @appointment.id %>
   </strong>
-</p>
-
-<p>
-  Your Pension Wise appointment will be delivered by telephone. We will call
-  you on the phone number provided.
 </p>
 
 <p>Email us to change or cancel your booking. You may be asked for your booking reference number.</p>
