@@ -61,11 +61,11 @@
         <caption><span class="sr-only">Appointments</span></caption>
         <thead>
           <tr class="table-header">
-            <th>Requested</th>
             <th>Customer name</th>
             <th>Slot</th>
             <th>Employer</th>
             <th>Location</th>
+            <th>Room</th>
             <th>Reference</th>
             <th>Status</th>
             <th></th>
@@ -75,9 +75,6 @@
           <% @appointments.each do |appointment| %>
             <% appointment = AppointmentDecorator.new(appointment) %>
             <tr class="t-appointment">
-              <td>
-                <%= time_ago_in_words(appointment.created_at) %> ago
-              </td>
               <td>
                 <%= appointment.full_name %>
               </td>
@@ -89,6 +86,9 @@
               </td>
               <td>
                 <%= appointment.location_name %>
+              </td>
+              <td>
+                <%= appointment.room %>
               </td>
               <td>
                 <%= appointment.id %>
