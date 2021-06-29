@@ -16,7 +16,7 @@ RSpec.describe AppointmentMailer do
     it 'renders the headers' do
       expect(mail.subject).to match(/Employer \d+ Pension Wise Appointment SMS Cancellation/)
       expect(mail.to).to eq([booking_manager.email])
-      expect(mail.from).to eq(['appointments@pensionwise.gov.uk'])
+      expect(mail.from).to eq(['appointments.pensionwise@moneyhelper.org.uk'])
     end
 
     describe 'rendering the body' do
@@ -48,7 +48,6 @@ RSpec.describe AppointmentMailer do
         expect(body).to include('16 September 2017')
         expect(body).to include('2:00pm')
         expect(body).to include('Phone appointment')
-        expect(body).to include('coronavirus')
       end
     end
 
