@@ -31,7 +31,7 @@ gem 'postgres-copy'
 gem 'puma'
 gem 'pusher'
 gem 'rack-cors'
-gem 'rails', '~> 5.2'
+gem 'rails', '~> 6.0'
 gem 'sassc-rails'
 gem 'sidekiq'
 gem 'sinatra', require: false

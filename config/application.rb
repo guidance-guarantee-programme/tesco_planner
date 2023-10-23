@@ -19,7 +19,7 @@ Bundler.require(*Rails.groups)
 module TescoPlanner
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.2
+    config.load_defaults 6.1
 
     config.active_record.yaml_column_permitted_classes = [
       Symbol, Date, Time, ActiveSupport::TimeWithZone, ActiveSupport::TimeZone, ActiveSupport::HashWithIndifferentAccess
