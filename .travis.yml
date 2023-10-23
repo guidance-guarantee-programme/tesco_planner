@@ -9,9 +9,6 @@ cache:
   directories:
   - $HOME/.phantomjs
   - tmp/cache/assets/test
-before_install:
-- gem update --system 3.0.6
-- gem install bundler
 before_script:
 - yarn install
 - bundle exec rake db:create db:migrate RAILS_ENV=test
