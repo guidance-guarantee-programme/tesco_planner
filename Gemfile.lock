@@ -13,6 +13,7 @@ GEM
       rails-assets-jquery (>= 2, < 4)
       rails-assets-moment (>= 2.9.0, < 3)
     rails-assets-jquery (3.7.1)
+    rails-assets-moment (2.24.0)
     rails-assets-pusher (4.3.1)
 
 GEM
@@ -326,7 +327,6 @@ GEM
       bundler (>= 1.15.0)
       railties (= 6.1.7.6)
       sprockets-rails (>= 2.0.0)
-    rails-assets-moment (2.24.0)
     rails-dom-testing (2.2.0)
       activesupport (>= 5.0.0)
       minitest
