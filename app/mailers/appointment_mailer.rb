@@ -20,7 +20,7 @@ class AppointmentMailer < ApplicationMailer
     mail to: appointment.email, reply_to: appointment.delivery_centre.reply_to, subject: employer_subject(appointment)
   end
 
-  def customer(appointment, rescheduled: false)
+  def customer(appointment, rescheduled = false)
     @rescheduled = rescheduled
     @appointment = appointment
 
