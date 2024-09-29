@@ -61,7 +61,7 @@ RSpec.describe AppointmentMailer do
 
     subject do
       travel_to '2017-09-16 13:00 UTC' do
-        described_class.customer(appointment, rescheduled: rescheduled)
+        described_class.customer(appointment, rescheduled)
       end
     end
 
